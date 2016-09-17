@@ -19,6 +19,7 @@
 		3A215D301D8C533D00876F00 /* AudioNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D2F1D8C533D00876F00 /* AudioNote.swift */; };
 		3A215D321D8C542900876F00 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D311D8C542900876F00 /* CoreDataStack.swift */; };
 		3A215D341D8D42BD00876F00 /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D331D8D42BD00876F00 /* HelperExtensions.swift */; };
+		3A215D361D8D4C7200876F00 /* ManagedObjectContextStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D351D8D4C7200876F00 /* ManagedObjectContextStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3A215D2F1D8C533D00876F00 /* AudioNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioNote.swift; sourceTree = "<group>"; };
 		3A215D311D8C542900876F00 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		3A215D331D8D42BD00876F00 /* HelperExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
+		3A215D351D8D4C7200876F00 /* ManagedObjectContextStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				3A215D261D8C422A00876F00 /* SubjectForExposure.swift */,
 				3A215D2F1D8C533D00876F00 /* AudioNote.swift */,
 				3A215D311D8C542900876F00 /* CoreDataStack.swift */,
+				3A215D351D8D4C7200876F00 /* ManagedObjectContextStack.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */,
 				3A215D2E1D8C518C00876F00 /* PhotoNote.swift in Sources */,
 				3A215D271D8C422A00876F00 /* SubjectForExposure.swift in Sources */,
+				3A215D361D8D4C7200876F00 /* ManagedObjectContextStack.swift in Sources */,
 				3A215D2A1D8C4D4D00876F00 /* ManagedObject.swift in Sources */,
 				3A215D241D8C3DA000876F00 /* DarkSlideModel.xcdatamodeld in Sources */,
 				3A215D301D8C533D00876F00 /* AudioNote.swift in Sources */,
