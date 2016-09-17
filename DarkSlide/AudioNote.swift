@@ -13,5 +13,8 @@ public final class AudioNote: ManagedObject {
 	
 	@NSManaged public var audioRecording: Data
 	@NSManaged public var audioTranscript: String?
+	
+	// Relationship properties
+	
 	@NSManaged public var subject: SubjectForExposure
 }

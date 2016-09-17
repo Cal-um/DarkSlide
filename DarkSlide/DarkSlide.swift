@@ -13,5 +13,7 @@ public final class DarkSlide: ManagedObject {
 	
 	@NSManaged public var refNumber: Double
 	@NSManaged public var filmType: String
+	
+	// Relationship properties
 	@NSManaged public var subject: SubjectForExposure?
 }

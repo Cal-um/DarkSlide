@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AudioNote" syncable="YES">
         <attribute name="audioNote" attributeType="Binary" syncable="YES"/>
-        <attribute name="audoTranscript" optional="YES" syncable="YES"/>
+        <attribute name="audoTranscript" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="audioNote" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
     <entity name="DarkSlide" syncable="YES">

@@ -12,5 +12,8 @@ import CoreData
 public final class PhotoNote: ManagedObject {
 	
 	@NSManaged public var photoNote: Data
+	
+	// Relationship properties
+	
 	@NSManaged public var subject: SubjectForExposure
 }

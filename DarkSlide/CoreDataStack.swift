@@ -8,8 +8,10 @@
 
 import CoreData
 
+// Define Model URL.
 private let StoreURL = URL.documentsURL.appendingPathComponent("Model.DarkSlide")
 
+// Create Main Context with model objects in Bundles and add PSC.
 public func getMainContext() -> NSManagedObjectContext? {
 	
 	let bundles = [Bundle(for: SubjectForExposure.self), Bundle(for: PhotoNote.self), Bundle(for: DarkSlide.self),Bundle(for: AudioNote.self)]
@@ -24,21 +26,16 @@ public func getMainContext() -> NSManagedObjectContext? {
 }
 
 
-extension URL {
-	
-	static var documentsURL: URL {
-		return try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-	}
-}
-
-
 extension NSManagedObjectContext {
 	
+	// Generic insert into Context function where object must conform to the ManagedObject protocol.
+	
 	public func insertObject<A: ManagedObject>() -> A where A: ManagedObjectType {
-		
 		guard let obj = NSEntityDescription.insertNewObject(forEntityName: A.entityName, into: self) as? A else { fatalError("Wrong object type") }
 		return obj
 	}
+	
+	// Create a Context on a background queue with same PSC as self.
 	
 	public func createBackgroundContext() -> NSManagedObjectContext {
 		let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -47,7 +44,7 @@ extension NSManagedObjectContext {
 		return context
 	}
 	
-	// This saves the context called from
+	// Save context
 	
 	func trySave() {
 		
