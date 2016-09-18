@@ -96,11 +96,23 @@ class PhotoAudioVideo: NSObject, AVCapturePhotoCaptureDelegate {
 	}
 	
 	func takePhoto() {
-		let settings = AVCapturePhotoSettings()
-		settings.isHighResolutionPhotoEnabled = true
+		let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecJPEG])
 		settings.flashMode = .auto
-		
 		imageOutput.capturePhoto(with: settings, delegate: self)
+		
+	}
+	
+	
+
+	func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+		print("meow")
+		if let error = error {
+			print(error.localizedDescription)
+		}
+		print("proot")
+		if let photoSample = photoSampleBuffer, let photo = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSample, previewPhotoSampleBuffer: previewPhotoSampleBuffer) {
+		print(UIImage(data: photo)?.size)
+		}
 	}
 	
 }

@@ -1,5 +1,5 @@
 //
-//  ExposurePhoto+VideoViewController.swift
+//  ExposurePhotoVideoViewController.swift
 //  DarkSlide
 //
 //  Created by Calum Harris on 18/09/2016.
@@ -16,6 +16,7 @@ class ExposurePhotoVideoViewController: UIViewController, CameraViewDelegate {
 	
 	override func viewDidLoad() {
 		photoVideo = PhotoAudioVideo(cameraViewDelegate: self)
+		gesturesForPhotoVideo()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -40,6 +41,23 @@ class ExposurePhotoVideoViewController: UIViewController, CameraViewDelegate {
 		}
 		
 		return orientation
+	}
+	
+	func takePhoto() {
+		photoVideo.takePhoto()
+	}
+	
+	func takeVideo() {
+		print("video")
+	}
+	
+	func gesturesForPhotoVideo() {
+		//Add Gesture Recodnizers for photo and video tap.
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ExposurePhotoVideoViewController.takePhoto))
+		let tapAndHoldGesture = UILongPressGestureRecognizer(target: self, action: #selector(ExposurePhotoVideoViewController.takeVideo))
+		tapGesture.numberOfTapsRequired = 1
+		cameraView.addGestureRecognizer(tapGesture)
+		cameraView.addGestureRecognizer(tapAndHoldGesture)
 	}
 }
 
