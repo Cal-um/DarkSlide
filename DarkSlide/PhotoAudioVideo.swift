@@ -31,7 +31,6 @@ class PhotoAudioVideo: NSObject, AVCapturePhotoCaptureDelegate {
 		}
 	}
 	
-	
 	func setUpCaptureSession() -> Bool {
 		
 		captureSession.sessionPreset = AVCaptureSessionPresetHigh
