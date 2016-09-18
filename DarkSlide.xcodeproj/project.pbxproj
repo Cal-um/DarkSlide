@@ -20,6 +20,9 @@
 		3A215D321D8C542900876F00 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D311D8C542900876F00 /* CoreDataStack.swift */; };
 		3A215D341D8D42BD00876F00 /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D331D8D42BD00876F00 /* HelperExtensions.swift */; };
 		3A215D361D8D4C7200876F00 /* ManagedObjectContextStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D351D8D4C7200876F00 /* ManagedObjectContextStack.swift */; };
+		3A215D3A1D8EA98200876F00 /* ExposurePhotoVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D391D8EA98200876F00 /* ExposurePhotoVideoViewController.swift */; };
+		3A215D3C1D8EABF100876F00 /* PhotoAudioVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D3B1D8EABF100876F00 /* PhotoAudioVideo.swift */; };
+		3A215D3E1D8EB0DF00876F00 /* CameraViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		3A215D311D8C542900876F00 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		3A215D331D8D42BD00876F00 /* HelperExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
 		3A215D351D8D4C7200876F00 /* ManagedObjectContextStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextStack.swift; sourceTree = "<group>"; };
+		3A215D391D8EA98200876F00 /* ExposurePhotoVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposurePhotoVideoViewController.swift; sourceTree = "<group>"; };
+		3A215D3B1D8EABF100876F00 /* PhotoAudioVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAudioVideo.swift; sourceTree = "<group>"; };
+		3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +76,9 @@
 		3A215D0F1D8C075600876F00 /* DarkSlide */ = {
 			isa = PBXGroup;
 			children = (
-				3A215D251D8C410500876F00 /* CoreData */,
+				3A215D381D8EA64500876F00 /* Views */,
+				3A215D371D8EA62E00876F00 /* View Controllers */,
+				3A215D251D8C410500876F00 /* CoreDataModel */,
 				3A215D101D8C075600876F00 /* AppDelegate.swift */,
 				3A215D141D8C075600876F00 /* Main.storyboard */,
 				3A215D171D8C075600876F00 /* Assets.xcassets */,
@@ -80,7 +88,7 @@
 			path = DarkSlide;
 			sourceTree = "<group>";
 		};
-		3A215D251D8C410500876F00 /* CoreData */ = {
+		3A215D251D8C410500876F00 /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
 				3A215D281D8C4D3600876F00 /* CoreDataHelpers */,
@@ -92,7 +100,7 @@
 				3A215D311D8C542900876F00 /* CoreDataStack.swift */,
 				3A215D351D8D4C7200876F00 /* ManagedObjectContextStack.swift */,
 			);
-			name = CoreData;
+			name = CoreDataModel;
 			sourceTree = "<group>";
 		};
 		3A215D281D8C4D3600876F00 /* CoreDataHelpers */ = {
@@ -102,6 +110,23 @@
 				3A215D331D8D42BD00876F00 /* HelperExtensions.swift */,
 			);
 			name = CoreDataHelpers;
+			sourceTree = "<group>";
+		};
+		3A215D371D8EA62E00876F00 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A215D391D8EA98200876F00 /* ExposurePhotoVideoViewController.swift */,
+				3A215D3B1D8EABF100876F00 /* PhotoAudioVideo.swift */,
+				3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		3A215D381D8EA64500876F00 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,12 +203,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A215D2C1D8C512800876F00 /* DarkSlide.swift in Sources */,
+				3A215D3E1D8EB0DF00876F00 /* CameraViewDelegate.swift in Sources */,
 				3A215D341D8D42BD00876F00 /* HelperExtensions.swift in Sources */,
 				3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */,
 				3A215D2E1D8C518C00876F00 /* PhotoNote.swift in Sources */,
 				3A215D271D8C422A00876F00 /* SubjectForExposure.swift in Sources */,
 				3A215D361D8D4C7200876F00 /* ManagedObjectContextStack.swift in Sources */,
 				3A215D2A1D8C4D4D00876F00 /* ManagedObject.swift in Sources */,
+				3A215D3C1D8EABF100876F00 /* PhotoAudioVideo.swift in Sources */,
+				3A215D3A1D8EA98200876F00 /* ExposurePhotoVideoViewController.swift in Sources */,
 				3A215D241D8C3DA000876F00 /* DarkSlideModel.xcdatamodeld in Sources */,
 				3A215D301D8C533D00876F00 /* AudioNote.swift in Sources */,
 				3A215D321D8C542900876F00 /* CoreDataStack.swift in Sources */,
