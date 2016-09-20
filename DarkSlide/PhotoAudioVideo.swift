@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PhotoAudioVideo: NSObject, AVCapturePhotoCaptureDelegate {
+class PhotoAudioVideo: NSObject {
 	
 	let captureSession = AVCaptureSession()
 	let imageOutput = AVCapturePhotoOutput()
@@ -101,17 +101,22 @@ class PhotoAudioVideo: NSObject, AVCapturePhotoCaptureDelegate {
 		imageOutput.capturePhoto(with: settings, delegate: self)
 		
 	}
-	
-	
 
+}
+
+extension PhotoAudioVideo: AVCapturePhotoCaptureDelegate {
+	
+// AVCapturePhotoCaptureDelegate functions.
+	
 	func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
-		print("meow")
+
 		if let error = error {
 			print(error.localizedDescription)
 		}
-		print("proot")
+
 		if let photoSample = photoSampleBuffer, let photo = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSample, previewPhotoSampleBuffer: previewPhotoSampleBuffer) {
-		print(UIImage(data: photo)?.size)
+			let image = UIImage(data: photo)
+			print(image)
 		}
 	}
 	

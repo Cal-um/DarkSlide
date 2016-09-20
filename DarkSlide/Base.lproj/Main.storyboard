@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Expose-->
         <scene sceneID="fjl-Fy-Hln">
             <objects>
-                <viewController id="jme-7a-NOa" sceneMemberID="viewController">
+                <viewController id="jme-7a-NOa" customClass="ExposureViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oUd-YT-w4m"/>
                         <viewControllerLayoutGuide type="bottom" id="bDu-0d-LlA"/>
@@ -22,7 +22,7 @@
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RA4-ld-Xzm">
                                 <connections>
-                                    <segue destination="uKw-RA-TCz" kind="embed" id="agT-Wk-Hay"/>
+                                    <segue destination="uKw-RA-TCz" kind="embed" identifier="ExposurePhotoVideoViewControllerSegue" id="agT-Wk-Hay"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -34,7 +34,7 @@
                             <constraint firstItem="RA4-ld-Xzm" firstAttribute="leading" secondItem="J1C-cx-cpN" secondAttribute="leading" id="w0n-1v-3q9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="1XK-bU-Egc"/>
+                    <navigationItem key="navigationItem" title="Expose" id="1XK-bU-Egc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQ5-gL-DuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -49,24 +49,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgO-1j-leJ">
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="335-L1-f2M">
-                                        <state key="normal" title="Audio"/>
-                                        <connections>
-                                            <segue destination="QDx-XM-MsZ" kind="presentation" modalPresentationStyle="currentContext" id="bqX-eU-43F"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" red="0.00025843492772980908" green="0.1580328525641026" blue="0.041794453005706111" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="335-L1-f2M" firstAttribute="top" secondItem="UgO-1j-leJ" secondAttribute="top" constant="8" id="V4E-yz-Zdl"/>
-                                    <constraint firstAttribute="trailing" secondItem="335-L1-f2M" secondAttribute="trailing" constant="8" id="oy7-RK-h7c"/>
-                                </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="335-L1-f2M">
+                                <state key="normal" title="Audio"/>
+                                <connections>
+                                    <segue destination="QDx-XM-MsZ" kind="presentation" identifier="ExposureAudioRecordViewControllerSegue" modalPresentationStyle="currentContext" id="bqX-eU-43F"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="UgO-1j-leJ" secondAttribute="bottom" id="BXG-gm-NUs"/>
+                            <constraint firstItem="335-L1-f2M" firstAttribute="top" secondItem="EJ1-kh-6fw" secondAttribute="topMargin" constant="10" id="IMw-hd-jEZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="335-L1-f2M" secondAttribute="trailing" id="Iuy-i3-G26"/>
                             <constraint firstItem="UgO-1j-leJ" firstAttribute="leading" secondItem="EJ1-kh-6fw" secondAttribute="leading" id="OSG-ZF-Rg8"/>
                             <constraint firstItem="UgO-1j-leJ" firstAttribute="top" secondItem="EJ1-kh-6fw" secondAttribute="top" id="b2H-6O-kkf"/>
                             <constraint firstAttribute="trailing" secondItem="UgO-1j-leJ" secondAttribute="trailing" id="jes-Bb-7w4"/>
@@ -80,10 +76,10 @@
             </objects>
             <point key="canvasLocation" x="1566" y="37"/>
         </scene>
-        <!--View Controller-->
+        <!--Exposure Audio Note View Controller-->
         <scene sceneID="HNg-tZ-nO8">
             <objects>
-                <viewController modalPresentationStyle="currentContext" id="QDx-XM-MsZ" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="currentContext" id="QDx-XM-MsZ" customClass="ExposureAudioNoteViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GFE-Ie-1xK"/>
                         <viewControllerLayoutGuide type="bottom" id="yFv-cS-8Gx"/>
@@ -92,19 +88,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3C3-Ed-MeP">
-                                <state key="normal" title="Record Audio"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uJ-9H-9ew">
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Camera"/>
+                                <connections>
+                                    <action selector="dismissViewController:" destination="QDx-XM-MsZ" eventType="touchUpInside" id="hYi-3f-nEu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3C3-Ed-MeP">
+                                <state key="normal" title="Record Audio"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1uJ-9H-9ew" firstAttribute="top" secondItem="GFE-Ie-1xK" secondAttribute="bottom" constant="20" id="H1X-P9-VQl"/>
-                            <constraint firstItem="3C3-Ed-MeP" firstAttribute="centerX" secondItem="3oy-Fj-sTe" secondAttribute="centerX" id="PXt-kb-1gT"/>
-                            <constraint firstItem="3C3-Ed-MeP" firstAttribute="top" secondItem="GFE-Ie-1xK" secondAttribute="bottom" constant="318" id="b96-gZ-XXy"/>
+                            <constraint firstItem="3C3-Ed-MeP" firstAttribute="centerX" secondItem="3oy-Fj-sTe" secondAttribute="centerX" id="UsM-Yd-OTe"/>
+                            <constraint firstItem="3C3-Ed-MeP" firstAttribute="centerY" secondItem="3oy-Fj-sTe" secondAttribute="centerY" id="l0i-za-AoV"/>
                             <constraint firstItem="1uJ-9H-9ew" firstAttribute="trailing" secondItem="3oy-Fj-sTe" secondAttribute="trailingMargin" id="nTl-D9-mM2"/>
                         </constraints>
                     </view>
@@ -113,10 +112,10 @@
             </objects>
             <point key="canvasLocation" x="2497" y="12"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Portrait Navigation Controller-->
         <scene sceneID="E8X-Pd-tpT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YYm-Aa-NcV" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YYm-Aa-NcV" customClass="PortraitNavigationController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RZs-2o-YDc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

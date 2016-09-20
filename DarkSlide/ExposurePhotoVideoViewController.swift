@@ -9,7 +9,9 @@
 import UIKit
 import AVFoundation
 
-class ExposurePhotoVideoViewController: UIViewController, CameraViewDelegate {
+class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextStackSettable, CameraViewDelegate {
+	
+	var managedObjectContextStack: ManagedObjectContextStack!
 	
 	@IBOutlet weak var cameraView: UIView!
 	var photoVideo: PhotoAudioVideo!
@@ -58,6 +60,15 @@ class ExposurePhotoVideoViewController: UIViewController, CameraViewDelegate {
 		tapGesture.numberOfTapsRequired = 1
 		cameraView.addGestureRecognizer(tapGesture)
 		cameraView.addGestureRecognizer(tapAndHoldGesture)
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		switch segue.identifier {
+		case .some("ExposureAudioRecordViewControllerSegue"):
+			guard var vc = segue.destination as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
+			vc.managedObjectContextStack = managedObjectContextStack
+		default: break
+		}
 	}
 }
 
