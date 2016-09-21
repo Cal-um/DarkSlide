@@ -122,14 +122,9 @@ extension PhotoAudioVideo: AVCapturePhotoCaptureDelegate {
 			let image = UIImage(data: photo)
 			print(image)
 			
-			//let obj: PhotoNote = managedObjectContextStack.backgroundContext.insertObject()
-			//obj.photoNote = photo as NSData
-			//managedObjectContextStack.backgroundContext.trySave()
-			
-			let obj = NSEntityDescription.insertNewObject(forEntityName: "PhotoNote", into: managedObjectContextStack.backgroundContext) as! PhotoNote
-			obj.photoNote = photo
+			let obj: PhotoNote = managedObjectContextStack.backgroundContext.insertObject()
+			obj.photoNote = photo as Data
 			managedObjectContextStack.backgroundContext.trySave()
-			
 		}
 	}
 	

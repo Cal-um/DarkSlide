@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AudioNote" syncable="YES">
+    <entity name="AudioNote" representedClassName=".AudioNote" syncable="YES">
         <attribute name="audioNote" attributeType="Binary" syncable="YES"/>
         <attribute name="audoTranscript" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="audioNote" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
-    <entity name="DarkSlide" syncable="YES">
+    <entity name="DarkSlide" representedClassName=".DarkSlide" syncable="YES">
         <attribute name="filmType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="refNumber" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="darkSlideUsed" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
-    <entity name="PhotoNote" syncable="YES">
+    <entity name="PhotoNote" representedClassName=".PhotoNote" syncable="YES">
         <attribute name="photoNote" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="photoNotes" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
-    <entity name="SubjectForExposure" syncable="YES">
+    <entity name="SubjectForExposure" representedClassName=".SubjectForExposure" syncable="YES">
         <attribute name="compassHeading" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="dateOfExposure" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="imageOfSubject" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
