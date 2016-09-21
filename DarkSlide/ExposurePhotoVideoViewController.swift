@@ -17,7 +17,7 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	var photoVideo: PhotoAudioVideo!
 	
 	override func viewDidLoad() {
-		photoVideo = PhotoAudioVideo(cameraViewDelegate: self)
+		photoVideo = PhotoAudioVideo(self, managedObjectContextStack)
 		gesturesForPhotoVideo()
 	}
 	

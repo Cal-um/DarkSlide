@@ -21,7 +21,14 @@ public final class SubjectForExposure: ManagedObject {
 	
 	// Relationship properties
 	
-	@NSManaged public var photoNote: Set<PhotoNote>
+	@NSManaged public var photoNotes: Set<PhotoNote>?
 	@NSManaged public var darkSlideUsed: DarkSlide
 	@NSManaged public var audioNote: Set<AudioNote>
+}
+
+extension SubjectForExposure: ManagedObjectType {
+	
+	public static var entityName: String {
+		return "SubjectForExposure"
+	}
 }

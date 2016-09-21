@@ -19,6 +19,8 @@ struct ManagedObjectContextStack {
 	init(mainManagedObjectContext mainContext: NSManagedObjectContext) {
 		self.mainContext = mainContext
 		self.backgroundContext = mainContext.createBackgroundContext()
+		setUpNotificationsForBackgroundContext()
+		print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString)
 	}
 	
 	fileprivate func setUpNotificationsForBackgroundContext() {

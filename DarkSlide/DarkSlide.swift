@@ -17,3 +17,10 @@ public final class DarkSlide: ManagedObject {
 	// Relationship properties
 	@NSManaged public var subject: SubjectForExposure?
 }
+
+extension DarkSlide: ManagedObjectType {
+	
+	public static var entityName: String {
+		return "DarkSlide"
+	}
+}

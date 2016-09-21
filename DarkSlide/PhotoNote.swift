@@ -6,7 +6,7 @@
 //  Copyright © 2016 Calum Harris. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 public final class PhotoNote: ManagedObject {
@@ -15,5 +15,12 @@ public final class PhotoNote: ManagedObject {
 	
 	// Relationship properties
 	
-	@NSManaged public var subject: SubjectForExposure
+	@NSManaged public var subject: SubjectForExposure?
+}
+
+extension PhotoNote: ManagedObjectType {
+	
+	public static var entityName: String {
+		return "PhotoNote"
+	}
 }

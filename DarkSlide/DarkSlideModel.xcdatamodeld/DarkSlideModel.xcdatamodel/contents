@@ -12,7 +12,7 @@
     </entity>
     <entity name="PhotoNote" syncable="YES">
         <attribute name="photoNote" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <relationship name="subject" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="photoNote" inverseEntity="SubjectForExposure" syncable="YES"/>
+        <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="photoNotes" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
     <entity name="SubjectForExposure" syncable="YES">
         <attribute name="compassHeading" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -22,12 +22,12 @@
         <attribute name="locationLong" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="audioNote" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AudioNote" inverseName="subject" inverseEntity="AudioNote" syncable="YES"/>
         <relationship name="darkSlideUsed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DarkSlide" inverseName="subject" inverseEntity="DarkSlide" syncable="YES"/>
-        <relationship name="photoNote" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhotoNote" inverseName="subject" inverseEntity="PhotoNote" syncable="YES"/>
+        <relationship name="photoNotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhotoNote" inverseName="subject" inverseEntity="PhotoNote" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SubjectForExposure" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="AudioNote" positionX="-18" positionY="27" width="128" height="90"/>
         <element name="DarkSlide" positionX="-54" positionY="-9" width="128" height="90"/>
         <element name="PhotoNote" positionX="-36" positionY="9" width="128" height="75"/>
-        <element name="AudioNote" positionX="-18" positionY="27" width="128" height="90"/>
+        <element name="SubjectForExposure" positionX="-63" positionY="-18" width="128" height="165"/>
     </elements>
 </model>

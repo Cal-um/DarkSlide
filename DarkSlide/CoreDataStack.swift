@@ -53,6 +53,7 @@ extension NSManagedObjectContext {
 			if self.hasChanges {
 				do {
 					try self.save()
+					print("save")
 				} catch {
 					fatalError("Error while saving main context \(error)")
 				}

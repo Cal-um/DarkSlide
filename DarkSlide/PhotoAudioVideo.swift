@@ -8,8 +8,11 @@
 
 import UIKit
 import AVFoundation
+import CoreData
 
 class PhotoAudioVideo: NSObject {
+	
+	var managedObjectContextStack: ManagedObjectContextStack!
 	
 	let captureSession = AVCaptureSession()
 	let imageOutput = AVCapturePhotoOutput()
@@ -18,10 +21,11 @@ class PhotoAudioVideo: NSObject {
 	var previewLayer: AVCaptureVideoPreviewLayer!
 	var cameraViewDelegate: CameraViewDelegate!
 	
-	init(cameraViewDelegate: CameraViewDelegate) {
+	init(_ cameraViewDelegate: CameraViewDelegate, _ managedObjectContextStack : ManagedObjectContextStack) {
 		super.init()
 		self.cameraViewDelegate = cameraViewDelegate
 		self.initPreviewAndStartSession()
+		self.managedObjectContextStack = managedObjectContextStack
 	}
 	
 	func initPreviewAndStartSession() {
@@ -117,6 +121,15 @@ extension PhotoAudioVideo: AVCapturePhotoCaptureDelegate {
 		if let photoSample = photoSampleBuffer, let photo = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSample, previewPhotoSampleBuffer: previewPhotoSampleBuffer) {
 			let image = UIImage(data: photo)
 			print(image)
+			
+			//let obj: PhotoNote = managedObjectContextStack.backgroundContext.insertObject()
+			//obj.photoNote = photo as NSData
+			//managedObjectContextStack.backgroundContext.trySave()
+			
+			let obj = NSEntityDescription.insertNewObject(forEntityName: "PhotoNote", into: managedObjectContextStack.backgroundContext) as! PhotoNote
+			obj.photoNote = photo
+			managedObjectContextStack.backgroundContext.trySave()
+			
 		}
 	}
 	

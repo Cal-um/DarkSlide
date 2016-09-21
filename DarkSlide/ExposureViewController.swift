@@ -12,10 +12,7 @@ import CoreData
 class ExposureViewController: UIViewController, ManagedObjectContextStackSettable {
 	
 	var managedObjectContextStack: ManagedObjectContextStack!
-	
-	
 
-	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 		case .some("ExposurePhotoVideoViewControllerSegue"):
