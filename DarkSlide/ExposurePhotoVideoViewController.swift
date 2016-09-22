@@ -11,12 +11,16 @@ import AVFoundation
 
 class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextStackSettable, CameraViewDelegate {
 	
+	// MARK: View Controller properties and life cycle
+	
 	var managedObjectContextStack: ManagedObjectContextStack!
 	
 	@IBOutlet weak var cameraView: UIView!
+	
 	var photoVideo: PhotoAudioVideo!
 	
 	override func viewDidLoad() {
+		// set up video preview and PhotoAudioVideo object
 		photoVideo = PhotoAudioVideo(self, managedObjectContextStack)
 		gesturesForPhotoVideo()
 	}
@@ -41,7 +45,6 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		default:
 			orientation = AVCaptureVideoOrientation.landscapeRight
 		}
-		
 		return orientation
 	}
 	

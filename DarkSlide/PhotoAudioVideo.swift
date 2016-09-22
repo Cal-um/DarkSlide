@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import CoreData
 
-class PhotoAudioVideo: NSObject {
+class PhotoAudioVideo: NSObject, AVCaptureFileOutputRecordingDelegate {
 	
 	var managedObjectContextStack: ManagedObjectContextStack!
 	
@@ -18,14 +18,21 @@ class PhotoAudioVideo: NSObject {
 	let imageOutput = AVCapturePhotoOutput()
 	let movieOutput = AVCaptureMovieFileOutput()
 	var activeInput: AVCaptureDeviceInput!
-	var previewLayer: AVCaptureVideoPreviewLayer!
-	var cameraViewDelegate: CameraViewDelegate!
+	var previewLayer: AVCaptureVideoPreviewLayer! {
+		didSet {
+			videoPreviewOrientation = previewLayer.connection.videoOrientation
+		}
+	}
+	var cameraViewDelegate: CameraViewDelegate?
+	
+	var videoPreviewOrientation: AVCaptureVideoOrientation?
 	
 	init(_ cameraViewDelegate: CameraViewDelegate, _ managedObjectContextStack : ManagedObjectContextStack) {
 		super.init()
 		self.cameraViewDelegate = cameraViewDelegate
 		self.initPreviewAndStartSession()
 		self.managedObjectContextStack = managedObjectContextStack
+		
 	}
 	
 	func initPreviewAndStartSession() {
@@ -77,16 +84,16 @@ class PhotoAudioVideo: NSObject {
 		}
 		return true
 	}
-
-	func videoQueue() -> DispatchQueue {
-		return DispatchQueue(label: "session queue", attributes: [], target: nil)
-	}
+	
+	// Communicate with the session and other session objects on this queue
+	private let sessionQueue = DispatchQueue(label: "session queue", attributes: [], target: nil)
+	
 	
 	func startSession() {
 		if !captureSession.isRunning {
-			videoQueue().async {
+			sessionQueue.async { [unowned self] in
 				self.captureSession.startRunning()
-				print("yy")
+				print("Capture session running")
 			}
 		}
 	}
@@ -95,7 +102,7 @@ class PhotoAudioVideo: NSObject {
 		//configure the preview layer
 		previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
 		previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-		cameraViewDelegate.cameraView.layer.addSublayer(previewLayer)
+		cameraViewDelegate?.cameraView.layer.addSublayer(previewLayer)
 		
 	}
 	
@@ -105,7 +112,50 @@ class PhotoAudioVideo: NSObject {
 		imageOutput.capturePhoto(with: settings, delegate: self)
 		
 	}
-
+	
+	// MARK: Record Movie
+	
+	
+	
+	func recordMovieNote() {
+		
+		sessionQueue.async { [unowned self] in
+			if !self.movieOutput.isRecording {
+				let movieFileOutputConnection = self.movieOutput.connection(withMediaType: AVMediaTypeVideo)
+				movieFileOutputConnection?.videoOrientation = self.videoPreviewOrientation!
+			
+			
+			// start recording to a temporary file
+			
+			let outputFileName = NSUUID().uuidString
+			let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("MOV")!)
+			self.movieOutput.startRecording(toOutputFileURL: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+		}
+		else {
+			self.movieOutput.stopRecording()
+			}
+		}
+	}
+	
+	func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+		
+		var success = true
+		
+		if error != nil {
+			print("Movie file finishing error: \(error)")
+			success = (((error as NSError).userInfo[AVErrorRecordingSuccessfullyFinishedKey] as AnyObject).boolValue)!
+		}
+		
+		if success {
+			let movie = try! Data(contentsOf: outputFileURL)
+			
+			
+		}
+		
+		
+	}
+	
+	
 }
 
 extension PhotoAudioVideo: AVCapturePhotoCaptureDelegate {

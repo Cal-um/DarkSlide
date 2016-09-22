@@ -14,7 +14,7 @@ private let StoreURL = URL.documentsURL.appendingPathComponent("Model.DarkSlide"
 // Create Main Context with model objects in Bundles and add PSC.
 public func getMainContext() -> NSManagedObjectContext? {
 	
-	let bundles = [Bundle(for: SubjectForExposure.self), Bundle(for: PhotoNote.self), Bundle(for: DarkSlide.self),Bundle(for: AudioNote.self)]
+	let bundles = [Bundle(for: MovieNote.self), Bundle(for: SubjectForExposure.self), Bundle(for: PhotoNote.self), Bundle(for: DarkSlide.self),Bundle(for: AudioNote.self)]
 	guard let model = NSManagedObjectModel.mergedModel(from: bundles) else { fatalError("Model not found") }
 	
 	let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
