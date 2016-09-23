@@ -19,9 +19,14 @@ public final class AudioNote: ManagedObject {
 	@NSManaged public var subject: SubjectForExposure
 }
 
-extension AudioNote: ManagedObjectType {
+extension AudioNote: ManagedObjectType, ExposureNote {
 	
 	public static var entityName: String {
 		return "AudioNote"
 	}
+	
+	var exposureNoteTypeIdentifier: NoteType {
+		return NoteType.audio
+	}
+
 }

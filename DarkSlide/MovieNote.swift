@@ -27,8 +27,8 @@ extension MovieNote: ManagedObjectType, ExposureNote {
 		return "MovieNote"
 	}
 	
-	static var typeIdentifier: NoteType {
-		return getExposureNote()
+	var exposureNoteTypeIdentifier: NoteType {
+		return NoteType.movie
 	}
 	
 	//photoPath gives you the location of the photo

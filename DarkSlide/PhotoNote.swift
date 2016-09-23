@@ -18,9 +18,13 @@ public final class PhotoNote: ManagedObject {
 	@NSManaged public var subject: SubjectForExposure?
 }
 
-extension PhotoNote: ManagedObjectType {
+extension PhotoNote: ManagedObjectType, ExposureNote {
 	
 	public static var entityName: String {
 		return "PhotoNote"
+	}
+	
+	var exposureNoteTypeIdentifier: NoteType {
+		return NoteType.photo
 	}
 }
