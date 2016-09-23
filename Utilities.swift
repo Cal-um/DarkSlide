@@ -6,7 +6,16 @@
 //  Copyright © 2016 Calum Harris. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-extension UINavigationController {
+extension FileManager {
+	// find or create applicationSupportDirectory for Movie and Audio saves.
+	public static var applicationSupportDirectory: URL {
+	do {
+		let path = try self.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+			return path
+	} catch {
+			fatalError("Failed to obtain or create applicationSupportDirectory")
+		}
 	}
+}

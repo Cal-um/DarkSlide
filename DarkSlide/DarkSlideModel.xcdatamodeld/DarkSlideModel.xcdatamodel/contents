@@ -11,7 +11,7 @@
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="darkSlideUsed" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
     <entity name="MovieNote" syncable="YES">
-        <attribute name="movieNote" attributeType="Binary" syncable="YES"/>
+        <attribute name="movieNote" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="movieNotes" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
     <entity name="PhotoNote" representedClassName=".PhotoNote" syncable="YES">

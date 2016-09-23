@@ -8,11 +8,24 @@
 
 import UIKit
 import AVFoundation
+import CoreData
+import AVKit
 
 class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextStackSettable, CameraViewDelegate {
 	
 	// MARK: View Controller properties and life cycle
-	
+	var movies: [MovieNote]? {
+		didSet {
+			if let m = movies?.last {
+				let player = AVPlayer(url: m.moviePath)
+				let playerController = AVPlayerViewController()
+				playerController.player = player
+				self.present(playerController, animated: true) {
+					playerController.player!.play()
+				}
+			}
+		}
+	}
 	var managedObjectContextStack: ManagedObjectContextStack!
 	
 	@IBOutlet weak var cameraView: UIView!
@@ -53,7 +66,18 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	}
 	
 	func takeVideo() {
-		print("video")
+		photoVideo.recordMovieNote() { _ in
+	//	let fetch = NSFetchRequest(entityName: "MovieNote")
+			let fetch: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "MovieNote")
+		
+			do {
+				if let movie = try managedObjectContextStack.mainContext.fetch(fetch) as? [MovieNote] {
+					movies = movie
+				}
+			} catch {
+				print("fuck")
+			}
+		}
 	}
 	
 	func gesturesForPhotoVideo() {

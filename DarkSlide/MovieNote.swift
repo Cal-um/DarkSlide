@@ -11,13 +11,44 @@ import CoreData
 
 class MovieNote: ManagedObject {
 	
-	@NSManaged var movieNote: Data
+	@NSManaged var movieReferenceNumber: Int
 	@NSManaged var subject: SubjectForExposure?
+	
+	var moviePath: URL {
+		
+		let filename = "Movie-\(movieReferenceNumber)"
+		return (FileManager.applicationSupportDirectory.appendingPathComponent(filename))
+	}
 }
 
-extension MovieNote: ManagedObjectType {
+extension MovieNote: ManagedObjectType, ExposureNote {
 	
 	static var entityName: String {
 		return "MovieNote"
+	}
+	
+	static var typeIdentifier: NoteType {
+		return getExposureNote()
+	}
+	
+	//photoPath gives you the location of the photo
+	func removePhotoFile() {
+		let path = moviePath
+		let fileManager = FileManager.default
+		if fileManager.fileExists(atPath: path.path) {
+			do {
+				try fileManager.removeItem(atPath: path.path)
+			} catch {
+				print("Error removing file: \(error)")
+			}
+		}
+	}
+
+	
+	class func nextMovieID() -> Int {
+		let userDefaults = UserDefaults.standard
+		let currentID = userDefaults.integer(forKey: "MovieID")
+		userDefaults.set((currentID + 1), forKey: "MovieID")
+		return currentID
 	}
 }

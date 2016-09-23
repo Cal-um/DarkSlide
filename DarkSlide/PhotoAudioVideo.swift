@@ -117,7 +117,7 @@ class PhotoAudioVideo: NSObject, AVCaptureFileOutputRecordingDelegate {
 	
 	
 	
-	func recordMovieNote() {
+	func recordMovieNote(completion: ()->()) {
 		
 		sessionQueue.async { [unowned self] in
 			if !self.movieOutput.isRecording {
@@ -135,9 +135,22 @@ class PhotoAudioVideo: NSObject, AVCaptureFileOutputRecordingDelegate {
 			self.movieOutput.stopRecording()
 			}
 		}
+		completion()
 	}
 	
 	func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+		
+		func cleanup() {
+			let path = outputFileURL.path
+			if FileManager.default.fileExists(atPath: path) {
+				do {
+					try FileManager.default.removeItem(atPath: path)
+				}
+				catch {
+					print("Could not remove file at url: \(outputFileURL)")
+				}
+			}
+		}
 		
 		var success = true
 		
@@ -147,14 +160,24 @@ class PhotoAudioVideo: NSObject, AVCaptureFileOutputRecordingDelegate {
 		}
 		
 		if success {
-			let movie = try! Data(contentsOf: outputFileURL)
-			
-			
+			saveMovie(outputFile: outputFileURL) { _ in
+			cleanup()
+			}
 		}
 		
 		
 	}
 	
+	func saveMovie(outputFile: URL, completion: ()->()) {
+		let movie = try! Data(contentsOf: outputFile)
+		let movieNote: MovieNote = managedObjectContextStack.backgroundContext.insertObject()
+		movieNote.movieReferenceNumber = MovieNote.nextMovieID()
+		try! movie.write(to: movieNote.moviePath)
+		
+		
+		managedObjectContextStack.backgroundContext.trySave()
+		completion()
+	}
 	
 }
 
