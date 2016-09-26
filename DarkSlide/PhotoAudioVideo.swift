@@ -138,6 +138,12 @@ class PhotoAudioVideo: NSObject, AVCaptureFileOutputRecordingDelegate {
 		completion()
 	}
 	
+	func stopRecording() {
+		sessionQueue.async { [unowned self] in
+			self.movieOutput.stopRecording()
+		}
+	}
+	
 	func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
 		
 		func cleanup() {
@@ -171,7 +177,7 @@ class PhotoAudioVideo: NSObject, AVCaptureFileOutputRecordingDelegate {
 	func saveMovie(outputFile: URL, completion: ()->()) {
 		let movie = try! Data(contentsOf: outputFile)
 		let movieNote: MovieNote = managedObjectContextStack.backgroundContext.insertObject()
-		movieNote.movieReferenceNumber = MovieNote.nextMovieID()
+		movieNote.movieReferenceNumber = MovieNote.randomReferenceNumber
 		try! movie.write(to: movieNote.moviePath)
 		
 		

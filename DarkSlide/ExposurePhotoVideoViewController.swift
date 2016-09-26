@@ -35,7 +35,7 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	override func viewDidLoad() {
 		// set up video preview and PhotoAudioVideo object
 		photoVideo = PhotoAudioVideo(self, managedObjectContextStack)
-		gesturesForPhotoVideo()
+		//gesturesForPhotoVideo()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -80,14 +80,30 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		}
 	}
 	
-	func gesturesForPhotoVideo() {
+	@IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
+		takeVideo()
+	}
+	
+	@IBAction func longPressRelease(_ sender: UILongPressGestureRecognizer) {
+		
+		
+	}
+	
+	
+	@IBAction func shortPress(_ sender: UITapGestureRecognizer) {
+		photoVideo.takePhoto()
+
+	}
+	
+	
+	/*func gesturesForPhotoVideo() {
 		//Add Gesture Recodnizers for photo and video tap.
 		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ExposurePhotoVideoViewController.takePhoto))
 		let tapAndHoldGesture = UILongPressGestureRecognizer(target: self, action: #selector(ExposurePhotoVideoViewController.takeVideo))
 		tapGesture.numberOfTapsRequired = 1
 		cameraView.addGestureRecognizer(tapGesture)
 		cameraView.addGestureRecognizer(tapAndHoldGesture)
-	}
+	}*/
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {

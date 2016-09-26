@@ -11,11 +11,10 @@ import CoreData
 
 class MovieNote: ManagedObject {
 	
-	@NSManaged var movieReferenceNumber: Int
+	@NSManaged var movieReferenceNumber: String
 	@NSManaged var subject: SubjectForExposure?
 	
 	var moviePath: URL {
-		
 		let filename = "Movie-\(movieReferenceNumber)"
 		return (FileManager.applicationSupportDirectory.appendingPathComponent(filename))
 	}
@@ -25,6 +24,10 @@ extension MovieNote: ManagedObjectType, ExposureNote {
 	
 	static var entityName: String {
 		return "MovieNote"
+	}
+	
+	static var randomReferenceNumber: String {
+		return NSUUID().uuidString
 	}
 	
 	var exposureNoteTypeIdentifier: NoteType {
@@ -42,13 +45,5 @@ extension MovieNote: ManagedObjectType, ExposureNote {
 				print("Error removing file: \(error)")
 			}
 		}
-	}
-
-	
-	class func nextMovieID() -> Int {
-		let userDefaults = UserDefaults.standard
-		let currentID = userDefaults.integer(forKey: "MovieID")
-		userDefaults.set((currentID + 1), forKey: "MovieID")
-		return currentID
 	}
 }

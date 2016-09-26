@@ -11,7 +11,7 @@
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="darkSlideUsed" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
     <entity name="MovieNote" syncable="YES">
-        <attribute name="movieNote" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="movieReferenceNumber" attributeType="String" syncable="YES"/>
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="movieNotes" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
     <entity name="PhotoNote" representedClassName=".PhotoNote" syncable="YES">
@@ -32,8 +32,8 @@
     <elements>
         <element name="AudioNote" positionX="-18" positionY="27" width="128" height="90"/>
         <element name="DarkSlide" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="MovieNote" positionX="-36" positionY="54" width="128" height="75"/>
         <element name="PhotoNote" positionX="-36" positionY="9" width="128" height="75"/>
         <element name="SubjectForExposure" positionX="-63" positionY="-18" width="128" height="180"/>
-        <element name="MovieNote" positionX="-36" positionY="54" width="128" height="75"/>
     </elements>
 </model>

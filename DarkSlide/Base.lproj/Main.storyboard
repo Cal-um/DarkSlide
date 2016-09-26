@@ -44,12 +44,32 @@
         <scene sceneID="FLP-NI-65t">
             <objects>
                 <viewController definesPresentationContext="YES" id="uKw-RA-TCz" customClass="ExposurePhotoVideoViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gjh-d7-Zuz"/>
+                        <viewControllerLayoutGuide type="bottom" id="qXD-RO-u3O"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EJ1-kh-6fw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgO-1j-leJ">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tB-4M-9JU">
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="longPress:" destination="uKw-RA-TCz" eventType="touchUpInside" id="s5d-HZ-o5S"/>
+                                            <action selector="longPressRelease:" destination="uKw-RA-TCz" eventType="touchUpOutside" id="N0i-o8-IAO"/>
+                                            <action selector="shortPress:" destination="uKw-RA-TCz" eventType="touchUpInside" id="nFP-ga-2qG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.00025843492772980908" green="0.1580328525641026" blue="0.041794453005706111" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="3tB-4M-9JU" firstAttribute="top" secondItem="UgO-1j-leJ" secondAttribute="top" id="4tW-x4-f3u"/>
+                                    <constraint firstItem="3tB-4M-9JU" firstAttribute="leading" secondItem="UgO-1j-leJ" secondAttribute="leading" id="B2S-gC-Olh"/>
+                                    <constraint firstAttribute="trailing" secondItem="3tB-4M-9JU" secondAttribute="trailing" id="DGm-47-fJC"/>
+                                    <constraint firstAttribute="bottom" secondItem="3tB-4M-9JU" secondAttribute="bottom" id="uLp-03-12y"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="335-L1-f2M">
                                 <state key="normal" title="Audio"/>
@@ -74,7 +94,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTK-WS-5GT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1566" y="37"/>
+            <point key="canvasLocation" x="1565.5999999999999" y="36.431784107946029"/>
+        </scene>
+        <!--Full Screen Camera View Controller-->
+        <scene sceneID="7gb-HJ-SH4">
+            <objects>
+                <viewController id="xhV-1D-f0p" customClass="FullScreenCameraViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eRk-4g-qAb"/>
+                        <viewControllerLayoutGuide type="bottom" id="dNw-Uz-ISn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gLf-sD-Anj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VJ-DL-eK8">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4VJ-DL-eK8" firstAttribute="top" secondItem="eRk-4g-qAb" secondAttribute="bottom" id="9oL-PO-Cfk"/>
+                            <constraint firstItem="dNw-Uz-ISn" firstAttribute="top" secondItem="4VJ-DL-eK8" secondAttribute="bottom" id="MBU-g7-ohs"/>
+                            <constraint firstAttribute="trailing" secondItem="4VJ-DL-eK8" secondAttribute="trailing" id="Qdb-9N-yJn"/>
+                            <constraint firstItem="4VJ-DL-eK8" firstAttribute="leading" secondItem="gLf-sD-Anj" secondAttribute="leading" id="mTM-Ot-f9g"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zBP-o7-2lQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1566" y="634"/>
         </scene>
         <!--Exposure Audio Note View Controller-->
         <scene sceneID="HNg-tZ-nO8">

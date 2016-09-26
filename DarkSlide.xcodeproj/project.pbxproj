@@ -29,6 +29,7 @@
 		3A215D471D90306500876F00 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D461D90306500876F00 /* Utilities.swift */; };
 		3A215D491D9149A300876F00 /* PortraitNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D481D9149A300876F00 /* PortraitNavigationController.swift */; };
 		3AC8214A1D93F613003C484D /* MovieNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC821491D93F612003C484D /* MovieNote.swift */; };
+		3AC8214C1D9929CE003C484D /* FullScreenCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8214B1D9929CE003C484D /* FullScreenCameraViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		3A215D461D90306500876F00 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = ../Utilities.swift; sourceTree = "<group>"; };
 		3A215D481D9149A300876F00 /* PortraitNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitNavigationController.swift; sourceTree = "<group>"; };
 		3AC821491D93F612003C484D /* MovieNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNote.swift; sourceTree = "<group>"; };
+		3AC8214B1D9929CE003C484D /* FullScreenCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenCameraViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				3A215D401D9024F500876F00 /* ExposureViewController.swift */,
 				3A215D441D90289D00876F00 /* ExposureAudioViewController.swift */,
 				3A215D481D9149A300876F00 /* PortraitNavigationController.swift */,
+				3AC8214B1D9929CE003C484D /* FullScreenCameraViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				3A215D3C1D8EABF100876F00 /* PhotoAudioVideo.swift in Sources */,
 				3A215D3A1D8EA98200876F00 /* ExposurePhotoVideoViewController.swift in Sources */,
 				3A215D241D8C3DA000876F00 /* DarkSlideModel.xcdatamodeld in Sources */,
+				3AC8214C1D9929CE003C484D /* FullScreenCameraViewController.swift in Sources */,
 				3A215D411D9024F500876F00 /* ExposureViewController.swift in Sources */,
 				3A215D301D8C533D00876F00 /* AudioNote.swift in Sources */,
 				3A215D491D9149A300876F00 /* PortraitNavigationController.swift in Sources */,
