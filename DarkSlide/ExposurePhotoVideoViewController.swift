@@ -81,7 +81,7 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	}
 	
 	@IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
-		takeVideo()
+	//	takeVideo()
 	}
 	
 	@IBAction func longPressRelease(_ sender: UILongPressGestureRecognizer) {

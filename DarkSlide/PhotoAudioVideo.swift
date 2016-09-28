@@ -23,7 +23,7 @@ class PhotoAudioVideo: NSObject, AVCaptureFileOutputRecordingDelegate {
 			videoPreviewOrientation = previewLayer.connection.videoOrientation
 		}
 	}
-	var cameraViewDelegate: CameraViewDelegate?
+	weak var cameraViewDelegate: CameraViewDelegate?
 	
 	var videoPreviewOrientation: AVCaptureVideoOrientation?
 	

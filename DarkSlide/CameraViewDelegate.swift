@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CameraViewDelegate {
+protocol CameraViewDelegate: class {
 	
 		weak var cameraView: UIView! { get set }
 }
