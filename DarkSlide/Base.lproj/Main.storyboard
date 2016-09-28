@@ -120,6 +120,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6v2-UO-HKd">
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="Kak-uj-FTb"/>
                                             <constraint firstAttribute="width" secondItem="6v2-UO-HKd" secondAttribute="height" multiplier="1:1" id="g7m-vv-fMG"/>
                                         </constraints>
                                         <state key="normal" title="photo"/>
@@ -200,10 +201,9 @@
                                     <constraint firstItem="6v2-UO-HKd" firstAttribute="centerX" secondItem="4VJ-DL-eK8" secondAttribute="centerX" id="LEQ-3u-9R3"/>
                                     <constraint firstItem="LLF-sf-mQd" firstAttribute="height" secondItem="4VJ-DL-eK8" secondAttribute="height" multiplier="0.2" identifier="height" id="RBA-WK-CPF"/>
                                     <constraint firstItem="NHH-Z9-oWy" firstAttribute="leading" secondItem="4VJ-DL-eK8" secondAttribute="leadingMargin" id="Uo7-Ve-rPq"/>
-                                    <constraint firstItem="6v2-UO-HKd" firstAttribute="height" secondItem="4VJ-DL-eK8" secondAttribute="height" multiplier="0.15" id="XNK-5w-3QY"/>
                                     <constraint firstItem="WQE-rb-kt4" firstAttribute="height" secondItem="6v2-UO-HKd" secondAttribute="height" multiplier="0.7" id="bBO-Nr-zaj"/>
                                     <constraint firstItem="NHH-Z9-oWy" firstAttribute="top" secondItem="4VJ-DL-eK8" secondAttribute="topMargin" constant="5" id="dVL-M3-tuh"/>
-                                    <constraint firstItem="WQE-rb-kt4" firstAttribute="leading" secondItem="6v2-UO-HKd" secondAttribute="trailing" constant="44" id="f2f-ru-Y9D"/>
+                                    <constraint firstItem="WQE-rb-kt4" firstAttribute="leading" secondItem="6v2-UO-HKd" secondAttribute="trailing" constant="30" id="f2f-ru-Y9D"/>
                                     <constraint firstItem="WQE-rb-kt4" firstAttribute="centerY" secondItem="6v2-UO-HKd" secondAttribute="centerY" id="hC4-eF-7DN"/>
                                     <constraint firstItem="LLF-sf-mQd" firstAttribute="leading" secondItem="4VJ-DL-eK8" secondAttribute="leading" id="lxH-6K-oev"/>
                                     <constraint firstAttribute="bottom" secondItem="LLF-sf-mQd" secondAttribute="bottom" id="x7O-TT-Gl8"/>
