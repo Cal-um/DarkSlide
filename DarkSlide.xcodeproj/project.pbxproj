@@ -71,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A03B2801DAE8312007926DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A215D3B1D8EABF100876F00 /* PhotoAudioVideo.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		3A215D041D8C075600876F00 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +101,7 @@
 				3A215D461D90306500876F00 /* Utilities.swift */,
 				3A215D421D90256400876F00 /* Protocols.swift */,
 				3A215D381D8EA64500876F00 /* Views */,
+				3A03B2801DAE8312007926DD /* Model */,
 				3A215D371D8EA62E00876F00 /* View Controllers */,
 				3A215D251D8C410500876F00 /* CoreDataModel */,
 				3A215D101D8C075600876F00 /* AppDelegate.swift */,
@@ -129,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				3A215D391D8EA98200876F00 /* ExposurePhotoVideoViewController.swift */,
-				3A215D3B1D8EABF100876F00 /* PhotoAudioVideo.swift */,
 				3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */,
 				3A215D401D9024F500876F00 /* ExposureViewController.swift */,
 				3A215D441D90289D00876F00 /* ExposureAudioViewController.swift */,

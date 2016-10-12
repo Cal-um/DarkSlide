@@ -10,10 +10,17 @@ import UIKit
 import AVFoundation
 import CoreData
 
+// This object creates an object which enables a live view preview layer and the option to take a live photo as well as video. You must pass in a delegate which must have a UIView suited for a AVCaptureVideoPreviewLayer, a core data ManagedObjectContext and a CameraConfiguration option defined in the enum CameraConfiguration.
+
+enum CameraConfiguration {
+	case livePhotoOnly
+	case livePhotoAndVideo
+}
+
 class PhotoAudioVideo: NSObject, AVCaptureFileOutputRecordingDelegate {
 	
 	var managedObjectContextStack: ManagedObjectContextStack!
-	
+	var cameraConfiguration: CameraConfiguration!
 	let captureSession = AVCaptureSession()
 	let imageOutput = AVCapturePhotoOutput()
 	let movieOutput = AVCaptureMovieFileOutput()
@@ -27,11 +34,12 @@ class PhotoAudioVideo: NSObject, AVCaptureFileOutputRecordingDelegate {
 	
 	var videoPreviewOrientation: AVCaptureVideoOrientation?
 	
-	init(_ cameraViewDelegate: CameraViewDelegate, _ managedObjectContextStack : ManagedObjectContextStack) {
+	init(cameraViewDelegate: CameraViewDelegate, managedObjectContextStack : ManagedObjectContextStack, configuration: CameraConfiguration) {
 		super.init()
 		self.cameraViewDelegate = cameraViewDelegate
 		self.initPreviewAndStartSession()
 		self.managedObjectContextStack = managedObjectContextStack
+		self.cameraConfiguration = configuration
 		
 	}
 	
