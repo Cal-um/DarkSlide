@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YYm-Aa-NcV">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YYm-Aa-NcV">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -18,7 +18,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bDu-0d-LlA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="J1C-cx-cpN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RA4-ld-Xzm">
@@ -50,15 +50,13 @@
                         <viewControllerLayoutGuide type="bottom" id="qXD-RO-u3O"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EJ1-kh-6fw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="294.33333333333326"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="267"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgO-1j-leJ">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tB-4M-9JU">
                                         <connections>
-                                            <action selector="longPress:" destination="uKw-RA-TCz" eventType="touchUpInside" id="s5d-HZ-o5S"/>
-                                            <action selector="longPressRelease:" destination="uKw-RA-TCz" eventType="touchUpOutside" id="N0i-o8-IAO"/>
                                             <action selector="shortPress:" destination="uKw-RA-TCz" eventType="touchUpInside" id="nFP-ga-2qG"/>
                                         </connections>
                                     </button>
@@ -74,13 +72,13 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="335-L1-f2M">
                                 <state key="normal" title="Audio"/>
                                 <connections>
-                                    <segue destination="QDx-XM-MsZ" kind="presentation" identifier="ExposureAudioRecordViewControllerSegue" modalPresentationStyle="currentContext" id="bqX-eU-43F"/>
+                                    <segue destination="QDx-XM-MsZ" kind="presentation" identifier="AudioSegue" modalPresentationStyle="currentContext" id="bqX-eU-43F"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHy-Ru-Pib">
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="xhV-1D-f0p" kind="presentation" id="Q77-Fy-ru0"/>
+                                    <segue destination="xhV-1D-f0p" kind="presentation" identifier="FullViewSegue" id="Q77-Fy-ru0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -113,7 +111,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dNw-Uz-ISn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gLf-sD-Anj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VJ-DL-eK8">
@@ -124,6 +122,9 @@
                                             <constraint firstAttribute="width" secondItem="6v2-UO-HKd" secondAttribute="height" multiplier="1:1" id="g7m-vv-fMG"/>
                                         </constraints>
                                         <state key="normal" title="photo"/>
+                                        <connections>
+                                            <action selector="takeVideo:" destination="xhV-1D-f0p" eventType="touchUpInside" id="tut-5g-eKZ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQE-rb-kt4">
                                         <constraints>
@@ -160,7 +161,7 @@
                                                         <color key="backgroundColor" red="0.2468442683" green="0.24776512740000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="WxW-Of-aOt" secondAttribute="height" multiplier="1:1" id="b9a-md-Sge"/>
-                                                            <constraint firstAttribute="height" constant="45" id="wA0-Qo-Cr0"/>
+                                                            <constraint firstAttribute="height" constant="46" id="wA0-Qo-Cr0"/>
                                                         </constraints>
                                                         <state key="normal" title="button"/>
                                                     </button>
@@ -222,11 +223,13 @@
                     <connections>
                         <outlet property="cameraOptionsBar" destination="LLF-sf-mQd" id="yUc-Dp-2j8"/>
                         <outlet property="cameraView" destination="4VJ-DL-eK8" id="G3d-Yj-sz9"/>
+                        <outlet property="exitFullScreenButton" destination="NHH-Z9-oWy" id="rTd-2w-Vy6"/>
                         <outlet property="flashOnOff" destination="Sxc-BQ-01B" id="hSn-Iw-2vI"/>
                         <outlet property="livePhotoToggle" destination="GOH-w1-bQe" id="wxa-XB-dBt"/>
                         <outlet property="switchCameraMode" destination="WxW-Of-aOt" id="HSZ-8T-6tI"/>
                         <outlet property="switchFrontBackCamera" destination="52H-GJ-Yxv" id="h7r-G5-rll"/>
                         <outlet property="takePhotoButton" destination="6v2-UO-HKd" id="BxX-NP-SZu"/>
+                        <outlet property="toggleCameraOptionsButton" destination="WQE-rb-kt4" id="FuE-a6-kOI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBP-o7-2lQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -242,7 +245,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yFv-cS-8Gx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3oy-Fj-sTe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uJ-9H-9ew">

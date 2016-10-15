@@ -14,18 +14,8 @@ import AVKit
 class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextStackSettable, CameraViewDelegate {
 	
 	// MARK: View Controller properties and life cycle
-	var movies: [MovieNote]? {
-		didSet {
-			if let m = movies?.last {
-				let player = AVPlayer(url: m.moviePath)
-				let playerController = AVPlayerViewController()
-				playerController.player = player
-				self.present(playerController, animated: true) {
-					playerController.player!.play()
-				}
-			}
-		}
-	}
+	
+	
 	var managedObjectContextStack: ManagedObjectContextStack!
 	
 	@IBOutlet weak var cameraView: UIView!
@@ -35,7 +25,6 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	override func viewDidLoad() {
 		// set up video preview and PhotoAudioVideo object
 		photoVideo = PhotoAudioVideo(cameraViewDelegate: self, managedObjectContextStack: managedObjectContextStack, configuration: .livePhotoOnly)
-		//gesturesForPhotoVideo()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -65,31 +54,6 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		photoVideo.takePhoto()
 	}
 	
-	func takeVideo() {
-		photoVideo.recordMovieNote() { _ in
-	//	let fetch = NSFetchRequest(entityName: "MovieNote")
-			let fetch: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "MovieNote")
-		
-			do {
-				if let movie = try managedObjectContextStack.mainContext.fetch(fetch) as? [MovieNote] {
-					movies = movie
-				}
-			} catch {
-				print("fuck")
-			}
-		}
-	}
-	
-	@IBAction func longPress(_ sender: UILongPressGestureRecognizer) {
-	//	takeVideo()
-	}
-	
-	@IBAction func longPressRelease(_ sender: UILongPressGestureRecognizer) {
-		
-		
-	}
-	
-	
 	@IBAction func shortPress(_ sender: UITapGestureRecognizer) {
 		photoVideo.takePhoto()
 
@@ -97,7 +61,11 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
-		case .some("ExposureAudioRecordViewControllerSegue"):
+		case .some("AudioSegue"):
+			guard var vc = segue.destination as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
+			vc.managedObjectContextStack = managedObjectContextStack
+		case .some("FullViewSegue"):
+			print("good")
 			guard var vc = segue.destination as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
 		default: break
