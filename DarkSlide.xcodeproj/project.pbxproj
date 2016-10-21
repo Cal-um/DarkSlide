@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A03B2821DB4C5C3007926DD /* PhotoVideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */; };
+		3A03B2841DB4CF37007926DD /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2831DB4CF37007926DD /* PreviewView.swift */; };
+		3A03B2AC1DBA2B1F007926DD /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */; };
 		3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D101D8C075600876F00 /* AppDelegate.swift */; };
 		3A215D161D8C075600876F00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A215D141D8C075600876F00 /* Main.storyboard */; };
 		3A215D181D8C075600876F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A215D171D8C075600876F00 /* Assets.xcassets */; };
@@ -33,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoCapture.swift; sourceTree = "<group>"; };
+		3A03B2831DB4CF37007926DD /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegate.swift; sourceTree = "<group>"; };
 		3A215D0D1D8C075600876F00 /* DarkSlide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarkSlide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A215D101D8C075600876F00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A215D151D8C075600876F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,6 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				3A215D3B1D8EABF100876F00 /* PhotoAudioVideo.swift */,
+				3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */,
+				3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -150,6 +158,7 @@
 		3A215D381D8EA64500876F00 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3A03B2831DB4CF37007926DD /* PreviewView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -242,10 +251,13 @@
 				3A215D431D90256400876F00 /* Protocols.swift in Sources */,
 				3A215D2C1D8C512800876F00 /* DarkSlide.swift in Sources */,
 				3A215D3E1D8EB0DF00876F00 /* CameraViewDelegate.swift in Sources */,
+				3A03B2841DB4CF37007926DD /* PreviewView.swift in Sources */,
+				3A03B2AC1DBA2B1F007926DD /* PhotoCaptureDelegate.swift in Sources */,
 				3A215D341D8D42BD00876F00 /* HelperExtensions.swift in Sources */,
 				3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */,
 				3A215D2E1D8C518C00876F00 /* PhotoNote.swift in Sources */,
 				3A215D271D8C422A00876F00 /* SubjectForExposure.swift in Sources */,
+				3A03B2821DB4C5C3007926DD /* PhotoVideoCapture.swift in Sources */,
 				3A215D361D8D4C7200876F00 /* ManagedObjectContextStack.swift in Sources */,
 				3A215D451D90289D00876F00 /* ExposureAudioViewController.swift in Sources */,
 				3A215D2A1D8C4D4D00876F00 /* ManagedObject.swift in Sources */,

@@ -29,7 +29,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	var managedObjectContextStack: ManagedObjectContextStack!
 	var photoVideo: PhotoAudioVideo!
 	
-	@IBOutlet weak var cameraView: UIView!
+	@IBOutlet weak var cameraView: PreviewView!
 	@IBOutlet weak var exitFullScreenButton: UIButton!
 	@IBOutlet weak var toggleCameraOptionsButton: UIButton!
 	@IBOutlet weak var cameraOptionsBar: UIView!

@@ -10,5 +10,5 @@ import UIKit
 
 protocol CameraViewDelegate: class {
 	
-		weak var cameraView: UIView! { get set }
+		weak var cameraView: PreviewView! { get set }
 }
