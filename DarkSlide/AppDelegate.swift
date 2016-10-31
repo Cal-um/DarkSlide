@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Fabric
+import Answers
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,7 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		vc.managedObjectContextStack = managedObjectContextStack
 		
-		
+		Fabric.with([Answers.self])
+
 		return true
 	}
 

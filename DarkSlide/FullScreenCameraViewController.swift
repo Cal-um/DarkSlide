@@ -116,6 +116,18 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		}
 	}
 	
+	func didTakeLivePhoto(image: UIImage, video: Data) {
+		
+	}
+	
+	func didTakeVideo(video: Data) {
+		
+	}
+	
+	func didTakeImage(image: UIImage) {
+		
+	}
+	
 	func currentVideoOrientation() -> AVCaptureVideoOrientation {
 		var orientation: AVCaptureVideoOrientation
 		

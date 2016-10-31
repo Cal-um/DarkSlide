@@ -15,23 +15,35 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	
 	// MARK: View Controller properties and life cycle
 	
-	
 	var managedObjectContextStack: ManagedObjectContextStack!
 	
-	@IBOutlet weak var cameraView: UIView!
+	@IBOutlet weak var cameraView: PreviewView!
 	
-	var photoVideo: PhotoAudioVideo!
+	var photoVideo: PhotoVideoCapture!
 	
 	override func viewDidLoad() {
 		// set up video preview and PhotoAudioVideo object
-		photoVideo = PhotoAudioVideo(cameraViewDelegate: self, managedObjectContextStack: managedObjectContextStack, configuration: .livePhotoOnly)
+		photoVideo = PhotoVideoCapture(delegate: self)
 	}
 	
-	override func viewDidLayoutSubviews() {
-		if photoVideo.previewLayer != nil {
-			photoVideo.previewLayer.frame = cameraView.bounds
-			photoVideo.previewLayer.connection.videoOrientation = currentVideoOrientation()
-		}
+	@IBAction func shortPress(_ sender: UITapGestureRecognizer) {
+		
+	}
+	
+	func didTakeImage(image: UIImage) {
+		
+	}
+	
+	func didTakeVideo(video: Data) {
+		
+	}
+	
+	func didTakeLivePhoto(image: UIImage, video: Data) {
+		
+	}
+		
+	func takePhoto() {
+			
 	}
 	
 	func currentVideoOrientation() -> AVCaptureVideoOrientation {
@@ -50,14 +62,6 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		return orientation
 	}
 	
-	func takePhoto() {
-		photoVideo.takePhoto()
-	}
-	
-	@IBAction func shortPress(_ sender: UITapGestureRecognizer) {
-		photoVideo.takePhoto()
-
-	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
@@ -72,4 +76,6 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		}
 	}
 }
+
+
 

@@ -11,8 +11,71 @@ import AVFoundation
 
 class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 	
+	// MARK: Init
 	
-
+	weak var cameraViewDelegate: CameraViewDelegate!
+	
+	init(delegate: CameraViewDelegate) {
+		super.init()
+		self.cameraViewDelegate = delegate
+		initialLoad()
+	}
+	
+	
+	func initialLoad() {
+		
+		// Disable UI. The UI is enabled if and only if the session starts running.
+		
+		// Set up the video preview view.
+		cameraViewDelegate.cameraView.session = session
+		
+		/*
+		Check video authorization status. Video access is required and audio
+		access is optional. If audio access is denied, audio is not recorded
+		during movie recording.
+		*/
+		
+		switch AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) {
+		case .authorized:
+			// the user has previously granted access to the camera
+			break
+			
+		case .notDetermined:
+			/*
+			The user has not yet been presented with the option to grant
+			video acswitcess. We suspend the session queue to delay session
+			setup until the access request has completed.
+			
+			Note that audio access will be implicitly requested when we
+			create an AVCaptureDeviceInput for audio during session setup.
+			*/
+			
+			sessionQueue.suspend()
+			AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { [unowned self] granted in
+				if !granted {
+					self.setupResult = .notAuthorised
+				}
+				self.sessionQueue.resume()
+				})
+		default:
+			// the user has previously denied access/
+			setupResult = .notAuthorised
+		}
+		
+		/*
+		Setup the capture session.
+		In general it is not safe to mutate an AVCaptureSession or any of its
+		inputs, outputs, or connections from multiple threads at the same time.
+		
+		Why not do all of this on the main queue?
+		Because AVCaptureSession.startRunning() is a blocking call which can
+		take a long time. We dispatch session setup to the sessionQueue so
+		that the main queue isn't blocked, which keeps the UI responsive.
+		*/
+		sessionQueue.async { [unowned self] in
+			self.configureSession()
+		}
+	}
 	
 	// MARK: Session Management
 	
@@ -22,7 +85,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 		case configurationFailed
 	}
 	
-	private let session = AVCaptureSession()
+	private var session = AVCaptureSession()
 	
 	private var isSessionRunning = false
 	
@@ -32,7 +95,6 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 	
 	var videoDeviceInput: AVCaptureDeviceInput!
 	
-	weak var cameraViewDelegate: CameraViewDelegate!
 	
 	// Call this on the session queue.
 	private func configureSession() {
@@ -75,7 +137,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 					self.videoDeviceInput = videoDeviceInput
 					
 					DispatchQueue.main.async {
-						
+						print("gotHERE")
 						/*
 						Why are we dispatching this to the main queue?
 						Because AVCaptureVideoPreviewLayer is the backing layer for PreviewView and UIView
@@ -95,6 +157,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 							}
 						}
 						
+						self.cameraViewDelegate.cameraView.videoPreviewLayer.frame = self.cameraViewDelegate.cameraView.bounds
 						self.cameraViewDelegate.cameraView.videoPreviewLayer.connection.videoOrientation = initialVideoOrientation
 					}
 				}
@@ -454,7 +517,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 		session.addObserver(self, forKeyPath: "running", options: .new, context: &sessionRunningObserveContext)
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(subjectAreaDidChange), name: Notification.Name("AVCaptureDeviceSubjectAreaDidChangeNotification"), object: videoDeviceInput.device)
-		NotificationCenter.default.addObserver(self, selector: #selector( sessionRuntimeError), name: Notification.Name("AVCaptureSessionRuntimeErrorNotification"), object: session)
+		NotificationCenter.default.addObserver(self, selector: #selector( sessionErrorRuntimeError), name: Notification.Name("AVCaptureSessionRuntimeErrorNotification"), object: session)
 		
 		/*
 		A session can only run when the app is full screen. It will be interrupted
@@ -497,7 +560,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 	
 	func subjectAreaDidChange(notification: NSNotification) {
 		let devicePoint = CGPoint(x: 0.5, y: 0.5)
-		focus(with: .autoFocus, exposureMode: .continuousAutoExposure, at: devicePoint, monitorSubjectChange: false)
+		focus(with: .autoFocus, exposureMode: .continuousAutoExposure, at: devicePoint, monitorSubjectAreaChange: false)
 	}
 	
 	func sessionErrorRuntimeError(notification: NSNotification) {

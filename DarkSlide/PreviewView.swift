@@ -27,5 +27,4 @@ class PreviewView: UIView {
 	override class var layerClass: AnyClass {
 		return AVCaptureVideoPreviewLayer.self
 	}
-	
 }
