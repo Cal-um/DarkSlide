@@ -28,6 +28,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 		
 		// Set up the video preview view.
 		cameraViewDelegate.cameraView.session = session
+
 		
 		/*
 		Check video authorization status. Video access is required and audio
@@ -77,6 +78,34 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 		}
 	}
 	
+	func viewAppeared() {
+		
+		sessionQueue.async { [unowned self] in
+			switch self.setupResult {
+			case .success:
+				// Only setup observers and start the session running if setup succeeded.
+				self.addObservers()
+				self.session.startRunning()
+				self.isSessionRunning = self.session.isRunning
+			case .notAuthorised: break
+				// Inform user that permissions must be granted.
+			case .configurationFailed: break
+				// Alert user that config failed.
+			}
+		}
+	}
+	
+	func viewDissapeared() {
+		
+		sessionQueue.async { [unowned self] in
+			if self.setupResult == .success {
+				self.session.stopRunning()
+				self.isSessionRunning = self.session.isRunning
+				self.removeObservers()
+			}
+		}
+	}
+	
 	// MARK: Session Management
 	
 	private enum SessionSetupResult {
@@ -99,6 +128,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 	// Call this on the session queue.
 	private func configureSession() {
 		if setupResult != .success {
+			print("moot")
 			return
 		}
 		
@@ -120,10 +150,12 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 			
 			if let dualCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInDuoCamera, mediaType: AVMediaTypeVideo, position: .back) {
 				defaultVideoDevice = dualCameraDevice
+				print("moot1")
 			}
 			else if let backCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .back) {
 				// If the back dual camera is not available, default to the back wide angle camera.
 				defaultVideoDevice = backCameraDevice
+				print("moot2")
 			}
 			else if let frontCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .front) {
 				// In some cases where users break their phones, the back wide angle camera is not available. In this case, we should default to the front wide angle camera.
@@ -137,7 +169,6 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 					self.videoDeviceInput = videoDeviceInput
 					
 					DispatchQueue.main.async {
-						print("gotHERE")
 						/*
 						Why are we dispatching this to the main queue?
 						Because AVCaptureVideoPreviewLayer is the backing layer for PreviewView and UIView
@@ -156,8 +187,6 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 								initialVideoOrientation = videoOrientation
 							}
 						}
-						
-						self.cameraViewDelegate.cameraView.videoPreviewLayer.frame = self.cameraViewDelegate.cameraView.bounds
 						self.cameraViewDelegate.cameraView.videoPreviewLayer.connection.videoOrientation = initialVideoOrientation
 					}
 				}

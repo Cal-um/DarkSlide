@@ -18,7 +18,9 @@ class ExposureAudioNoteViewController: UIViewController, ManagedObjectContextSta
 		dismiss(animated: true, completion: nil)
 	}
 	
-	
+	override func viewDidLoad() {
+		print(view.bounds)
+	}
 }
 
 

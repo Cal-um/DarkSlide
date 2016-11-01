@@ -26,6 +26,22 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		photoVideo = PhotoVideoCapture(delegate: self)
 	}
 	
+	override func viewDidLayoutSubviews() {
+	//	cameraView.videoPreviewLayer.frame = cameraView.bounds
+		print(cameraView.bounds)
+		print(view.bounds)
+		cameraView.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+		print(cameraView.videoPreviewLayer.bounds)
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		photoVideo.viewAppeared()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		photoVideo.viewDissapeared()
+	}
+	
 	@IBAction func shortPress(_ sender: UITapGestureRecognizer) {
 		
 	}
@@ -45,23 +61,6 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	func takePhoto() {
 			
 	}
-	
-	func currentVideoOrientation() -> AVCaptureVideoOrientation {
-		var orientation: AVCaptureVideoOrientation
-		
-		switch UIDevice.current.orientation {
-		case .portrait:
-			orientation = AVCaptureVideoOrientation.portrait
-		case .landscapeRight:
-			orientation = AVCaptureVideoOrientation.landscapeLeft
-		case .portraitUpsideDown:
-			orientation = AVCaptureVideoOrientation.portraitUpsideDown
-		default:
-			orientation = AVCaptureVideoOrientation.landscapeRight
-		}
-		return orientation
-	}
-	
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {

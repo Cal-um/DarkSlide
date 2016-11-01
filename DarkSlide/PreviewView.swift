@@ -15,6 +15,16 @@ class PreviewView: UIView {
 		return layer as! AVCaptureVideoPreviewLayer
 	}
 	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		setup()
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		setup()
+	}
+	
 	var session: AVCaptureSession? {
 		get {
 			return videoPreviewLayer.session
@@ -26,5 +36,16 @@ class PreviewView: UIView {
 	
 	override class var layerClass: AnyClass {
 		return AVCaptureVideoPreviewLayer.self
+	}
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		print("bounds: \(bounds)")
+		print("frame: \(videoPreviewLayer.frame)")
+		videoPreviewLayer.frame = bounds
+	}
+	
+	private func setup() {
+		backgroundColor = UIColor.black
 	}
 }
