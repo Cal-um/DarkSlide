@@ -27,7 +27,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 		// Disable UI. The UI is enabled if and only if the session starts running.
 		
 		// Set up the video preview view.
-		cameraViewDelegate.cameraView.session = session
+		cameraViewDelegate.cameraView.setupForPreviewLayer(previewLayer: createPreviewLayer())
 
 		
 		/*
@@ -78,6 +78,10 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 		}
 	}
 	
+	func createPreviewLayer() -> AVCaptureVideoPreviewLayer {
+		return AVCaptureVideoPreviewLayer(session: session)
+	}
+
 	func viewAppeared() {
 		
 		sessionQueue.async { [unowned self] in
@@ -87,6 +91,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 				self.addObservers()
 				self.session.startRunning()
 				self.isSessionRunning = self.session.isRunning
+				print("startUp")
 			case .notAuthorised: break
 				// Inform user that permissions must be granted.
 			case .configurationFailed: break
@@ -102,6 +107,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 				self.session.stopRunning()
 				self.isSessionRunning = self.session.isRunning
 				self.removeObservers()
+				print("shutDown")
 			}
 		}
 	}
@@ -188,6 +194,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 							}
 						}
 						self.cameraViewDelegate.cameraView.videoPreviewLayer.connection.videoOrientation = initialVideoOrientation
+						
 					}
 				}
 				else {
@@ -622,6 +629,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 			//resumeButton.isHidden = false
 		}
 	}
+	
 	func sessionWasInterrupted(notification: NSNotification) {
 		/*
 		In some scenarios we want to enable the user to resume the session running.

@@ -19,7 +19,7 @@ class ExposureAudioNoteViewController: UIViewController, ManagedObjectContextSta
 	}
 	
 	override func viewDidLoad() {
-		print(view.bounds)
+	
 	}
 }
 

@@ -26,14 +26,6 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		photoVideo = PhotoVideoCapture(delegate: self)
 	}
 	
-	override func viewDidLayoutSubviews() {
-	//	cameraView.videoPreviewLayer.frame = cameraView.bounds
-		print(cameraView.bounds)
-		print(view.bounds)
-		cameraView.videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-		print(cameraView.videoPreviewLayer.bounds)
-	}
-	
 	override func viewDidAppear(_ animated: Bool) {
 		photoVideo.viewAppeared()
 	}
@@ -68,7 +60,6 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 			guard var vc = segue.destination as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
 		case .some("FullViewSegue"):
-			print("good")
 			guard var vc = segue.destination as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
 		default: break

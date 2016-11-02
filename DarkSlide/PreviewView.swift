@@ -11,9 +11,7 @@ import AVFoundation
 
 class PreviewView: UIView {
 	
-	var videoPreviewLayer: AVCaptureVideoPreviewLayer {
-		return layer as! AVCaptureVideoPreviewLayer
-	}
+	var videoPreviewLayer: AVCaptureVideoPreviewLayer!
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -25,23 +23,15 @@ class PreviewView: UIView {
 		setup()
 	}
 	
-	var session: AVCaptureSession? {
-		get {
-			return videoPreviewLayer.session
-		}
-		set {
-			videoPreviewLayer.session = newValue
-		}
+	func setupForPreviewLayer(previewLayer: AVCaptureVideoPreviewLayer) {
+		previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+		layer.insertSublayer(previewLayer, at: 0)
+		self.videoPreviewLayer = previewLayer
 	}
-	
-	override class var layerClass: AnyClass {
-		return AVCaptureVideoPreviewLayer.self
-	}
+
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		print("bounds: \(bounds)")
-		print("frame: \(videoPreviewLayer.frame)")
 		videoPreviewLayer.frame = bounds
 	}
 	

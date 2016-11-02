@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		managedObjectContext = mainContext
 		managedObjectContextStack = ManagedObjectContextStack(mainManagedObjectContext: managedObjectContext)
 		
-		// Pass MOCStack to Root ViewController.
+		// Pass MOCStack to rootViewController.
 		
 		guard let nc = window?.rootViewController as? UINavigationController, var vc = nc.viewControllers.first as? ManagedObjectContextStackSettable else {
 			fatalError("Wrong view controller type")

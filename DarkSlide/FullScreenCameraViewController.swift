@@ -9,25 +9,11 @@
 import UIKit
 import AVKit
 import AVFoundation
-import CoreData
 
 class FullScreenCameraViewController: UIViewController, ManagedObjectContextStackSettable, CameraViewDelegate {
 	
-	var movies: [MovieNote]? {
-		didSet {
-			if let m = movies?.last {
-				let player = AVPlayer(url: m.moviePath)
-				let playerController = AVPlayerViewController()
-				playerController.player = player
-				self.present(playerController, animated: true) {
-					playerController.player!.play()
-				}
-			}
-		}
-	}
-	
 	var managedObjectContextStack: ManagedObjectContextStack!
-	var photoVideo: PhotoAudioVideo!
+	var photoVideo: PhotoVideoCapture!
 	
 	@IBOutlet weak var cameraView: PreviewView!
 	@IBOutlet weak var exitFullScreenButton: UIButton!
@@ -40,20 +26,38 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	@IBOutlet weak var livePhotoToggle: UIButton!
 	
 	override func viewDidLoad() {
-		photoVideo = PhotoAudioVideo(cameraViewDelegate: self, managedObjectContextStack: managedObjectContextStack, configuration: .livePhotoAndVideo)
+		photoVideo = PhotoVideoCapture(delegate: self)
 		openCloseCameraOptionTab()
 		bringSubviewsToFront()
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		photoVideo.viewAppeared()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
 	}
 	
 	override var prefersStatusBarHidden: Bool {
 		return true
 	}
 	
+	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+		super.viewWillTransition(to: size, with: coordinator)
+		
+		if let videoPreviewLayerConnection = cameraView.videoPreviewLayer.connection {
+			let deviceOrientation = UIDevice.current.orientation
+			guard let newVideoOrientation = deviceOrientation.videoOrientation, deviceOrientation.isPortrait || deviceOrientation.isLandscape else {
+				return
+			}
+			
+			videoPreviewLayerConnection.videoOrientation = newVideoOrientation
+		}
+	}
+	
 	@IBAction func takeVideo(_ sender: AnyObject) {
 		takeVideo()
 	}
-
-
 	
 	@IBAction func tapToToggleOptionTabConstraint(_ sender: AnyObject) {
 		openCloseCameraOptionTab()
@@ -61,14 +65,10 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	
 	override func viewDidLayoutSubviews() {
 		configureButton()
-		
-		if photoVideo.previewLayer != nil {
-			photoVideo.previewLayer.frame = cameraView.bounds
-			photoVideo.previewLayer.connection.videoOrientation = currentVideoOrientation()
-		}
 	}
 	
 	@IBAction func backButton(_ sender: AnyObject) {
+		photoVideo.viewDissapeared()
 		dismiss(animated: true, completion: nil)
 	}
 	
@@ -102,18 +102,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	}
 	
 	func takeVideo() {
-		photoVideo.recordMovieNote() { _ in
-			//	let fetch = NSFetchRequest(entityName: "MovieNote")
-			let fetch: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "MovieNote")
-			
-			do {
-				if let movie = try managedObjectContextStack.mainContext.fetch(fetch) as? [MovieNote] {
-					movies = movie
-				}
-			} catch {
-				fatalError("problem with video")
-			}
-		}
+		print("video")
 	}
 	
 	func didTakeLivePhoto(image: UIImage, video: Data) {
@@ -126,22 +115,6 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	
 	func didTakeImage(image: UIImage) {
 		
-	}
-	
-	func currentVideoOrientation() -> AVCaptureVideoOrientation {
-		var orientation: AVCaptureVideoOrientation
-		
-		switch UIDevice.current.orientation {
-		case .portrait:
-			orientation = AVCaptureVideoOrientation.portrait
-		case .landscapeRight:
-			orientation = AVCaptureVideoOrientation.landscapeLeft
-		case .portraitUpsideDown:
-			orientation = AVCaptureVideoOrientation.portraitUpsideDown
-		default:
-			orientation = AVCaptureVideoOrientation.landscapeRight
-		}
-		return orientation
 	}
 	
 	func bringSubviewsToFront() {
@@ -157,10 +130,5 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		cameraView.bringSubview(toFront: toggleCameraOptionsButton)
 		cameraView.bringSubview(toFront: exitFullScreenButton)
 		cameraView.bringSubview(toFront: cameraOptionsBar)
-
-
 	}
-
-	
-	
 }
