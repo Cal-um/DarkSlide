@@ -135,7 +135,7 @@
                                         </constraints>
                                         <state key="normal" title="photo"/>
                                         <connections>
-                                            <action selector="takeVideo:" destination="xhV-1D-f0p" eventType="touchUpInside" id="tut-5g-eKZ"/>
+                                            <action selector="touchExposeButton:" destination="xhV-1D-f0p" eventType="touchUpInside" id="qCE-z1-1BV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQE-rb-kt4">

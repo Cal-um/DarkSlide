@@ -29,6 +29,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		photoVideo = PhotoVideoCapture(delegate: self)
 		openCloseCameraOptionTab()
 		bringSubviewsToFront()
+		photoVideo.toggleCaptureMode()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -41,6 +42,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	override var prefersStatusBarHidden: Bool {
 		return true
 	}
+	
 	
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransition(to: size, with: coordinator)
@@ -55,7 +57,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		}
 	}
 	
-	@IBAction func takeVideo(_ sender: AnyObject) {
+	@IBAction func touchExposeButton(_ sender: AnyObject) {
 		takeVideo()
 	}
 	
@@ -102,15 +104,23 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	}
 	
 	func takeVideo() {
-		print("video")
+		photoVideo.toggleMovieRecording()
 	}
 	
 	func didTakeLivePhoto(image: UIImage, video: Data) {
 		
 	}
 	
-	func didTakeVideo(video: Data) {
-		
+	func didTakeVideo(videoReferenceNumber: String) {
+		// test that shows that video does save.
+			/*print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
+			let player = AVPlayer(url: MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
+			let playerController = AVPlayerViewController()
+			playerController.player = player
+			self.present(playerController, animated: true) {
+				playerController.player!.play()
+			}*/
+
 	}
 	
 	func didTakeImage(image: UIImage) {

@@ -14,8 +14,10 @@ class MovieNote: ManagedObject {
 	@NSManaged var movieReferenceNumber: String
 	@NSManaged var subject: SubjectForExposure?
 	
+	// moviePath gives you the location of the movie.
+
 	var moviePath: URL {
-		let filename = "Movie-\(movieReferenceNumber)"
+		let filename = "Movie-\(movieReferenceNumber).mp4"
 		return (FileManager.applicationSupportDirectory.appendingPathComponent(filename))
 	}
 }
@@ -34,7 +36,12 @@ extension MovieNote: ManagedObjectType, ExposureNote {
 		return NoteType.movie
 	}
 	
-	//photoPath gives you the location of the photo
+	// this function is used for when saving to applcations directory or when Managed Object has not been yet created.
+	static func generateMoviePath(movieReferenceNumber: String) -> URL {
+		let fileName = "Movie-\(movieReferenceNumber).mp4"
+		return (FileManager.applicationSupportDirectory.appendingPathComponent(fileName))
+	}
+	
 	func removePhotoFile() {
 		let path = moviePath
 		let fileManager = FileManager.default

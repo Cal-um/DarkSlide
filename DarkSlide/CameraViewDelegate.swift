@@ -13,5 +13,5 @@ protocol CameraViewDelegate: class {
 	weak var cameraView: PreviewView! { get set }
 	func didTakeImage(image: UIImage)
 	func didTakeLivePhoto(image: UIImage, video: Data)
-	func didTakeVideo(video: Data)
+	func didTakeVideo(videoReferenceNumber: String)
 }

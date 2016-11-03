@@ -22,7 +22,7 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 	
 	private var livePhotoCompanionMovieURL: URL? = nil
 	
-	init(with requestedPhotoSettings: AVCapturePhotoSettings, willCapturePhotoAnimation: @escaping () -> (), capturingLivePhoto: @escaping (Bool) -> (), completed: @escaping (PhotoCaptureDelegate) -> ()) {
+	init(with requestedPhotoSettings: AVCapturePhotoSettings, delegate: CameraViewDelegate, willCapturePhotoAnimation: @escaping () -> (), capturingLivePhoto: @escaping (Bool) -> (), completed: @escaping (PhotoCaptureDelegate) -> ()) {
 		self.requestedPhotoSettings = requestedPhotoSettings
 		self.willCapturePhotoAnimation = willCapturePhotoAnimation
 		self.capturingLivePhoto = capturingLivePhoto
@@ -90,7 +90,11 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 			return
 		}
 		
-		// do something with file
+		if let livePhotoCompanionMovieURL = self.livePhotoCompanionMovieURL {
+			
+			
+			
+		}
 		
 	}
 }

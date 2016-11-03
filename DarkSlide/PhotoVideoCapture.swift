@@ -279,11 +279,11 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 		case movie = 1
 	}
 	
-	@IBOutlet private weak var captureModeControl: UISegmentedControl!
+	private let captureModeControl = 1
 	
 	func toggleCaptureMode() {
 		
-		if captureModeControl.selectedSegmentIndex == CaptureMode.photo.rawValue {
+		if captureModeControl == CaptureMode.photo.rawValue {
 			
 			sessionQueue.async { [unowned self] in
 				/*
@@ -302,7 +302,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 					self.photoOutput.isLivePhotoCaptureEnabled = true
 				}
 			}
-		} else if captureModeControl.selectedSegmentIndex == CaptureMode.movie.rawValue {
+		} else if captureModeControl == CaptureMode.movie.rawValue {
 			sessionQueue.async { [unowned self] in
 				let movieFileOutput = AVCaptureMovieFileOutput()
 				
@@ -529,7 +529,24 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 		}
 		
 		if success {
-			// save to preffered location and cleanup
+			
+			let referenceNumber = MovieNote.randomReferenceNumber
+			
+			do {
+			let movie = try Data(contentsOf: outputFileURL)
+			print(MovieNote.generateMoviePath(movieReferenceNumber: referenceNumber))
+			try movie.write(to: MovieNote.generateMoviePath(movieReferenceNumber: referenceNumber))
+			
+			cameraViewDelegate.didTakeVideo(videoReferenceNumber: referenceNumber)
+			}
+			catch {
+				print("Error saving movie ERROR:\(error)")
+				cleanUp()
+				return
+			}
+		}
+		else {
+			cleanUp()
 		}
 		
 		// Enable the Camera and Record buttons to let the user switch camera and start another recording on main queue.
@@ -728,7 +745,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 			}
 			
 			// Use a separate object for the photo capture delegate to isolate each capture life cycle.
-			let photoCaptureDelegate = PhotoCaptureDelegate(with: photoSettings, willCapturePhotoAnimation: {
+			let photoCaptureDelegate = PhotoCaptureDelegate(with: photoSettings, delegate: self.cameraViewDelegate, willCapturePhotoAnimation: {
 				  DispatchQueue.main.async { [unowned self] in
 				    self.cameraViewDelegate.cameraView.videoPreviewLayer.opacity = 0
 				  	UIView.animate(withDuration: 0.25) { [unowned self] in

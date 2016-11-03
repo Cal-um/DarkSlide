@@ -42,7 +42,7 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		
 	}
 	
-	func didTakeVideo(video: Data) {
+	func didTakeVideo(videoReferenceNumber: String) {
 		
 	}
 	
