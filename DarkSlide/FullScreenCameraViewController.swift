@@ -29,7 +29,6 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		photoVideo = PhotoVideoCapture(delegate: self)
 		openCloseCameraOptionTab()
 		bringSubviewsToFront()
-		photoVideo.toggleCaptureMode()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -73,6 +72,22 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		photoVideo.viewDissapeared()
 		dismiss(animated: true, completion: nil)
 	}
+	
+	@IBAction func toggleChangeCameraPosition(_ sender: Any) {
+		photoVideo.changeCamera()
+	}
+	
+	@IBAction func toggleFlashOrTorchOnOff(_ sender: Any) {
+	}
+	
+	@IBAction func toggleRecordMovieOrPhoto(_ sender: Any) {
+	}
+	
+	@IBAction func toggleLivePhotoOnOff(_ sender: Any) {
+	}
+	
+	
+	
 	
 	func configureButton() {
 		takePhotoButton.layer.cornerRadius = takePhotoButton.bounds.width / 2

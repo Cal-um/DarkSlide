@@ -164,6 +164,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="toggleChangeCameraPosition:" destination="xhV-1D-f0p" eventType="touchUpInside" id="Rw3-ye-EN7"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sxc-BQ-01B">
                                                         <rect key="frame" x="84.5" y="34" width="46" height="46"/>
@@ -173,6 +176,9 @@
                                                             <constraint firstAttribute="width" secondItem="Sxc-BQ-01B" secondAttribute="height" multiplier="1:1" id="rOF-md-hvs"/>
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="toggleFlashOrTorchOnOff:" destination="xhV-1D-f0p" eventType="touchUpInside" id="cRn-fk-5Bs"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WxW-Of-aOt">
                                                         <rect key="frame" x="169.5" y="34" width="46" height="46"/>
@@ -182,6 +188,9 @@
                                                             <constraint firstAttribute="height" constant="46" id="wA0-Qo-Cr0"/>
                                                         </constraints>
                                                         <state key="normal" title="button"/>
+                                                        <connections>
+                                                            <action selector="toggleRecordMovieOrPhoto:" destination="xhV-1D-f0p" eventType="touchUpInside" id="lQv-pp-7VP"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOH-w1-bQe">
                                                         <rect key="frame" x="254" y="34" width="46" height="46"/>
@@ -191,6 +200,9 @@
                                                             <constraint firstAttribute="height" constant="46" id="izj-do-QhH"/>
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="toggleLivePhotoOnOff:" destination="xhV-1D-f0p" eventType="touchUpInside" id="Hdi-k1-msC"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
