@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
+class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraUtils {
 	
 	// MARK: Init
 	
@@ -28,7 +28,6 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 		
 		// Set up the video preview view.
 		cameraViewDelegate.cameraView.setupForPreviewLayer(previewLayer: createPreviewLayer())
-
 		
 		/*
 		Check video authorization status. Video access is required and audio
@@ -133,6 +132,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 	
 	// Call this on the session queue.
 	private func configureSession() {
+		
 		if setupResult != .success {
 			print("moot")
 			return
@@ -400,6 +400,28 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate {
 				//Enable buttons again
 			}
 		}
+	}
+	
+	// MARK: Capture device zoom
+	
+	var lastZoomFactor: CGFloat = 0.0
+	
+	func zoom(zoomFactorFromPinchGesture factor: CGFloat) {
+		
+		let scaledFactor = factor / 20
+		
+		guard let device = videoDeviceInput.device else { print("Device not found") ; return }
+		do {
+			try device.lockForConfiguration()
+			defer {device.unlockForConfiguration()}
+			print("Max zoom for device:\(device.activeFormat.videoMaxZoomFactor) Current Zoom factor:\(device.videoZoomFactor)")
+			
+			device.videoZoomFactor = calculateZoomResult(gestureFactor: scaledFactor, lastZoomFactor: lastZoomFactor, currentVideoZoomFactor: device.videoZoomFactor, maxZoomFactor: 6.00)
+		}
+		catch {
+			print("Error:\(error)")
+		}
+		lastZoomFactor = scaledFactor
 	}
 	
 	private func focus(with focusMode: AVCaptureFocusMode, exposureMode: AVCaptureExposureMode, at devicePoint: CGPoint, monitorSubjectAreaChange: Bool) {

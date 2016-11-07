@@ -64,6 +64,12 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		openCloseCameraOptionTab()
 	}
 	
+	@IBAction func pinchToZoom(_ sender: UIPinchGestureRecognizer) {
+		print("Pinch")
+		let vZoomFactor = sender.scale
+		print("ZOOM HAPPENING IS OF \(vZoomFactor)")
+		photoVideo.zoom(zoomFactorFromPinchGesture: vZoomFactor)	}
+	
 	override func viewDidLayoutSubviews() {
 		configureButton()
 	}

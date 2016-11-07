@@ -12,7 +12,6 @@
 		3A03B2AC1DBA2B1F007926DD /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */; };
 		3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D101D8C075600876F00 /* AppDelegate.swift */; };
 		3A215D161D8C075600876F00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A215D141D8C075600876F00 /* Main.storyboard */; };
-		3A215D181D8C075600876F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A215D171D8C075600876F00 /* Assets.xcassets */; };
 		3A215D1B1D8C075600876F00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A215D191D8C075600876F00 /* LaunchScreen.storyboard */; };
 		3A215D241D8C3DA000876F00 /* DarkSlideModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D221D8C3DA000876F00 /* DarkSlideModel.xcdatamodeld */; };
 		3A215D271D8C422A00876F00 /* SubjectForExposure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D261D8C422A00876F00 /* SubjectForExposure.swift */; };
@@ -33,9 +32,22 @@
 		3A215D491D9149A300876F00 /* PortraitNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D481D9149A300876F00 /* PortraitNavigationController.swift */; };
 		3A3B2A4A1DC3A38800357D00 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B2A481DC3A38800357D00 /* Fabric.framework */; };
 		3A3B2A4B1DC3A38800357D00 /* Answers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B2A491DC3A38800357D00 /* Answers.framework */; };
+		3A43EE2E1DCFABE7002EB25B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */; };
+		3AC4472D1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */; };
 		3AC8214A1D93F613003C484D /* MovieNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC821491D93F612003C484D /* MovieNote.swift */; };
 		3AC8214C1D9929CE003C484D /* FullScreenCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8214B1D9929CE003C484D /* FullScreenCameraViewController.swift */; };
+		3AD345D91DCE12BF005AD849 /* CameraUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD345D81DCE12BF005AD849 /* CameraUtils.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3AC4472F1DCCB29000F69EC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A215D051D8C075600876F00 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A215D0C1D8C075600876F00;
+			remoteInfo = DarkSlide;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoCapture.swift; sourceTree = "<group>"; };
@@ -44,7 +56,6 @@
 		3A215D0D1D8C075600876F00 /* DarkSlide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarkSlide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A215D101D8C075600876F00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A215D151D8C075600876F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3A215D171D8C075600876F00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A215D1A1D8C075600876F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A215D1C1D8C075600876F00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A215D231D8C3DA000876F00 /* DarkSlideModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DarkSlideModel.xcdatamodel; sourceTree = "<group>"; };
@@ -66,8 +77,13 @@
 		3A215D481D9149A300876F00 /* PortraitNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitNavigationController.swift; sourceTree = "<group>"; };
 		3A3B2A481DC3A38800357D00 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3A3B2A491DC3A38800357D00 /* Answers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Answers.framework; sourceTree = "<group>"; };
+		3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3AC4472A1DCCB29000F69EC0 /* DarkSlideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DarkSlideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCaptureTests.swift; sourceTree = "<group>"; };
+		3AC4472E1DCCB29000F69EC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AC821491D93F612003C484D /* MovieNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNote.swift; sourceTree = "<group>"; };
 		3AC8214B1D9929CE003C484D /* FullScreenCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenCameraViewController.swift; sourceTree = "<group>"; };
+		3AD345D81DCE12BF005AD849 /* CameraUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +93,13 @@
 			files = (
 				3A3B2A4B1DC3A38800357D00 /* Answers.framework in Frameworks */,
 				3A3B2A4A1DC3A38800357D00 /* Fabric.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AC447271DCCB29000F69EC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +113,7 @@
 				3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */,
 				3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */,
 				3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */,
+				3AD345D81DCE12BF005AD849 /* CameraUtils.swift */,
 			);
 			name = PhotoVideoCapture;
 			sourceTree = "<group>";
@@ -98,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				3A215D0F1D8C075600876F00 /* DarkSlide */,
+				3AC4472B1DCCB29000F69EC0 /* DarkSlideTests */,
 				3A215D0E1D8C075600876F00 /* Products */,
 				3A3B2A481DC3A38800357D00 /* Fabric.framework */,
 				3A3B2A491DC3A38800357D00 /* Answers.framework */,
@@ -108,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				3A215D0D1D8C075600876F00 /* DarkSlide.app */,
+				3AC4472A1DCCB29000F69EC0 /* DarkSlideTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,8 +148,8 @@
 				3A215D371D8EA62E00876F00 /* View Controllers */,
 				3A215D251D8C410500876F00 /* CoreDataModel */,
 				3A215D101D8C075600876F00 /* AppDelegate.swift */,
+				3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */,
 				3A215D141D8C075600876F00 /* Main.storyboard */,
-				3A215D171D8C075600876F00 /* Assets.xcassets */,
 				3A215D191D8C075600876F00 /* LaunchScreen.storyboard */,
 				3A215D1C1D8C075600876F00 /* Info.plist */,
 			);
@@ -183,6 +209,15 @@
 			name = Entities;
 			sourceTree = "<group>";
 		};
+		3AC4472B1DCCB29000F69EC0 /* DarkSlideTests */ = {
+			isa = PBXGroup;
+			children = (
+				3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */,
+				3AC4472E1DCCB29000F69EC0 /* Info.plist */,
+			);
+			path = DarkSlideTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -204,13 +239,31 @@
 			productReference = 3A215D0D1D8C075600876F00 /* DarkSlide.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3AC447291DCCB29000F69EC0 /* DarkSlideTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AC447331DCCB29000F69EC0 /* Build configuration list for PBXNativeTarget "DarkSlideTests" */;
+			buildPhases = (
+				3AC447261DCCB29000F69EC0 /* Sources */,
+				3AC447271DCCB29000F69EC0 /* Frameworks */,
+				3AC447281DCCB29000F69EC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3AC447301DCCB29000F69EC0 /* PBXTargetDependency */,
+			);
+			name = DarkSlideTests;
+			productName = DarkSlideTests;
+			productReference = 3AC4472A1DCCB29000F69EC0 /* DarkSlideTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		3A215D051D8C075600876F00 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0800;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Calum Harris";
 				TargetAttributes = {
@@ -218,6 +271,12 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = B3H446T9U7;
 						ProvisioningStyle = Automatic;
+					};
+					3AC447291DCCB29000F69EC0 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = B3H446T9U7;
+						ProvisioningStyle = Manual;
+						TestTargetID = 3A215D0C1D8C075600876F00;
 					};
 				};
 			};
@@ -235,6 +294,7 @@
 			projectRoot = "";
 			targets = (
 				3A215D0C1D8C075600876F00 /* DarkSlide */,
+				3AC447291DCCB29000F69EC0 /* DarkSlideTests */,
 			);
 		};
 /* End PBXProject section */
@@ -245,8 +305,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A215D1B1D8C075600876F00 /* LaunchScreen.storyboard in Resources */,
-				3A215D181D8C075600876F00 /* Assets.xcassets in Resources */,
+				3A43EE2E1DCFABE7002EB25B /* Assets.xcassets in Resources */,
 				3A215D161D8C075600876F00 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AC447281DCCB29000F69EC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +354,7 @@
 				3A215D451D90289D00876F00 /* ExposureAudioViewController.swift in Sources */,
 				3A215D2A1D8C4D4D00876F00 /* ManagedObject.swift in Sources */,
 				3A215D471D90306500876F00 /* Utilities.swift in Sources */,
+				3AD345D91DCE12BF005AD849 /* CameraUtils.swift in Sources */,
 				3A215D3C1D8EABF100876F00 /* PhotoAudioVideo.swift in Sources */,
 				3A215D3A1D8EA98200876F00 /* ExposurePhotoVideoViewController.swift in Sources */,
 				3A215D241D8C3DA000876F00 /* DarkSlideModel.xcdatamodeld in Sources */,
@@ -299,7 +367,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3AC447261DCCB29000F69EC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AC4472D1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3AC447301DCCB29000F69EC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A215D0C1D8C075600876F00 /* DarkSlide */;
+			targetProxy = 3AC4472F1DCCB29000F69EC0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3A215D141D8C075600876F00 /* Main.storyboard */ = {
@@ -450,6 +534,36 @@
 			};
 			name = Release;
 		};
+		3AC447311DCCB29000F69EC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = B3H446T9U7;
+				INFOPLIST_FILE = DarkSlideTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.RenaldoMoon.DarkSlideTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DarkSlide.app/DarkSlide";
+			};
+			name = Debug;
+		};
+		3AC447321DCCB29000F69EC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = B3H446T9U7;
+				INFOPLIST_FILE = DarkSlideTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.RenaldoMoon.DarkSlideTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DarkSlide.app/DarkSlide";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -467,6 +581,15 @@
 			buildConfigurations = (
 				3A215D201D8C075600876F00 /* Debug */,
 				3A215D211D8C075600876F00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3AC447331DCCB29000F69EC0 /* Build configuration list for PBXNativeTarget "DarkSlideTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AC447311DCCB29000F69EC0 /* Debug */,
+				3AC447321DCCB29000F69EC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
