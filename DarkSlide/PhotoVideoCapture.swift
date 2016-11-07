@@ -408,7 +408,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	
 	func zoom(zoomFactorFromPinchGesture factor: CGFloat) {
 		
-		let scaledFactor = factor / 20
+		let scaledFactor = factor * 0.02
 		
 		guard let device = videoDeviceInput.device else { print("Device not found") ; return }
 		do {

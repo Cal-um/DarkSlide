@@ -18,7 +18,7 @@ extension CameraUtils {
 		var result: CGFloat
 		
 		switch gestureFactor {
-		case let factor where factor >= lastZoomFactor:
+		case let factor where factor > lastZoomFactor:
 			print("Zoom In")
 			result = gestureFactor
 		case let factor where factor <= lastZoomFactor:
