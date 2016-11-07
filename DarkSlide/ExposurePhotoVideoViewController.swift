@@ -11,7 +11,7 @@ import AVFoundation
 import CoreData
 import AVKit
 
-class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextStackSettable, CameraViewDelegate {
+class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextStackSettable {
 	
 	// MARK: View Controller properties and life cycle
 	
@@ -38,18 +38,6 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		
 	}
 	
-	func didTakeImage(image: UIImage) {
-		
-	}
-	
-	func didTakeVideo(videoReferenceNumber: String) {
-		
-	}
-	
-	func didTakeLivePhoto(image: UIImage, video: Data) {
-		
-	}
-		
 	func takePhoto() {
 			
 	}
@@ -64,6 +52,17 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 			vc.managedObjectContextStack = managedObjectContextStack
 		default: break
 		}
+	}
+}
+
+extension ExposurePhotoVideoViewController: CameraViewDelegate {
+	
+	func didTakeVideo(videoReferenceNumber: String) {
+		
+	}
+	
+	func didTakePhoto(image: UIImage, livePhoto: String?) {
+		
 	}
 }
 

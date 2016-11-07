@@ -13,19 +13,19 @@ class MovieNote: ManagedObject {
 	
 	@NSManaged var movieReferenceNumber: String
 	@NSManaged var subject: SubjectForExposure?
-	
-	// moviePath gives you the location of the movie.
-
-	var moviePath: URL {
-		let filename = "Movie-\(movieReferenceNumber).mp4"
-		return (FileManager.applicationSupportDirectory.appendingPathComponent(filename))
-	}
 }
 
 extension MovieNote: ManagedObjectType, ExposureNote {
 	
 	static var entityName: String {
 		return "MovieNote"
+	}
+	
+	// moviePath gives you the location of the movie.
+	
+	var moviePath: URL {
+		let filename = "Movie-\(movieReferenceNumber).mp4"
+		return (FileManager.applicationSupportDirectory.appendingPathComponent(filename))
 	}
 	
 	static var randomReferenceNumber: String {
@@ -42,7 +42,7 @@ extension MovieNote: ManagedObjectType, ExposureNote {
 		return (FileManager.applicationSupportDirectory.appendingPathComponent(fileName))
 	}
 	
-	func removePhotoFile() {
+	func removeMovieFile() {
 		let path = moviePath
 		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: path.path) {

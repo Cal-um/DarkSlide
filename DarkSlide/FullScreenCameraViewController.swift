@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class FullScreenCameraViewController: UIViewController, ManagedObjectContextStackSettable, CameraViewDelegate {
+class FullScreenCameraViewController: UIViewController, ManagedObjectContextStackSettable {
 	
 	var managedObjectContextStack: ManagedObjectContextStack!
 	var photoVideo: PhotoVideoCapture!
@@ -128,25 +128,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		photoVideo.toggleMovieRecording()
 	}
 	
-	func didTakeLivePhoto(image: UIImage, video: Data) {
-		
-	}
 	
-	func didTakeVideo(videoReferenceNumber: String) {
-		// test that shows that video does save.
-			/*print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
-			let player = AVPlayer(url: MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
-			let playerController = AVPlayerViewController()
-			playerController.player = player
-			self.present(playerController, animated: true) {
-				playerController.player!.play()
-			}*/
-
-	}
-	
-	func didTakeImage(image: UIImage) {
-		
-	}
 	
 	func bringSubviewsToFront() {
 		
@@ -162,4 +144,25 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		cameraView.bringSubview(toFront: exitFullScreenButton)
 		cameraView.bringSubview(toFront: cameraOptionsBar)
 	}
+}
+
+extension FullScreenCameraViewController: CameraViewDelegate {
+	
+	func didTakePhoto(image: UIImage, livePhoto: String?) {
+		
+	}
+	
+	func didTakeVideo(videoReferenceNumber: String) {
+		
+		// test that shows that video does save.
+		/*print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
+		let player = AVPlayer(url: MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
+		let playerController = AVPlayerViewController()
+		playerController.player = player
+		self.present(playerController, animated: true) {
+		playerController.player!.play()
+		}*/
+		
+	}
+	
 }
