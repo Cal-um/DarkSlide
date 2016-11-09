@@ -23,7 +23,6 @@
 		3A215D341D8D42BD00876F00 /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D331D8D42BD00876F00 /* HelperExtensions.swift */; };
 		3A215D361D8D4C7200876F00 /* ManagedObjectContextStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D351D8D4C7200876F00 /* ManagedObjectContextStack.swift */; };
 		3A215D3A1D8EA98200876F00 /* ExposurePhotoVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D391D8EA98200876F00 /* ExposurePhotoVideoViewController.swift */; };
-		3A215D3C1D8EABF100876F00 /* PhotoAudioVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D3B1D8EABF100876F00 /* PhotoAudioVideo.swift */; };
 		3A215D3E1D8EB0DF00876F00 /* CameraViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */; };
 		3A215D411D9024F500876F00 /* ExposureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D401D9024F500876F00 /* ExposureViewController.swift */; };
 		3A215D431D90256400876F00 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D421D90256400876F00 /* Protocols.swift */; };
@@ -68,7 +67,6 @@
 		3A215D331D8D42BD00876F00 /* HelperExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
 		3A215D351D8D4C7200876F00 /* ManagedObjectContextStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextStack.swift; sourceTree = "<group>"; };
 		3A215D391D8EA98200876F00 /* ExposurePhotoVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposurePhotoVideoViewController.swift; sourceTree = "<group>"; };
-		3A215D3B1D8EABF100876F00 /* PhotoAudioVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAudioVideo.swift; sourceTree = "<group>"; };
 		3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewDelegate.swift; sourceTree = "<group>"; };
 		3A215D401D9024F500876F00 /* ExposureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposureViewController.swift; sourceTree = "<group>"; };
 		3A215D421D90256400876F00 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 		3A03B2801DAE8312007926DD /* PhotoVideoCapture */ = {
 			isa = PBXGroup;
 			children = (
-				3A215D3B1D8EABF100876F00 /* PhotoAudioVideo.swift */,
 				3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */,
 				3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */,
 				3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */,
@@ -355,7 +352,6 @@
 				3A215D2A1D8C4D4D00876F00 /* ManagedObject.swift in Sources */,
 				3A215D471D90306500876F00 /* Utilities.swift in Sources */,
 				3AD345D91DCE12BF005AD849 /* CameraUtils.swift in Sources */,
-				3A215D3C1D8EABF100876F00 /* PhotoAudioVideo.swift in Sources */,
 				3A215D3A1D8EA98200876F00 /* ExposurePhotoVideoViewController.swift in Sources */,
 				3A215D241D8C3DA000876F00 /* DarkSlideModel.xcdatamodeld in Sources */,
 				3AC8214C1D9929CE003C484D /* FullScreenCameraViewController.swift in Sources */,

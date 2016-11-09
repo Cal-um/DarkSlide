@@ -22,11 +22,14 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 	
 	private var livePhotoCompanionMovieURL: URL? = nil
 	
+	private let cameraViewDelegate: CameraViewDelegate!
+	
 	init(with requestedPhotoSettings: AVCapturePhotoSettings, delegate: CameraViewDelegate, willCapturePhotoAnimation: @escaping () -> (), capturingLivePhoto: @escaping (Bool) -> (), completed: @escaping (PhotoCaptureDelegate) -> ()) {
 		self.requestedPhotoSettings = requestedPhotoSettings
 		self.willCapturePhotoAnimation = willCapturePhotoAnimation
 		self.capturingLivePhoto = capturingLivePhoto
 		self.completed = completed
+		self.cameraViewDelegate = delegate
 	}
 	
 	private func didFinish() {
@@ -90,11 +93,25 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 			return
 		}
 		
+		let photo = UIImage(data: photoData)!
+		
 		if let livePhotoCompanionMovieURL = self.livePhotoCompanionMovieURL {
 			
+			let livePhotoReferenceNumber = PhotoNote.randomReferenceNumber
 			
-			
+			do {
+				let livePhoto = try Data(contentsOf: livePhotoCompanionMovieURL)
+				try livePhoto.write(to: PhotoNote.generateLivePhotoPath(livePhotoReferenceNumber: livePhotoReferenceNumber))
+				cameraViewDelegate.didTakePhoto(image: photo, livePhoto: livePhotoReferenceNumber)
+				didFinish()
+			}
+			catch {
+				print("Error saving livePhotoFile")
+				didFinish()
+			}
 		}
-		
+		else {
+			cameraViewDelegate.didTakePhoto(image: photo, livePhoto: nil)
+		}
 	}
 }

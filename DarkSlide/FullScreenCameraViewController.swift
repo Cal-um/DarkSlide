@@ -42,6 +42,17 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		return true
 	}
 	
+	override var shouldAutorotate: Bool {
+		// Disable autorotation of the interface when recording is in progress.
+		if let movieFileOutput = photoVideo.movieFileOutput {
+			return !movieFileOutput.isRecording
+		}
+		return true
+	}
+	
+	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+		return .all
+	}
 	
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransition(to: size, with: coordinator)
@@ -51,13 +62,10 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 			guard let newVideoOrientation = deviceOrientation.videoOrientation, deviceOrientation.isPortrait || deviceOrientation.isLandscape else {
 				return
 			}
-			
+			print("CALLED \(videoPreviewLayerConnection.videoOrientation.rawValue)")
 			videoPreviewLayerConnection.videoOrientation = newVideoOrientation
+			print("CALLED \(videoPreviewLayerConnection.videoOrientation.rawValue)")
 		}
-	}
-	
-	@IBAction func touchExposeButton(_ sender: AnyObject) {
-		takeVideo()
 	}
 	
 	@IBAction func tapToToggleOptionTabConstraint(_ sender: AnyObject) {
@@ -79,21 +87,43 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		dismiss(animated: true, completion: nil)
 	}
 	
+	private enum CaptureMode {
+		case movie
+		case photo
+	}
+	
+	private var captureMode: CaptureMode = .photo {
+		didSet {
+			print("\n\n CURRENT CAPTURE MODE: \(captureMode) \n\n")
+		}
+	}
+	
+	@IBAction func touchExposeButton(_ sender: AnyObject) {
+		switch captureMode {
+		case .photo:
+			takePhoto()
+		case .movie:
+			takeMovie()
+		}
+	}
+	
 	@IBAction func toggleChangeCameraPosition(_ sender: Any) {
 		photoVideo.changeCamera()
 	}
 	
 	@IBAction func toggleFlashOrTorchOnOff(_ sender: Any) {
+		
 	}
 	
 	@IBAction func toggleRecordMovieOrPhoto(_ sender: Any) {
+		photoVideo.toggleCaptureMode()
+		captureMode = (captureMode == .photo) ? .movie : .photo
 	}
 	
 	@IBAction func toggleLivePhotoOnOff(_ sender: Any) {
+		photoVideo.toggleLivePhotoMode()
+		//captureMode = (captureMode == .photo) ? .livePhoto : .photo
 	}
-	
-	
-	
 	
 	func configureButton() {
 		takePhotoButton.layer.cornerRadius = takePhotoButton.bounds.width / 2
@@ -124,8 +154,12 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		})
 	}
 	
-	func takeVideo() {
+	func takeMovie() {
 		photoVideo.toggleMovieRecording()
+	}
+	
+	func takePhoto() {
+		photoVideo.capturePhoto()
 	}
 	
 	
@@ -150,19 +184,76 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 	
 	func didTakePhoto(image: UIImage, livePhoto: String?) {
 		
+		if let livePhoto = livePhoto {
+			let player = AVPlayer(url: PhotoNote.generateLivePhotoPath(livePhotoReferenceNumber: livePhoto))
+			let playerController = AVPlayerViewController()
+			playerController.player = player
+			self.present(playerController, animated: true) {
+				playerController.player!.play()
+			}
+		}
 	}
-	
 	func didTakeVideo(videoReferenceNumber: String) {
 		
 		// test that shows that video does save.
-		/*print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
+		print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
 		let player = AVPlayer(url: MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
 		let playerController = AVPlayerViewController()
 		playerController.player = player
 		self.present(playerController, animated: true) {
 		playerController.player!.play()
-		}*/
+		}
+	}
+	
+	func disableButtons() {
+		livePhotoToggle.isEnabled = false
+		switchCameraMode.isEnabled = false
+		takePhotoButton.isEnabled = false
+		flashOnOff.isEnabled = false
+		switchFrontBackCamera.isEnabled = false
+	}
+	
+	func enableButtons(buttonconfiguration: ButtonConfiguration) {
+		switch buttonconfiguration {
+		case .allPossible:
+			livePhotoToggle.isEnabled = true
+			switchCameraMode.isEnabled = true
+			takePhotoButton.isEnabled = true
+			flashOnOff.isEnabled = true
+			switchFrontBackCamera.isEnabled = true
+			
+		case .noLivePhoto:
+			livePhotoToggle.isEnabled = false
+			switchCameraMode.isEnabled = true
+			takePhotoButton.isEnabled = true
+			flashOnOff.isEnabled = true
+			switchFrontBackCamera.isEnabled = true
+			
+		case .oneCameraOnly:
+			livePhotoToggle.isEnabled = true
+			switchCameraMode.isEnabled = true
+			takePhotoButton.isEnabled = true
+			flashOnOff.isEnabled = true
+			switchFrontBackCamera.isEnabled = false
+			
+		case .noLivePhotoOneCameraOnly:
+			livePhotoToggle.isEnabled = false
+			switchCameraMode.isEnabled = true
+			takePhotoButton.isEnabled = true
+			flashOnOff.isEnabled = true
+			switchFrontBackCamera.isEnabled = false
+		}
+	}
+	
+	func alertActionNoCameraPermission() {
+		let message = "Dark Slide doesn't have permission to use the camera, please change privacy settings"
+		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Settings", style: .`default`, handler: { action in
+			UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+		}))
 		
+		self.present(alertController, animated: true, completion: nil)
 	}
 	
 }

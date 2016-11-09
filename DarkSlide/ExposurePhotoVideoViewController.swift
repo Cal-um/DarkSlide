@@ -24,24 +24,30 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	override func viewDidLoad() {
 		// set up video preview and PhotoAudioVideo object
 		photoVideo = PhotoVideoCapture(delegate: self)
+		
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		photoVideo.viewAppeared()
+	//	setUpInitialVideoOrientation()
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
 		photoVideo.viewDissapeared()
 	}
 	
-	@IBAction func shortPress(_ sender: UITapGestureRecognizer) {
-		
+	@IBOutlet weak var takeExposureButton: UIButton!
+	
+	@IBAction func tapExposureButton(_ sender: Any) {
+		takePhoto()
 	}
+	
 	
 	func takePhoto() {
-			
+			photoVideo.capturePhoto()
 	}
 	
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 		case .some("AudioSegue"):
@@ -57,12 +63,32 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 
 extension ExposurePhotoVideoViewController: CameraViewDelegate {
 	
+	func disableButtons() {
+		takeExposureButton.isEnabled = false
+	}
+	
+	func enableButtons(buttonconfiguration: ButtonConfiguration) {
+			takeExposureButton.isEnabled = true
+	}
+	
+	func alertActionNoCameraPermission() {
+		let message = "Dark Slide doesn't have permission to use the camera, please change privacy settings"
+		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
+		alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+		alertController.addAction(UIAlertAction(title: "Settings", style: .`default`, handler: { action in
+			UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+		}))
+		
+		self.present(alertController, animated: true, completion: nil)
+	}
+	
+	// Unused in ExposureViewController
 	func didTakeVideo(videoReferenceNumber: String) {
 		
 	}
 	
 	func didTakePhoto(image: UIImage, livePhoto: String?) {
-		
+		print(image)
 	}
 }
 

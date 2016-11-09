@@ -46,8 +46,8 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 	}
 	
 	// this function is used for when saving to applcations directory or when Managed Object has not been yet created.
-	static func generateMoviePath(movieReferenceNumber: String) -> URL {
-		let fileName = "Movie-\(movieReferenceNumber).mp4"
+	static func generateLivePhotoPath(livePhotoReferenceNumber: String) -> URL {
+		let fileName = "LivePhoto-\(livePhotoReferenceNumber).mp4"
 		return (FileManager.applicationSupportDirectory.appendingPathComponent(fileName))
 	}
 	

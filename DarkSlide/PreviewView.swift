@@ -26,13 +26,15 @@ class PreviewView: UIView {
 	func setupForPreviewLayer(previewLayer: AVCaptureVideoPreviewLayer) {
 		previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
 		layer.insertSublayer(previewLayer, at: 0)
-		self.videoPreviewLayer = previewLayer
+		videoPreviewLayer = previewLayer
+
 	}
 
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		videoPreviewLayer.frame = bounds
+
 	}
 	
 	private func setup() {

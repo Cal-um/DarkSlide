@@ -21,7 +21,7 @@ class PhotoVideoCaptureTests: XCTestCase, CameraUtils {
         super.tearDown()
     }
 	
-	
+	// MARK: ZOOM TESTS
 	// tests use a scaled factor of 0.05 and max limit 6.0
 	
 	func testIncreasingZoom() {
@@ -65,4 +65,34 @@ class PhotoVideoCaptureTests: XCTestCase, CameraUtils {
 		
 		XCTAssertEqual(zoom, 6.0)
 	}
+	
+	// MARK: Observer Value Button Config Tests
+	
+	func testLivePhotoAndMoreThanOneCamera() {
+		let buttonConfig = buttonConfigForObserver(isLivePhotoEnabledAndSupported: true, doesDeviceHaveMoreThanOneCamera: true)
+		
+		XCTAssertEqual(buttonConfig, .allPossible)
+	}
+	
+	func testLivePhotoOnlyOneCamera() {
+		let buttonConfig = buttonConfigForObserver(isLivePhotoEnabledAndSupported: true, doesDeviceHaveMoreThanOneCamera: false)
+		
+		XCTAssertEqual(buttonConfig, .oneCameraOnly)
+	}
+	
+	func testNoLivePhotoMoreThanOneCamera() {
+		let buttonConfig = buttonConfigForObserver(isLivePhotoEnabledAndSupported: false, doesDeviceHaveMoreThanOneCamera: true)
+		
+		XCTAssertEqual(buttonConfig, .noLivePhoto)
+	}
+	
+	func testNoLivePhotoOnlyOneCamera() {
+		let buttonConfig = buttonConfigForObserver(isLivePhotoEnabledAndSupported: false, doesDeviceHaveMoreThanOneCamera: false)
+		
+		XCTAssertEqual(buttonConfig, .noLivePhotoOneCameraOnly)
+
+	}
+	
+	
+	
 }

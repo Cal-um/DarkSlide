@@ -65,7 +65,7 @@
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tB-4M-9JU">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                                         <connections>
-                                            <action selector="shortPress:" destination="uKw-RA-TCz" eventType="touchUpInside" id="nFP-ga-2qG"/>
+                                            <action selector="tapExposureButton:" destination="uKw-RA-TCz" eventType="touchUpInside" id="mAh-PJ-Tov"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -85,8 +85,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHy-Ru-Pib">
-                                <rect key="frame" x="16" y="10" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="16" y="10" width="76" height="30"/>
+                                <state key="normal" title="Full Screen"/>
                                 <connections>
                                     <segue destination="xhV-1D-f0p" kind="presentation" identifier="FullViewSegue" id="Q77-Fy-ru0"/>
                                 </connections>
@@ -106,6 +106,7 @@
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="UgO-1j-leJ" id="Y4B-p8-lmq"/>
+                        <outlet property="takeExposureButton" destination="3tB-4M-9JU" id="qjD-nh-fMM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTK-WS-5GT" userLabel="First Responder" sceneMemberID="firstResponder"/>

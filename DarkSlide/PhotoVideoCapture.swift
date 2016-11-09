@@ -25,7 +25,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	func initialLoad() {
 		
 		// Disable UI. The UI is enabled if and only if the session starts running.
-		
+		cameraViewDelegate.disableButtons()
 		// Set up the video preview view.
 		cameraViewDelegate.cameraView.setupForPreviewLayer(previewLayer: createPreviewLayer())
 		
@@ -84,6 +84,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	func viewAppeared() {
 		
 		sessionQueue.async { [unowned self] in
+			
 			switch self.setupResult {
 			case .success:
 				// Only setup observers and start the session running if setup succeeded.
@@ -91,10 +92,12 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 				self.session.startRunning()
 				self.isSessionRunning = self.session.isRunning
 				print("startUp")
-			case .notAuthorised: break
-				// Inform user that permissions must be granted.
-			case .configurationFailed: break
-				// Alert user that config failed.
+			case .notAuthorised:
+				DispatchQueue.main.async { [unowned self] in
+					self.cameraViewDelegate.alertActionNoCameraPermission()
+				}
+			case .configurationFailed:
+				print("configuration failed")
 			}
 		}
 	}
@@ -274,16 +277,16 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 		}
 	}
 	
-	private enum CaptureMode: Int {
-		case photo = 0
-		case movie = 1
+	enum PhotoOrMovieCaptureMode {
+		case photo
+		case movie
 	}
 	
-	private let captureModeControl = 1
+	let photoOrMovieCaptureModeControl: PhotoOrMovieCaptureMode = .photo
 	
 	func toggleCaptureMode() {
 		
-		if captureModeControl == CaptureMode.photo.rawValue {
+		if photoOrMovieCaptureModeControl == PhotoOrMovieCaptureMode.photo {
 			
 			sessionQueue.async { [unowned self] in
 				/*
@@ -302,7 +305,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 					self.photoOutput.isLivePhotoCaptureEnabled = true
 				}
 			}
-		} else if captureModeControl == CaptureMode.movie.rawValue {
+		} else if photoOrMovieCaptureModeControl == PhotoOrMovieCaptureMode.movie {
 			sessionQueue.async { [unowned self] in
 				let movieFileOutput = AVCaptureMovieFileOutput()
 				
@@ -457,7 +460,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	
 	// MARK: Recording movies
 	
-	private var movieFileOutput: AVCaptureMovieFileOutput? = nil
+	private(set) var movieFileOutput: AVCaptureMovieFileOutput? = nil
 	
 	private var backgroundrecordingID: UIBackgroundTaskIdentifier? = nil
 	
@@ -616,16 +619,15 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			let newValue = change?[.newKey] as AnyObject?
 			guard let isSessionRunning = newValue?.boolValue else { return }
 			let isLivePhotoCaptureSupported = photoOutput.isLivePhotoCaptureSupported
-			let isLivePhotoCaptureEnables = photoOutput.isLivePhotoCaptureEnabled
+			let isLivePhotoCaptureEnabled = photoOutput.isLivePhotoCaptureEnabled
+			let doesDeviceHaveMoreThanOneCamera = self.videoDeviceDiscoverySession.uniqueDevicePositionsCount() > 1
 			
 			DispatchQueue.main.async { [unowned self] in
 				// Only enable the ability to change camera if the device has more than one camera.
-//				self.cameraButton.isEnabled = isSessionRunning && self.videoDeviceDiscoverySession.uniqueDevicePositionsCount() > 1
-//				self.recordButton.isEnabled = isSessionRunning && self.movieFileOutput != nil
-//				self.photoButton.isEnabled = isSessionRunning
-//				self.captureModeControl.isEnabled = isSessionRunning
-//				self.livePhotoModeButton.isEnabled = isSessionRunning && isLivePhotoCaptureEnabled
-//				self.livePhotoModeButton.isHidden = !(isSessionRunning && isLivePhotoCaptureSupported)
+				guard isSessionRunning else { return }
+				let livePhotoEnabledAndSupported = isLivePhotoCaptureEnabled && isLivePhotoCaptureSupported
+				
+				self.cameraViewDelegate.enableButtons(buttonconfiguration: self.buttonConfigForObserver(isLivePhotoEnabledAndSupported: livePhotoEnabledAndSupported, doesDeviceHaveMoreThanOneCamera: doesDeviceHaveMoreThanOneCamera))
 			}
 		}
 		else {
@@ -742,23 +744,37 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 		entering the session queue. We do this to ensure UI elements are accessed on
 		the main thread and session configuration is done on the session queue.
 		*/
+		
 		let videoPreviewLayerOrientation = cameraViewDelegate.cameraView.videoPreviewLayer.connection.videoOrientation
 		
-		sessionQueue.async {
+		sessionQueue.async { [unowned self] in
 			// update the photo output's connection to match the video orientation of the video preview layer.
 			
 			if let photoOutputConnection = self.photoOutput.connection(withMediaType: AVMediaTypeVideo) {
 				photoOutputConnection.videoOrientation = videoPreviewLayerOrientation
+				print("VIDEO ORIENTATION \(videoPreviewLayerOrientation.rawValue)")
 			}
 			
-			// capture a jpeg photo with flash set to auto and high resolution enabled.
-			let photoSettings = AVCapturePhotoSettings()
-			photoSettings.flashMode = .auto
-			photoSettings.isHighResolutionPhotoEnabled = true
-			if photoSettings.availablePreviewPhotoPixelFormatTypes.count > 0 {
-				photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String : photoSettings.availablePreviewPhotoPixelFormatTypes.first!]
+			func configPhotoSettings(flashMode: FlashMode) -> AVCapturePhotoSettings {
+				
+				let photoSettings = AVCapturePhotoSettings()
+				photoSettings.isHighResolutionPhotoEnabled = true
+				if photoSettings.availablePreviewPhotoPixelFormatTypes.count > 0 {
+					photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String : photoSettings.availablePreviewPhotoPixelFormatTypes.first!]
+				}
+				
+				switch flashMode {
+				case .on: photoSettings.flashMode = .on
+				case .off: photoSettings.flashMode = .off
+				case .auto: photoSettings.flashMode = .auto
+				}
+				
+				return photoSettings
 			}
-		
+			
+			
+			// capture a jpeg photo with flash set to required setting and high resolution enabled.
+			let photoSettings = configPhotoSettings(flashMode: self.requestedFlashPhotoSettings)
 			// Live Photo capture is not supported in movie mode.
 			if self.livePhotoMode == .on && self.photoOutput.isLivePhotoCaptureSupported {
 				let livePhotoMovieFileName = NSUUID().uuidString
@@ -820,11 +836,19 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			self.photoOutput.capturePhoto(with: photoSettings, delegate: photoCaptureDelegate)
 		}
 	}
+	
 	private enum LivePhotoMode {
 		case on
 		case off
 	}
 	
+	enum FlashMode {
+		case off
+		case on
+		case auto
+	}
+	
+	var requestedFlashPhotoSettings: FlashMode = .auto
 	private var inProgressLivePhotoCapturesCount = 0
 	private var livePhotoMode: LivePhotoMode = .off
 	

@@ -38,4 +38,28 @@ extension CameraUtils {
 			return newVideoZoomFactor
 		}
 	}
+	
+	func buttonConfigForObserver(isLivePhotoEnabledAndSupported: Bool, doesDeviceHaveMoreThanOneCamera: Bool) -> ButtonConfiguration {
+		
+		if isLivePhotoEnabledAndSupported && doesDeviceHaveMoreThanOneCamera {
+			return .allPossible
+		}
+		else if isLivePhotoEnabledAndSupported && !doesDeviceHaveMoreThanOneCamera {
+			return .oneCameraOnly
+		}
+		else if !isLivePhotoEnabledAndSupported && doesDeviceHaveMoreThanOneCamera {
+			return .noLivePhoto
+		}
+		else {
+			return .noLivePhotoOneCameraOnly
+		}
+	}
+	
+}
+
+enum ButtonConfiguration {
+	case allPossible
+	case noLivePhoto
+	case oneCameraOnly
+	case noLivePhotoOneCameraOnly
 }
