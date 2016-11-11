@@ -17,6 +17,15 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	
 	var managedObjectContextStack: ManagedObjectContextStack!
 	
+	@IBOutlet weak var cameraUnavailableLabel: UILabel!
+	@IBOutlet weak var resumeSessionButton: UIButton!
+	// MARK: Delegate properies. Used to observe state of photoVideo.
+
+	var observeLivePhotoModeSelected : LivePhotoMode = .off
+	var observeFlashConfiguration: AVCaptureFlashMode = .auto
+	var observeCaptureMode: CaptureMode = .photo
+	var observeCameraFacing: CameraFacing = .front
+	
 	@IBOutlet weak var cameraView: PreviewView!
 	
 	var photoVideo: PhotoVideoCapture!
@@ -71,6 +80,14 @@ extension ExposurePhotoVideoViewController: CameraViewDelegate {
 			takeExposureButton.isEnabled = true
 	}
 	
+	func unableToResumeUninteruptedSessionAlert() {
+		let message = "Unable to resume"
+		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
+		let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+		alertController.addAction(cancelAction)
+		self.present(alertController, animated: true, completion: nil)
+	}
+	
 	func alertActionNoCameraPermission() {
 		let message = "Dark Slide doesn't have permission to use the camera, please change privacy settings"
 		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
@@ -80,6 +97,24 @@ extension ExposurePhotoVideoViewController: CameraViewDelegate {
 		}))
 		
 		self.present(alertController, animated: true, completion: nil)
+	}
+	
+	func hideResumeButton(hide: Bool) {
+		if hide {
+			resumeSessionButton.isHidden = true
+		}
+		else {
+			resumeSessionButton.isHidden = false
+		}
+	}
+	
+	func hideCameraUnavailableLabel(hide: Bool) {
+		if hide {
+			cameraUnavailableLabel.isHidden = true
+		}
+		else {
+			cameraUnavailableLabel.isHidden = false
+		}
 	}
 	
 	// Unused in ExposureViewController

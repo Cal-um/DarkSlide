@@ -266,27 +266,24 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			self.isSessionRunning = self.session.isRunning
 			if !self.isSessionRunning {
 				DispatchQueue.main.async { [unowned self] in
-					// handle UI with alert controller or similar.
+					self.cameraViewDelegate.alertActionNoCameraPermission()
 				}
 			}
 			else {
 				DispatchQueue.main.async { [unowned self] in
-					// handle UI if session running.
+					self.cameraViewDelegate.hideResumeButton(hide: true)
 				}
 			}
 		}
 	}
 	
-	enum PhotoOrMovieCaptureMode {
-		case photo
-		case movie
-	}
-	
-	let photoOrMovieCaptureModeControl: PhotoOrMovieCaptureMode = .photo
+	var photoOrMovieCaptureModeControl: CaptureMode = .photo
 	
 	func toggleCaptureMode() {
 		
-		if photoOrMovieCaptureModeControl == PhotoOrMovieCaptureMode.photo {
+		photoOrMovieCaptureModeControl = (photoOrMovieCaptureModeControl == .photo) ? .movie : .photo
+		
+		if photoOrMovieCaptureModeControl == CaptureMode.photo {
 			
 			sessionQueue.async { [unowned self] in
 				/*
@@ -304,8 +301,12 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 				if self.photoOutput.isLivePhotoCaptureSupported {
 					self.photoOutput.isLivePhotoCaptureEnabled = true
 				}
+				
+				DispatchQueue.main.async { [unowned self] in
+					self.cameraViewDelegate.observeCaptureMode = .photo
+				}
 			}
-		} else if photoOrMovieCaptureModeControl == PhotoOrMovieCaptureMode.movie {
+		} else if photoOrMovieCaptureModeControl == CaptureMode.movie {
 			sessionQueue.async { [unowned self] in
 				let movieFileOutput = AVCaptureMovieFileOutput()
 				
@@ -322,6 +323,10 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 					
 					self.movieFileOutput = movieFileOutput
 					}
+				
+					DispatchQueue.main.async { [unowned self] in
+						self.cameraViewDelegate.observeCaptureMode = .movie
+					}
 				}
 			}
 	}
@@ -331,7 +336,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	private let videoDeviceDiscoverySession = AVCaptureDeviceDiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDuoCamera], mediaType: AVMediaTypeVideo, position: .unspecified)!
 	
 	func changeCamera() {
-		// Disable buttons
+		
 		sessionQueue.async { [unowned self] in
 			let currentVideoDevice = self.videoDeviceInput.device
 			let currentPosition = currentVideoDevice!.position
@@ -395,12 +400,21 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 					self.photoOutput.isLivePhotoCaptureEnabled = self.photoOutput.isLivePhotoCaptureSupported;
 					
 					self.session.commitConfiguration()
+					
+					DispatchQueue.main.async { [unowned self] in
+						if let videoDevice = newVideoDevice {
+							if videoDevice.position == .back || videoDevice.position == .unspecified {
+								self.cameraViewDelegate.observeCameraFacing = .back
+							}
+							else {
+								self.cameraViewDelegate.observeCameraFacing = .front
+							}
+						}
+					}
 				}
 				catch {
 					print("Error occured while creating video device input: \(error)")
 				}
-				
-				//Enable buttons again
 			}
 		}
 	}
@@ -463,10 +477,6 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	private(set) var movieFileOutput: AVCaptureMovieFileOutput? = nil
 	
 	private var backgroundrecordingID: UIBackgroundTaskIdentifier? = nil
-	
-	@IBOutlet private weak var recordButton: UIButton!
-	
-	@IBOutlet private weak var resumeButton: UIButton!
 	
 	func toggleMovieRecording() {
 		guard let movieFileOutput = self.movieFileOutput else { return }
@@ -574,18 +584,10 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			cleanUp()
 		}
 		
-		// Enable the Camera and Record buttons to let the user switch camera and start another recording on main queue.
-		
-		
+		//TODO:
+		// Enable and disable the Camera and Record buttons to let the user switch camera and start another recording on main queue.
 	}
-	
-	// Enable the Camera and Record buttons to let the user switch camera and start another recording.
-	
-	// code here
-	
-	
-	
-	
+
 	// MARK: KVO and Notifications
 	
 	
@@ -661,13 +663,15 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 				}
 				else {
 					DispatchQueue.main.async { [unowned self] in
-				//		self.resumeButton.isHidden = false
+						self.cameraViewDelegate.hideResumeButton(hide: false)
 					}
 				}
 			}
 		}
 		else {
-			//resumeButton.isHidden = false
+			DispatchQueue.main.async { [unowned self] in
+				self.cameraViewDelegate.hideResumeButton(hide: false)
+			}
 		}
 	}
 	
@@ -689,21 +693,15 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 				showResumeButton = true
 			}
 			else if reason == AVCaptureSessionInterruptionReason.videoDeviceNotAvailableWithMultipleForegroundApps {
-				// Simply fade-in a label to inform the user that the camera is unavailable.
-				//cameraUnavailableLabel.alpha = 0
-			//	cameraUnavailableLabel.isHidden = false
-			//	UIView.animate(withDuration: 0.25) { [unowned self] in
-			//		self.cameraUnavailableLabel.alpha = 1
-			//	}
+				DispatchQueue.main.async { [unowned self] in
+					self.cameraViewDelegate.hideCameraUnavailableLabel(hide: false)
+				}
 			}
 			
 			if showResumeButton {
-				// Simply fade-in a button to enable the user to try to resume the session running.
-				//resumeButton.alpha = 0
-				//resumeButton.isHidden = false
-			//	UIView.animate(withDuration: 0.25) { [unowned self] in
-			//		self.resumeButton.alpha = 1
-//	}
+				DispatchQueue.main.async { [unowned self] in
+					self.cameraViewDelegate.hideResumeButton(hide: false)
+				}
 			}
 		}
 	}
@@ -711,25 +709,10 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	func sessionInterruptionEnded(notification: NSNotification) {
 		print("Capture session interruption ended")
 		
-//		if !resumeButton.isHidden {
-//			UIView.animate(withDuration: 0.25,
-//			               animations: { [unowned self] in
-//											self.resumeButton.alpha = 0
-//				}, completion: { [unowned self] finished in
-//					self.resumeButton.isHidden = true
-//				}
-//			)
-//		}
-////		if !cameraUnavailableLabel.isHidden {
-////			UIView.animate(withDuration: 0.25,
-////			               animations: { [unowned self] in
-////											self.cameraUnavailableLabel.alpha = 0
-////				}, completion: { [unowned self] finished in
-////					self.cameraUnavailableLabel.isHidden = true
-////				}
-////			)
-//	//	}
-//	}
+		DispatchQueue.main.async { [unowned self] in
+			self.cameraViewDelegate.hideResumeButton(hide: true)
+			self.cameraViewDelegate.hideCameraUnavailableLabel(hide: true)
+		}
 	}
 
 
@@ -755,12 +738,18 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 				print("VIDEO ORIENTATION \(videoPreviewLayerOrientation.rawValue)")
 			}
 			
-			func configPhotoSettings(flashMode: FlashMode) -> AVCapturePhotoSettings {
+			func configPhotoSettings(flashMode: AVCaptureFlashMode) -> AVCapturePhotoSettings {
 				
 				let photoSettings = AVCapturePhotoSettings()
 				photoSettings.isHighResolutionPhotoEnabled = true
 				if photoSettings.availablePreviewPhotoPixelFormatTypes.count > 0 {
 					photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String : photoSettings.availablePreviewPhotoPixelFormatTypes.first!]
+				}
+				
+				print("\n'nSUPPORTED FLASH MODES\(self.photoOutput.supportedFlashModes)\n\n")
+				guard self.photoOutput.supportedFlashModes.contains(NSNumber(value: flashMode.rawValue)) else {
+					photoSettings.flashMode = .off
+					return photoSettings
 				}
 				
 				switch flashMode {
@@ -774,7 +763,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			
 			
 			// capture a jpeg photo with flash set to required setting and high resolution enabled.
-			let photoSettings = configPhotoSettings(flashMode: self.requestedFlashPhotoSettings)
+			let photoSettings = configPhotoSettings(flashMode: self.flashMode)
 			// Live Photo capture is not supported in movie mode.
 			if self.livePhotoMode == .on && self.photoOutput.isLivePhotoCaptureSupported {
 				let livePhotoMovieFileName = NSUUID().uuidString
@@ -837,29 +826,34 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 		}
 	}
 	
-	private enum LivePhotoMode {
-		case on
-		case off
+	private var flashMode: AVCaptureFlashMode = .auto
+	
+	func toggleFlashMode() {
+		sessionQueue.async { [unowned self] in
+			switch self.flashMode {
+			case .auto: self.flashMode = .on
+			case .on: self.flashMode = .off
+			case .off: self.flashMode = .auto
+			}
+		}
+		
+		DispatchQueue.main.async { [unowned self] in
+			self.cameraViewDelegate.observeFlashConfiguration = self.flashMode
+		}
 	}
 	
-	enum FlashMode {
-		case off
-		case on
-		case auto
-	}
-	
-	var requestedFlashPhotoSettings: FlashMode = .auto
 	private var inProgressLivePhotoCapturesCount = 0
 	private var livePhotoMode: LivePhotoMode = .off
 	
 	func toggleLivePhotoMode() {
+		
 		
 		sessionQueue.async { [unowned self] in
 			self.livePhotoMode = (self.livePhotoMode == .on) ? .off : .on
 			let livePhotoMode = self.livePhotoMode
 			
 			DispatchQueue.main.async { [unowned self] in
-				// set button for live photo on.
+				self.cameraViewDelegate.observeLivePhotoModeSelected = livePhotoMode
 			}
 		}
 	}
@@ -903,3 +897,5 @@ extension AVCaptureDeviceDiscoverySession {
 		return uniqueDevicePositions.count
 	}
 }
+
+

@@ -12,6 +12,8 @@ import AVFoundation
 
 class FullScreenCameraViewController: UIViewController, ManagedObjectContextStackSettable {
 	
+	// MARK: ViewController Properties
+
 	var managedObjectContextStack: ManagedObjectContextStack!
 	var photoVideo: PhotoVideoCapture!
 	
@@ -24,7 +26,60 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	@IBOutlet weak var takePhotoButton: UIButton!
 	@IBOutlet weak var switchCameraMode: UIButton!
 	@IBOutlet weak var livePhotoToggle: UIButton!
+	@IBOutlet weak var cameraUnavailableLabel: UILabel!
+	@IBOutlet weak var resumeSessionButton: UIButton!
 	
+	// MARK: Delegate properies. Used to observe state of photoVideo
+	
+	var observeLivePhotoModeSelected: LivePhotoMode = .off {
+		didSet {
+			switch observeLivePhotoModeSelected {
+			case .off: livePhotoToggle.setTitle("live photo off", for: .normal)
+			case .on: livePhotoToggle.setTitle("live photo on", for: .normal)
+			}
+		}
+	}
+	var observeFlashConfiguration: AVCaptureFlashMode = .auto {
+		didSet {
+			switch observeFlashConfiguration {
+			case .auto:
+				flashOnOff.setTitle("Auto FL", for: .normal)
+			case .on:
+				flashOnOff.setTitle("FL On", for: .normal)
+			case .off:
+				flashOnOff.setTitle("FL Off", for: .normal)
+			}
+		}
+	}
+	
+	var observeCaptureMode: CaptureMode = .photo {
+		didSet {
+			switch observeCaptureMode {
+			case .photo:
+				switchCameraMode.setTitle("Movie", for: .normal)
+				takePhotoButton.setTitle("Photo", for: .normal)
+			case .movie:
+				switchCameraMode.setTitle("Photo", for: .normal)
+				takePhotoButton.setTitle("Video", for: .normal)
+			}
+		}
+	}
+	
+	var observeCameraFacing: CameraFacing = .front {
+		didSet {
+			switch observeCameraFacing {
+			case .front:
+				switchFrontBackCamera.setTitle("Back", for: .normal)
+				flashOnOff.isHidden = true
+			case .back:
+				switchFrontBackCamera.setTitle("Front", for: .normal)
+				flashOnOff.isHidden = false
+			}
+		}
+	}
+	
+	
+	// MARK: Life cycle
 	override func viewDidLoad() {
 		photoVideo = PhotoVideoCapture(delegate: self)
 		openCloseCameraOptionTab()
@@ -87,19 +142,9 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		dismiss(animated: true, completion: nil)
 	}
 	
-	private enum CaptureMode {
-		case movie
-		case photo
-	}
-	
-	private var captureMode: CaptureMode = .photo {
-		didSet {
-			print("\n\n CURRENT CAPTURE MODE: \(captureMode) \n\n")
-		}
-	}
 	
 	@IBAction func touchExposeButton(_ sender: AnyObject) {
-		switch captureMode {
+		switch observeCaptureMode {
 		case .photo:
 			takePhoto()
 		case .movie:
@@ -112,17 +157,15 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	}
 	
 	@IBAction func toggleFlashOrTorchOnOff(_ sender: Any) {
-		
+		photoVideo.toggleFlashMode()
 	}
 	
 	@IBAction func toggleRecordMovieOrPhoto(_ sender: Any) {
 		photoVideo.toggleCaptureMode()
-		captureMode = (captureMode == .photo) ? .movie : .photo
 	}
 	
 	@IBAction func toggleLivePhotoOnOff(_ sender: Any) {
 		photoVideo.toggleLivePhotoMode()
-		//captureMode = (captureMode == .photo) ? .livePhoto : .photo
 	}
 	
 	func configureButton() {
@@ -133,7 +176,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		takePhotoButton.layer.borderColor = UIColor(red:0.47, green:0.85, blue:0.98, alpha:1.0).cgColor
 		takePhotoButton.layer.borderWidth = 1
 	}
-	
+		
 	func openCloseCameraOptionTab() {
 		
 		let constraint = cameraOptionsBar.superview!.constraints.filter { $0.identifier == "height" }.first
@@ -142,15 +185,18 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		let newConstraint = NSLayoutConstraint(item: cameraOptionsBar, attribute: .height, relatedBy: .equal, toItem: cameraOptionsBar.superview!, attribute: .height, multiplier: multiplier, constant: 0)
 		newConstraint.identifier = "height"
 		newConstraint.isActive = true
+		let isBarOpen = (multiplier != 0) ? true : false
+		//self.cameraOptionsBar.isHidden = isBarOpen ? false : true
+		if isBarOpen {
+			cameraOptionsBar.isHidden = false
+		}
 
 		UIView.animate(withDuration: 0.5, delay: 0, animations: {
 			self.view.layoutIfNeeded()}, completion: { _ in
-		
-		let barButtonsHidden = self.switchCameraMode.isHidden
-		self.switchCameraMode.isHidden = !barButtonsHidden
-		self.flashOnOff.isHidden = !barButtonsHidden
-		self.livePhotoToggle.isHidden = !barButtonsHidden
-		self.switchFrontBackCamera.isHidden = !barButtonsHidden
+				if !isBarOpen {
+					self.cameraOptionsBar.isHidden = true
+				}
+				
 		})
 	}
 	
@@ -193,6 +239,7 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 			}
 		}
 	}
+	
 	func didTakeVideo(videoReferenceNumber: String) {
 		
 		// test that shows that video does save.
@@ -223,7 +270,9 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 			switchFrontBackCamera.isEnabled = true
 			
 		case .noLivePhoto:
+			print("called")
 			livePhotoToggle.isEnabled = false
+			livePhotoToggle.isHidden = true
 			switchCameraMode.isEnabled = true
 			takePhotoButton.isEnabled = true
 			flashOnOff.isEnabled = true
@@ -235,14 +284,43 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 			takePhotoButton.isEnabled = true
 			flashOnOff.isEnabled = true
 			switchFrontBackCamera.isEnabled = false
+			switchFrontBackCamera.isHidden = true
 			
 		case .noLivePhotoOneCameraOnly:
 			livePhotoToggle.isEnabled = false
+			livePhotoToggle.isHidden = true
 			switchCameraMode.isEnabled = true
 			takePhotoButton.isEnabled = true
 			flashOnOff.isEnabled = true
 			switchFrontBackCamera.isEnabled = false
+			switchFrontBackCamera.isHidden = true
 		}
+	}
+	
+	func hideResumeButton(hide: Bool) {
+		if hide {
+			resumeSessionButton.isHidden = true
+		}
+		else {
+			resumeSessionButton.isHidden = false
+		}
+	}
+	
+	func hideCameraUnavailableLabel(hide: Bool) {
+		if hide {
+			cameraUnavailableLabel.isHidden = true
+		}
+		else {
+			cameraUnavailableLabel.isHidden = false
+		}
+	}
+	
+	func unableToResumeUninteruptedSessionAlert() {
+		let message = "Unable to resume"
+		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
+		let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+		alertController.addAction(cancelAction)
+		self.present(alertController, animated: true, completion: nil)
 	}
 	
 	func alertActionNoCameraPermission() {

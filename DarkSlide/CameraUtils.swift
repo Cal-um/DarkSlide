@@ -15,6 +15,7 @@ protocol CameraUtils: class {
 extension CameraUtils {
 	
 	func calculateZoomResult(gestureFactor: CGFloat, lastZoomFactor: CGFloat, currentVideoZoomFactor: CGFloat, maxZoomFactor: CGFloat) -> CGFloat {
+		
 		var result: CGFloat
 		
 		switch gestureFactor {
@@ -54,7 +55,6 @@ extension CameraUtils {
 			return .noLivePhotoOneCameraOnly
 		}
 	}
-	
 }
 
 enum ButtonConfiguration {
