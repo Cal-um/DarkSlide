@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RA4-ld-Xzm">
-                                <rect key="frame" x="0.0" y="456" width="375" height="211"/>
+                                <rect key="frame" x="0.0" y="455.5" width="375" height="211.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="RA4-ld-Xzm" secondAttribute="height" multiplier="16:9" id="1iF-DR-MxX"/>
                                 </constraints>
@@ -56,26 +56,26 @@
                         <viewControllerLayoutGuide type="bottom" id="qXD-RO-u3O"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EJ1-kh-6fw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="211.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgO-1j-leJ" customClass="PreviewView" customModule="DarkSlide" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tB-4M-9JU">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
                                         <connections>
                                             <action selector="tapExposureButton:" destination="uKw-RA-TCz" eventType="touchUpInside" id="mAh-PJ-Tov"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5M-O4-xa0">
-                                        <rect key="frame" x="159.5" y="90" width="55" height="30"/>
+                                        <rect key="frame" x="160" y="91" width="55" height="30"/>
                                         <state key="normal" title="Resume">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgr-J7-g6o">
-                                        <rect key="frame" x="111" y="95" width="152" height="21"/>
+                                        <rect key="frame" x="111" y="96" width="152" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -147,7 +147,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6v2-UO-HKd">
-                                        <rect key="frame" x="137.5" y="418" width="100" height="100"/>
+                                        <rect key="frame" x="137.5" y="417.5" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Kak-uj-FTb"/>
                                             <constraint firstAttribute="width" secondItem="6v2-UO-HKd" secondAttribute="height" multiplier="1:1" id="g7m-vv-fMG"/>
@@ -158,7 +158,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQE-rb-kt4">
-                                        <rect key="frame" x="267.5" y="433" width="70" height="70"/>
+                                        <rect key="frame" x="267.5" y="432.5" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="WQE-rb-kt4" secondAttribute="height" multiplier="1:1" id="Wrb-02-IaV"/>
                                         </constraints>
@@ -169,13 +169,13 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLF-sf-mQd">
-                                        <rect key="frame" x="0.0" y="534" width="375" height="133"/>
+                                        <rect key="frame" x="0.0" y="533.5" width="375" height="133.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ts3-X2-r3y">
-                                                <rect key="frame" x="10" y="0.0" width="355" height="133"/>
+                                                <rect key="frame" x="10" y="0.0" width="355" height="133.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52H-GJ-Yxv">
-                                                        <rect key="frame" x="0.0" y="33.5" width="66.5" height="66"/>
+                                                        <rect key="frame" x="0.0" y="33.5" width="66.5" height="66.5"/>
                                                         <color key="backgroundColor" red="0.24684426826164418" green="0.24776512739535983" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="52H-GJ-Yxv" secondAttribute="height" multiplier="1:1" id="tKE-ot-hro"/>
@@ -189,7 +189,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sxc-BQ-01B">
-                                                        <rect key="frame" x="96.5" y="33.5" width="66.5" height="66"/>
+                                                        <rect key="frame" x="96" y="33.5" width="67" height="66.5"/>
                                                         <color key="backgroundColor" red="0.2468442683" green="0.24776512740000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Sxc-BQ-01B" secondAttribute="height" multiplier="1:1" id="rOF-md-hvs"/>
@@ -203,7 +203,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WxW-Of-aOt">
-                                                        <rect key="frame" x="193" y="33.5" width="66" height="66"/>
+                                                        <rect key="frame" x="192" y="33.5" width="67" height="66.5"/>
                                                         <color key="backgroundColor" red="0.2468442683" green="0.24776512740000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="WxW-Of-aOt" secondAttribute="height" multiplier="1:1" id="b9a-md-Sge"/>
@@ -217,7 +217,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOH-w1-bQe">
-                                                        <rect key="frame" x="289" y="33.5" width="66" height="66"/>
+                                                        <rect key="frame" x="288.5" y="33.5" width="66.5" height="66.5"/>
                                                         <color key="backgroundColor" red="0.2468442683" green="0.24776512740000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="GOH-w1-bQe" secondAttribute="height" multiplier="1:1" id="0RZ-q1-2d5"/>
@@ -259,13 +259,13 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVQ-0I-kZd">
-                                        <rect key="frame" x="111" y="323.5" width="152" height="20.5"/>
+                                        <rect key="frame" x="111.5" y="324" width="152" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cO6-zO-cPS">
-                                        <rect key="frame" x="130.5" y="319" width="113" height="30"/>
+                                        <rect key="frame" x="130.5" y="318.5" width="113" height="30"/>
                                         <state key="normal" title="Resume Session">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>

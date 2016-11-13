@@ -32,6 +32,8 @@
 		3A3B2A4A1DC3A38800357D00 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B2A481DC3A38800357D00 /* Fabric.framework */; };
 		3A3B2A4B1DC3A38800357D00 /* Answers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B2A491DC3A38800357D00 /* Answers.framework */; };
 		3A3CADEE1DD67FDD00804424 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3A3CADED1DD67FDD00804424 /* .gitignore */; };
+		3A3CADF11DD8B6C000804424 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF01DD8B6C000804424 /* AudioRecorder.swift */; };
+		3A3CADF31DD8B6F600804424 /* AudioRecorderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF21DD8B6F600804424 /* AudioRecorderDelegate.swift */; };
 		3A43EE2E1DCFABE7002EB25B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */; };
 		3AC4472D1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */; };
 		3AC8214A1D93F613003C484D /* MovieNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC821491D93F612003C484D /* MovieNote.swift */; };
@@ -77,6 +79,8 @@
 		3A3B2A481DC3A38800357D00 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3A3B2A491DC3A38800357D00 /* Answers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Answers.framework; sourceTree = "<group>"; };
 		3A3CADED1DD67FDD00804424 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		3A3CADF01DD8B6C000804424 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		3A3CADF21DD8B6F600804424 /* AudioRecorderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderDelegate.swift; sourceTree = "<group>"; };
 		3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AC4472A1DCCB29000F69EC0 /* DarkSlideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DarkSlideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCaptureTests.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 				3A215D461D90306500876F00 /* Utilities.swift */,
 				3A215D421D90256400876F00 /* Protocols.swift */,
 				3A215D381D8EA64500876F00 /* Views */,
+				3A3CADEF1DD8B62800804424 /* AudioRecording */,
 				3A03B2801DAE8312007926DD /* PhotoVideoCapture */,
 				3A215D371D8EA62E00876F00 /* View Controllers */,
 				3A215D251D8C410500876F00 /* CoreDataModel */,
@@ -207,6 +212,15 @@
 				3AC821491D93F612003C484D /* MovieNote.swift */,
 			);
 			name = Entities;
+			sourceTree = "<group>";
+		};
+		3A3CADEF1DD8B62800804424 /* AudioRecording */ = {
+			isa = PBXGroup;
+			children = (
+				3A3CADF01DD8B6C000804424 /* AudioRecorder.swift */,
+				3A3CADF21DD8B6F600804424 /* AudioRecorderDelegate.swift */,
+			);
+			name = AudioRecording;
 			sourceTree = "<group>";
 		};
 		3AC4472B1DCCB29000F69EC0 /* DarkSlideTests */ = {
@@ -347,6 +361,7 @@
 				3A03B2841DB4CF37007926DD /* PreviewView.swift in Sources */,
 				3A03B2AC1DBA2B1F007926DD /* PhotoCaptureDelegate.swift in Sources */,
 				3A215D341D8D42BD00876F00 /* HelperExtensions.swift in Sources */,
+				3A3CADF11DD8B6C000804424 /* AudioRecorder.swift in Sources */,
 				3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */,
 				3A215D2E1D8C518C00876F00 /* PhotoNote.swift in Sources */,
 				3A215D271D8C422A00876F00 /* SubjectForExposure.swift in Sources */,
@@ -360,6 +375,7 @@
 				3A215D241D8C3DA000876F00 /* DarkSlideModel.xcdatamodeld in Sources */,
 				3AC8214C1D9929CE003C484D /* FullScreenCameraViewController.swift in Sources */,
 				3A215D411D9024F500876F00 /* ExposureViewController.swift in Sources */,
+				3A3CADF31DD8B6F600804424 /* AudioRecorderDelegate.swift in Sources */,
 				3A215D301D8C533D00876F00 /* AudioNote.swift in Sources */,
 				3A215D491D9149A300876F00 /* PortraitNavigationController.swift in Sources */,
 				3AC8214A1D93F613003C484D /* MovieNote.swift in Sources */,
