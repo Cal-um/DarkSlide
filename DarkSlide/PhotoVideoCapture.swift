@@ -252,7 +252,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	// MARK: Resume iterrupted session
 	// use this block in a place where it can notify the user and to restart the session
 	
-	private func resumeInterupptedSession() {
+	func resumeInterupptedSession() {
 		sessionQueue.async { [unowned self] in
 			/*
 			The session might fail to start running, e.g., if a phone or FaceTime call is still
@@ -647,6 +647,8 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			return
 		}
 		
+		print(errorValue)
+		
 		let error = AVError(_nsError: errorValue)
 		print("Capture session runtime error \(error)")
 		/*
@@ -695,7 +697,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			else if reason == AVCaptureSessionInterruptionReason.videoDeviceNotAvailableWithMultipleForegroundApps {
 				DispatchQueue.main.async { [unowned self] in
 					self.cameraViewDelegate.hideCameraUnavailableLabel(hide: false)
-				}
+				}	
 			}
 			
 			if showResumeButton {

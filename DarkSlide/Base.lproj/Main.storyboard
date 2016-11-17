@@ -73,6 +73,9 @@
                                         <state key="normal" title="Resume">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="resumeSession:" destination="uKw-RA-TCz" eventType="touchUpInside" id="xYx-18-y1g"/>
+                                        </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgr-J7-g6o">
                                         <rect key="frame" x="111" y="96" width="152" height="21"/>
@@ -269,6 +272,9 @@
                                         <state key="normal" title="Resume Session">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="resumeSessionAction:" destination="xhV-1D-f0p" eventType="touchUpInside" id="RaG-Uk-vPT"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -350,6 +356,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3C3-Ed-MeP">
                                 <rect key="frame" x="141.5" y="318.5" width="92" height="30"/>
                                 <state key="normal" title="Record Audio"/>
+                                <connections>
+                                    <action selector="toggleAudioRecording:" destination="QDx-XM-MsZ" eventType="touchUpInside" id="1XQ-UX-JFS"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -360,6 +369,9 @@
                             <constraint firstItem="1uJ-9H-9ew" firstAttribute="trailing" secondItem="3oy-Fj-sTe" secondAttribute="trailingMargin" id="nTl-D9-mM2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="audioRecordButton" destination="3C3-Ed-MeP" id="oeR-qF-SWV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLB-NQ-Zhx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

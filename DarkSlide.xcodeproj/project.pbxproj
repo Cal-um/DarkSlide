@@ -34,6 +34,7 @@
 		3A3CADEE1DD67FDD00804424 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3A3CADED1DD67FDD00804424 /* .gitignore */; };
 		3A3CADF11DD8B6C000804424 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF01DD8B6C000804424 /* AudioRecorder.swift */; };
 		3A3CADF31DD8B6F600804424 /* AudioRecorderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF21DD8B6F600804424 /* AudioRecorderDelegate.swift */; };
+		3A3CADF51DDDD57D00804424 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF41DDDD57D00804424 /* AudioPlayer.swift */; };
 		3A43EE2E1DCFABE7002EB25B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */; };
 		3AC4472D1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */; };
 		3AC8214A1D93F613003C484D /* MovieNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC821491D93F612003C484D /* MovieNote.swift */; };
@@ -81,6 +82,7 @@
 		3A3CADED1DD67FDD00804424 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3A3CADF01DD8B6C000804424 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		3A3CADF21DD8B6F600804424 /* AudioRecorderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderDelegate.swift; sourceTree = "<group>"; };
+		3A3CADF41DDDD57D00804424 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AC4472A1DCCB29000F69EC0 /* DarkSlideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DarkSlideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCaptureTests.swift; sourceTree = "<group>"; };
@@ -147,7 +149,7 @@
 				3A215D461D90306500876F00 /* Utilities.swift */,
 				3A215D421D90256400876F00 /* Protocols.swift */,
 				3A215D381D8EA64500876F00 /* Views */,
-				3A3CADEF1DD8B62800804424 /* AudioRecording */,
+				3A3CADEF1DD8B62800804424 /* Audio Recorder and Player */,
 				3A03B2801DAE8312007926DD /* PhotoVideoCapture */,
 				3A215D371D8EA62E00876F00 /* View Controllers */,
 				3A215D251D8C410500876F00 /* CoreDataModel */,
@@ -214,13 +216,14 @@
 			name = Entities;
 			sourceTree = "<group>";
 		};
-		3A3CADEF1DD8B62800804424 /* AudioRecording */ = {
+		3A3CADEF1DD8B62800804424 /* Audio Recorder and Player */ = {
 			isa = PBXGroup;
 			children = (
 				3A3CADF01DD8B6C000804424 /* AudioRecorder.swift */,
 				3A3CADF21DD8B6F600804424 /* AudioRecorderDelegate.swift */,
+				3A3CADF41DDDD57D00804424 /* AudioPlayer.swift */,
 			);
-			name = AudioRecording;
+			name = "Audio Recorder and Player";
 			sourceTree = "<group>";
 		};
 		3AC4472B1DCCB29000F69EC0 /* DarkSlideTests */ = {
@@ -278,7 +281,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Calum Harris";
 				TargetAttributes = {
 					3A215D0C1D8C075600876F00 = {
@@ -366,6 +369,7 @@
 				3A215D2E1D8C518C00876F00 /* PhotoNote.swift in Sources */,
 				3A215D271D8C422A00876F00 /* SubjectForExposure.swift in Sources */,
 				3A03B2821DB4C5C3007926DD /* PhotoVideoCapture.swift in Sources */,
+				3A3CADF51DDDD57D00804424 /* AudioPlayer.swift in Sources */,
 				3A215D361D8D4C7200876F00 /* ManagedObjectContextStack.swift in Sources */,
 				3A215D451D90289D00876F00 /* ExposureAudioViewController.swift in Sources */,
 				3A215D2A1D8C4D4D00876F00 /* ManagedObject.swift in Sources */,
@@ -439,6 +443,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -489,6 +494,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

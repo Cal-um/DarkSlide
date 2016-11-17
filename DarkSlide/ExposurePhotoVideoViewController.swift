@@ -47,6 +47,10 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	
 	@IBOutlet weak var takeExposureButton: UIButton!
 	
+	@IBAction func resumeSession(_ sender: Any) {
+		photoVideo.resumeInterupptedSession()
+	}
+	
 	@IBAction func tapExposureButton(_ sender: Any) {
 		takePhoto()
 	}

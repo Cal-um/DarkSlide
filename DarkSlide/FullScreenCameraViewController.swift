@@ -90,9 +90,6 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		photoVideo.viewAppeared()
 	}
 	
-	override func viewDidDisappear(_ animated: Bool) {
-	}
-	
 	override var prefersStatusBarHidden: Bool {
 		return true
 	}
@@ -139,7 +136,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	
 	@IBAction func backButton(_ sender: AnyObject) {
 		photoVideo.viewDissapeared()
-		dismiss(animated: true, completion: nil)
+		self.dismiss(animated: true, completion: nil)
 	}
 	
 	
@@ -166,6 +163,10 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	
 	@IBAction func toggleLivePhotoOnOff(_ sender: Any) {
 		photoVideo.toggleLivePhotoMode()
+	}
+	
+	@IBAction func resumeSessionAction(_ sender: Any) {
+		photoVideo.resumeInterupptedSession()
 	}
 	
 	func configureButton() {
@@ -247,6 +248,7 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 		let player = AVPlayer(url: MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
 		let playerController = AVPlayerViewController()
 		playerController.player = player
+		photoVideo.viewDissapeared()
 		self.present(playerController, animated: true) {
 		playerController.player!.play()
 		}
