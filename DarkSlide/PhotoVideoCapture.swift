@@ -831,14 +831,12 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	private var flashMode: AVCaptureFlashMode = .auto
 	
 	func toggleFlashMode() {
-		sessionQueue.async { [unowned self] in
-			switch self.flashMode {
-			case .auto: self.flashMode = .on
-			case .on: self.flashMode = .off
-			case .off: self.flashMode = .auto
-			}
+		switch self.flashMode {
+		case .auto: flashMode = .on
+		case .on: flashMode = .off
+		case .off: flashMode = .auto
 		}
-		
+	
 		DispatchQueue.main.async { [unowned self] in
 			self.cameraViewDelegate.observeFlashConfiguration = self.flashMode
 		}

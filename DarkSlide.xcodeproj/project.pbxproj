@@ -35,6 +35,8 @@
 		3A3CADF11DD8B6C000804424 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF01DD8B6C000804424 /* AudioRecorder.swift */; };
 		3A3CADF31DD8B6F600804424 /* AudioRecorderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF21DD8B6F600804424 /* AudioRecorderDelegate.swift */; };
 		3A3CADF51DDDD57D00804424 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF41DDDD57D00804424 /* AudioPlayer.swift */; };
+		3A3CADF71DDE300000804424 /* SubjectCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF61DDE300000804424 /* SubjectCameraViewController.swift */; };
+		3A3CADF91DDE537A00804424 /* PreviewSubjectPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF81DDE537A00804424 /* PreviewSubjectPhotoViewController.swift */; };
 		3A43EE2E1DCFABE7002EB25B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */; };
 		3AC4472D1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */; };
 		3AC8214A1D93F613003C484D /* MovieNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC821491D93F612003C484D /* MovieNote.swift */; };
@@ -83,6 +85,8 @@
 		3A3CADF01DD8B6C000804424 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		3A3CADF21DD8B6F600804424 /* AudioRecorderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderDelegate.swift; sourceTree = "<group>"; };
 		3A3CADF41DDDD57D00804424 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		3A3CADF61DDE300000804424 /* SubjectCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectCameraViewController.swift; sourceTree = "<group>"; };
+		3A3CADF81DDE537A00804424 /* PreviewSubjectPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewSubjectPhotoViewController.swift; sourceTree = "<group>"; };
 		3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AC4472A1DCCB29000F69EC0 /* DarkSlideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DarkSlideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCaptureTests.swift; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 				3A215D401D9024F500876F00 /* ExposureViewController.swift */,
 				3A215D441D90289D00876F00 /* ExposureAudioViewController.swift */,
 				3A215D481D9149A300876F00 /* PortraitNavigationController.swift */,
+				3A3CADF61DDE300000804424 /* SubjectCameraViewController.swift */,
+				3A3CADF81DDE537A00804424 /* PreviewSubjectPhotoViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -359,12 +365,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A215D431D90256400876F00 /* Protocols.swift in Sources */,
+				3A3CADF91DDE537A00804424 /* PreviewSubjectPhotoViewController.swift in Sources */,
 				3A215D2C1D8C512800876F00 /* DarkSlide.swift in Sources */,
 				3A215D3E1D8EB0DF00876F00 /* CameraViewDelegate.swift in Sources */,
 				3A03B2841DB4CF37007926DD /* PreviewView.swift in Sources */,
 				3A03B2AC1DBA2B1F007926DD /* PhotoCaptureDelegate.swift in Sources */,
 				3A215D341D8D42BD00876F00 /* HelperExtensions.swift in Sources */,
 				3A3CADF11DD8B6C000804424 /* AudioRecorder.swift in Sources */,
+				3A3CADF71DDE300000804424 /* SubjectCameraViewController.swift in Sources */,
 				3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */,
 				3A215D2E1D8C518C00876F00 /* PhotoNote.swift in Sources */,
 				3A215D271D8C422A00876F00 /* SubjectForExposure.swift in Sources */,
