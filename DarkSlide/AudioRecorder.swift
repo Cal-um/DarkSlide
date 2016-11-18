@@ -67,7 +67,7 @@ class AudioRecorder: NSObject {
 			let filePath = AudioNote.generateMoviePath(audioReferenceNumber: randomReferenceNumber)
 			
 			do {
-				try self.audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+				try self.audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with: AVAudioSessionCategoryOptions.defaultToSpeaker)
 			}
 			catch {
 				fatalError("error setting up audio recorder")
