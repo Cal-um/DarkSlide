@@ -76,7 +76,6 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate {
 				
 			}
 		}
-		
 	}
 	
 	func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
@@ -86,7 +85,6 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate {
 		recorder.stop()
 		recorder.deleteRecording()
 		alertErrorRecordingMessage()
-		
 	}
 	
 	func alertErrorRecordingMessage() {
@@ -94,7 +92,6 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate {
 		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
 		self.present(alertController, animated: true, completion: nil)
-		
 	}
 }
 

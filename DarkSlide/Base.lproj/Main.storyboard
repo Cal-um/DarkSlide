@@ -12,7 +12,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Expose-->
+        <!--Exposure Notes-->
         <scene sceneID="fjl-Fy-Hln">
             <objects>
                 <viewController id="jme-7a-NOa" customClass="ExposureViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
@@ -41,7 +41,14 @@
                             <constraint firstItem="RA4-ld-Xzm" firstAttribute="leading" secondItem="J1C-cx-cpN" secondAttribute="leading" id="w0n-1v-3q9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Expose" id="1XK-bU-Egc"/>
+                    <navigationItem key="navigationItem" title="Exposure Notes" id="1XK-bU-Egc">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="grW-yQ-Tkk">
+                            <connections>
+                                <action selector="dismissViewController:" destination="jme-7a-NOa" id="2hE-KP-BEh"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Continue" id="r9i-09-rDe"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQ5-gL-DuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

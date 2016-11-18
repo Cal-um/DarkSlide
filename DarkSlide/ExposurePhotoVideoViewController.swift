@@ -41,8 +41,9 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	//	setUpInitialVideoOrientation()
 	}
 	
-	override func viewDidDisappear(_ animated: Bool) {
+	override func viewWillDisappear(_ animated: Bool) {
 		photoVideo.viewDissapeared()
+		super.viewWillDisappear(true)
 	}
 	
 	@IBOutlet weak var takeExposureButton: UIButton!
