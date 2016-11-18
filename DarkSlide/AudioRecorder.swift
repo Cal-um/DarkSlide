@@ -35,10 +35,12 @@ class AudioRecorder: NSObject {
 		switch audioSession.recordPermission() {
 			
 		case AVAudioSessionRecordPermission.undetermined:
+			audioQueue.suspend()
 			audioSession.requestRecordPermission { [unowned self] permissionGranted in
 				if !permissionGranted {
 					self.setupResult = false
 				}
+				self.audioQueue.resume()
 			}
 			
 		case AVAudioSessionRecordPermission.granted:

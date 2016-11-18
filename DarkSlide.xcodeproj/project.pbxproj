@@ -10,6 +10,8 @@
 		3A03B2821DB4C5C3007926DD /* PhotoVideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */; };
 		3A03B2841DB4CF37007926DD /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2831DB4CF37007926DD /* PreviewView.swift */; };
 		3A03B2AC1DBA2B1F007926DD /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */; };
+		3A0FFFDD1DDF068400AFA88B /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FFFDC1DDF068400AFA88B /* SpeechToText.swift */; };
+		3A0FFFDF1DDF086F00AFA88B /* SpeechToTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FFFDE1DDF086F00AFA88B /* SpeechToTextDelegate.swift */; };
 		3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D101D8C075600876F00 /* AppDelegate.swift */; };
 		3A215D161D8C075600876F00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A215D141D8C075600876F00 /* Main.storyboard */; };
 		3A215D1B1D8C075600876F00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A215D191D8C075600876F00 /* LaunchScreen.storyboard */; };
@@ -58,6 +60,8 @@
 		3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoCapture.swift; sourceTree = "<group>"; };
 		3A03B2831DB4CF37007926DD /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegate.swift; sourceTree = "<group>"; };
+		3A0FFFDC1DDF068400AFA88B /* SpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
+		3A0FFFDE1DDF086F00AFA88B /* SpeechToTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextDelegate.swift; sourceTree = "<group>"; };
 		3A215D0D1D8C075600876F00 /* DarkSlide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarkSlide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A215D101D8C075600876F00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A215D151D8C075600876F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -228,6 +232,8 @@
 				3A3CADF01DD8B6C000804424 /* AudioRecorder.swift */,
 				3A3CADF21DD8B6F600804424 /* AudioRecorderDelegate.swift */,
 				3A3CADF41DDDD57D00804424 /* AudioPlayer.swift */,
+				3A0FFFDC1DDF068400AFA88B /* SpeechToText.swift */,
+				3A0FFFDE1DDF086F00AFA88B /* SpeechToTextDelegate.swift */,
 			);
 			name = "Audio Recorder and Player";
 			sourceTree = "<group>";
@@ -382,12 +388,14 @@
 				3A215D451D90289D00876F00 /* ExposureAudioViewController.swift in Sources */,
 				3A215D2A1D8C4D4D00876F00 /* ManagedObject.swift in Sources */,
 				3A215D471D90306500876F00 /* Utilities.swift in Sources */,
+				3A0FFFDF1DDF086F00AFA88B /* SpeechToTextDelegate.swift in Sources */,
 				3AD345D91DCE12BF005AD849 /* CameraUtils.swift in Sources */,
 				3A215D3A1D8EA98200876F00 /* ExposurePhotoVideoViewController.swift in Sources */,
 				3A215D241D8C3DA000876F00 /* DarkSlideModel.xcdatamodeld in Sources */,
 				3AC8214C1D9929CE003C484D /* FullScreenCameraViewController.swift in Sources */,
 				3A215D411D9024F500876F00 /* ExposureViewController.swift in Sources */,
 				3A3CADF31DD8B6F600804424 /* AudioRecorderDelegate.swift in Sources */,
+				3A0FFFDD1DDF068400AFA88B /* SpeechToText.swift in Sources */,
 				3A215D301D8C533D00876F00 /* AudioNote.swift in Sources */,
 				3A215D491D9149A300876F00 /* PortraitNavigationController.swift in Sources */,
 				3AC8214A1D93F613003C484D /* MovieNote.swift in Sources */,

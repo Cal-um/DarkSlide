@@ -38,7 +38,7 @@ class ExposureAudioNoteViewController: UIViewController, ManagedObjectContextSta
 }
 
 	
-extension ExposureAudioNoteViewController: AudioRecorderDelegate {
+extension ExposureAudioNoteViewController: AudioRecorderDelegate, SpeechToTextDelegate {
 	
 	func disableRecordButton() {
 		audioRecordButton.isEnabled = false
@@ -68,13 +68,16 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate {
 			
 			// Play sounds with AVPlayer
 			
-			let player = AVPlayer(url: recorder.url)
+			let sR = SpeechToText(delegate: self)
+			sR.processAudioFile(url: recorder.url)
+			
+			/*let player = AVPlayer(url: recorder.url)
 			let playerController = AVPlayerViewController()
 			playerController.player = player
 			self.present(playerController, animated: true) {
-				playerController.player!.play()
+				playerController.player!.play()*/
 				
-			}
+			//}
 		}
 	}
 	
@@ -92,6 +95,10 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate {
 		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
 		self.present(alertController, animated: true, completion: nil)
+	}
+
+	func alertUserOfSpeechRecognitionAllowance() {
+		self.present(alertUserOfSpeechRecognitionAllowanceAlertController(), animated: true, completion: nil)
 	}
 }
 
