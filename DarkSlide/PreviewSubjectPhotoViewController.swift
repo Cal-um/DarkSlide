@@ -18,10 +18,13 @@ class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextS
 	override func viewDidLoad() {
 		imageView.image = subjectPhoto
 	}
+	@IBAction func tryAgainAction(_ sender: Any) {
+		dismiss(animated: true, completion: nil)
+	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "Chosen Photo Segue" {
-			guard var vc = segue.destination as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
+			guard let nc = segue.destination as? UINavigationController, var vc = nc.viewControllers.first as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
 		}
 	}

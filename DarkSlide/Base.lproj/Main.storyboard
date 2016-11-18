@@ -60,16 +60,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgO-1j-leJ" customClass="PreviewView" customModule="DarkSlide" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tB-4M-9JU">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
                                         <connections>
                                             <action selector="tapExposureButton:" destination="uKw-RA-TCz" eventType="touchUpInside" id="mAh-PJ-Tov"/>
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5M-O4-xa0">
-                                        <rect key="frame" x="160" y="91" width="55" height="30"/>
+                                        <rect key="frame" x="179.66666666666666" y="101.66666666666666" width="55" height="29.999999999999972"/>
                                         <state key="normal" title="Resume">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -78,7 +78,7 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgr-J7-g6o">
-                                        <rect key="frame" x="111" y="96" width="152" height="21"/>
+                                        <rect key="frame" x="130.66666666666669" y="106.66666666666667" width="152.00000000000006" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -97,14 +97,14 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="335-L1-f2M">
-                                <rect key="frame" x="319" y="10" width="40" height="30"/>
+                                <rect key="frame" x="354" y="10" width="40" height="30"/>
                                 <state key="normal" title="Audio"/>
                                 <connections>
                                     <segue destination="QDx-XM-MsZ" kind="presentation" identifier="AudioSegue" modalPresentationStyle="currentContext" id="bqX-eU-43F"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHy-Ru-Pib">
-                                <rect key="frame" x="16" y="10" width="76" height="30"/>
+                                <rect key="frame" x="20" y="10" width="76" height="30"/>
                                 <state key="normal" title="Full Screen"/>
                                 <connections>
                                     <segue destination="xhV-1D-f0p" kind="presentation" identifier="FullViewSegue" id="Q77-Fy-ru0"/>
@@ -406,6 +406,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4W-U2-wz8">
                                         <rect key="frame" x="8" y="8" width="34" height="30"/>
                                         <state key="normal" title="Back"/>
+                                        <connections>
+                                            <action selector="dissmissViewController:" destination="uDH-iq-wAo" eventType="touchUpInside" id="5aO-17-aAj"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a Photo of Your Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qd-HE-4la">
                                         <rect key="frame" x="66.666666666666686" y="569.66666666666652" width="280.66666666666663" height="26.333333333333371"/>
@@ -418,6 +421,9 @@
                                         <state key="normal" title="Resume Camera">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="resumeCameraSession:" destination="uDH-iq-wAo" eventType="touchUpInside" id="MhB-10-Z2E"/>
+                                        </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ma8-kk-rsZ">
                                         <rect key="frame" x="130.66666666666669" y="357.66666666666669" width="152.00000000000006" height="21"/>
@@ -499,7 +505,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fmB-qy-u70">
-                        <barButtonItem key="leftBarButtonItem" id="tFV-xr-LLs"/>
+                        <barButtonItem key="leftBarButtonItem" title="Try Again" id="tFV-xr-LLs">
+                            <connections>
+                                <action selector="tryAgainAction:" destination="gDq-zR-wAj" id="Efz-9a-GQ3"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Choose Photo" id="01U-Ol-rP6">
                             <connections>
                                 <segue destination="YYm-Aa-NcV" kind="presentation" identifier="Chosen Photo Segue" id="YSQ-zp-caF"/>

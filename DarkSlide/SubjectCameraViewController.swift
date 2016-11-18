@@ -70,7 +70,13 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 	
 	// MARK: Camera Actions
 	
+	@IBAction func resumeCameraSession(_ sender: Any) {
+		photoVideo.resumeInterupptedSession()
+	}
 	
+	@IBAction func dissmissViewController(_ sender: Any) {
+		//self.dismiss(animated: true)
+	}
 	
 	@IBAction func takePhoto(_ sender: Any) {
 		photoVideo.capturePhoto()
