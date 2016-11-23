@@ -38,6 +38,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Record exposure information.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To record exposure location.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Convert recorded speech to text</string>
 	<key>NSMicrophoneUsageDescription</key>

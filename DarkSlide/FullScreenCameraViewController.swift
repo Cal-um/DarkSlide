@@ -83,6 +83,8 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		photoVideo = PhotoVideoCapture(delegate: self)
 		openCloseCameraOptionTab()
 		bringSubviewsToFront()
+		// The default is livePhoto off so this ensures live photo is on for capable devices
+		photoVideo.toggleLivePhotoMode()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {

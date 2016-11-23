@@ -237,7 +237,6 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			session.addOutput(photoOutput)
 			photoOutput.isHighResolutionCaptureEnabled = true
 			photoOutput.isLivePhotoCaptureEnabled = photoOutput.isLivePhotoCaptureSupported
-			livePhotoMode = photoOutput.isLivePhotoCaptureSupported ? .on : .off
 		}
 		else {
 			print("could not add photo output to the session")

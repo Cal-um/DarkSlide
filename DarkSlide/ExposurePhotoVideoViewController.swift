@@ -33,12 +33,13 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	override func viewDidLoad() {
 		// set up video preview and PhotoAudioVideo object
 		photoVideo = PhotoVideoCapture(delegate: self)
+		// The default is livePhoto off so this ensures live photo is on for capable devices
+		photoVideo.toggleLivePhotoMode()
 		
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		photoVideo.viewAppeared()
-	//	setUpInitialVideoOrientation()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
