@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SubjectForExposure.swift
 //  DarkSlide
 //
 //  Created by Calum Harris on 16/09/2016.

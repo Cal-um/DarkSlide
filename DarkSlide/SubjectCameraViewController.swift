@@ -31,14 +31,12 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransition(to: size, with: coordinator)
 		
-		if let videoPreviewLayerConnection = cameraView.videoPreviewLayer.connection {
+		if let videoPreviewLayerConnection = cameraView?.videoPreviewLayer.connection {
 			let deviceOrientation = UIDevice.current.orientation
 			guard let newVideoOrientation = deviceOrientation.videoOrientation, deviceOrientation.isPortrait || deviceOrientation.isLandscape else {
 				return
 			}
-			print("CALLED \(videoPreviewLayerConnection.videoOrientation.rawValue)")
 			videoPreviewLayerConnection.videoOrientation = newVideoOrientation
-			print("CALLED \(videoPreviewLayerConnection.videoOrientation.rawValue)")
 		}
 	}
 	
@@ -81,7 +79,7 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 	}
 	
 	@IBAction func dissmissViewController(_ sender: Any) {
-		//self.dismiss(animated: true)
+		self.dismiss(animated: true)
 	}
 	
 	@IBAction func takePhoto(_ sender: Any) {
@@ -107,7 +105,7 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 	
 	private var correctedScreenOrientationHeading: Double? {
 		didSet {
-			print(correctedScreenOrientationHeading ?? nil)
+			print(correctedScreenOrientationHeading)
 		}
 	}
 	
@@ -115,7 +113,7 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 		// The Compass heading is taken from the top of the device no matter what the screen orientation is. To correct the measurements in the event of an orientation change this is corrected with the below didSet.
 		
 		didSet {
-			guard let currentScreenOrientation = cameraView?.videoPreviewLayer?.connection.videoOrientation, let heading = heading else { return }
+			guard let currentScreenOrientation = cameraView?.videoPreviewLayer.connection?.videoOrientation, let heading = heading else { return }
 			
 			switch currentScreenOrientation {
 			case .portrait: correctedScreenOrientationHeading = heading
@@ -151,6 +149,15 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? PreviewSubjectPhotoViewController else { fatalError("wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
 			vc.subjectPhoto = chosenSubjectImage
+			
+			if let coordinates = coordinates {
+				vc.latitude = coordinates.latitude
+				vc.longitude = coordinates.longitude
+			}
+			
+			if let heading = heading {
+				vc.compassBearing = heading
+			}
 		}
 	}
 }

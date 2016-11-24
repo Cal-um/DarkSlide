@@ -27,11 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// Pass MOCStack to rootViewController.
 		
-		guard var vc = window?.rootViewController as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
+		//guard var vc = window?.rootViewController as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
 		
-		/*guard let nc = window?.rootViewController as? UINavigationController, var vc = nc.viewControllers.first as? ManagedObjectContextStackSettable else {
+		guard let svc = window?.rootViewController as? UISplitViewController, let nc = svc.viewControllers.first as? UINavigationController, var vc = nc.viewControllers.first as? ManagedObjectContextStackSettable else {
 			fatalError("Wrong view controller type")
-		}*/
+		}
 		
 		vc.managedObjectContextStack = managedObjectContextStack
 		

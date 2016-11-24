@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RootCell" id="G0C-zT-ivl" customClass="RootCollectionViewCell" customModule="DarkSlide" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="211" height="263"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="211" height="263"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAk-IM-jqT">
+                        <rect key="frame" x="0.0" y="0.0" width="210.5" height="263"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="DefaultPic" translatesAutoresizingMaskIntoConstraints="NO" id="njM-3y-vvy">
+                                <rect key="frame" x="8" y="8" width="194.5" height="209"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Date" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rq3-Zp-TRK">
+                                <rect key="frame" x="8" y="225" width="194.5" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="IAk-IM-jqT" secondAttribute="height" multiplier="4:5" id="PLz-Uo-RKl"/>
+                            <constraint firstItem="njM-3y-vvy" firstAttribute="top" secondItem="IAk-IM-jqT" secondAttribute="top" constant="8" id="Wg2-ew-nf1"/>
+                            <constraint firstItem="njM-3y-vvy" firstAttribute="leading" secondItem="IAk-IM-jqT" secondAttribute="leading" constant="8" id="bUm-6Z-5ee"/>
+                            <constraint firstAttribute="trailing" secondItem="rq3-Zp-TRK" secondAttribute="trailing" constant="8" id="jmv-lf-ui7"/>
+                            <constraint firstItem="rq3-Zp-TRK" firstAttribute="top" secondItem="njM-3y-vvy" secondAttribute="bottom" constant="8" id="kXc-14-6xA"/>
+                            <constraint firstItem="rq3-Zp-TRK" firstAttribute="leading" secondItem="IAk-IM-jqT" secondAttribute="leading" constant="8" id="kxK-Je-VeA"/>
+                            <constraint firstAttribute="trailing" secondItem="njM-3y-vvy" secondAttribute="trailing" constant="8" id="rWK-4o-WVK"/>
+                            <constraint firstAttribute="bottom" secondItem="rq3-Zp-TRK" secondAttribute="bottom" constant="8" id="swO-ji-ENX"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="IAk-IM-jqT" secondAttribute="trailing" id="GbN-rN-aEZ"/>
+                <constraint firstItem="IAk-IM-jqT" firstAttribute="top" secondItem="G0C-zT-ivl" secondAttribute="top" id="VkX-bm-qpr"/>
+                <constraint firstItem="IAk-IM-jqT" firstAttribute="leading" secondItem="G0C-zT-ivl" secondAttribute="leading" id="pza-ti-ped"/>
+                <constraint firstAttribute="bottom" secondItem="IAk-IM-jqT" secondAttribute="bottom" id="zKV-3A-pYm"/>
+            </constraints>
+            <size key="customSize" width="211" height="263"/>
+            <connections>
+                <outlet property="ImageView" destination="njM-3y-vvy" id="Mn6-PZ-hnN"/>
+                <outlet property="TextLabel" destination="rq3-Zp-TRK" id="dz5-LQ-CTI"/>
+            </connections>
+            <point key="canvasLocation" x="-71" y="7"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="DefaultPic" width="756" height="756"/>
+    </resources>
+</document>

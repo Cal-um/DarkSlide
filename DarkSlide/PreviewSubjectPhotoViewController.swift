@@ -10,8 +10,12 @@ import UIKit
 
 class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextStackSettable {
 	
-	var subjectPhoto: UIImage!
 	var managedObjectContextStack: ManagedObjectContextStack!
+	var subjectPhoto: UIImage!
+	var latitude: Double?
+	var longitude: Double?
+	var compassBearing: Double?
+	
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var choosePhotoButton: UINavigationItem!
 	
