@@ -10,9 +10,9 @@ import UIKit
 import AVFoundation
 
 class AudioPlayer: NSObject, AVAudioPlayerDelegate {
-	
+
 	var player: AVAudioPlayer!
-	
+
 	func playSoundFile(atPath url: URL) {
 		self.player?.stop()
 		guard let p = try? AVAudioPlayer(contentsOf: url) else { print("error with url audio player"); return }
@@ -22,7 +22,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
 		print("playing")
 		self.player.play()
 	}
-	
+
 	func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
 		print("audio player finished playing \(flag)")
 	}

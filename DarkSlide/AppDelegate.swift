@@ -19,22 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var managedObjectContextStack: ManagedObjectContextStack!
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		
+
 		// CoreData init main context and assign to managedObjectContext property before passing to MOCStack.
 		guard let mainContext = getMainContext() else { fatalError("Init main context failure") }
 		managedObjectContext = mainContext
 		managedObjectContextStack = ManagedObjectContextStack(mainManagedObjectContext: managedObjectContext)
-		
+
 		// Pass MOCStack to rootViewController.
-		
+
 		//guard var vc = window?.rootViewController as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
-		
+
 		guard let svc = window?.rootViewController as? UISplitViewController, let nc = svc.viewControllers.first as? UINavigationController, var vc = nc.viewControllers.first as? ManagedObjectContextStackSettable else {
 			fatalError("Wrong view controller type")
 		}
-		
+
 		vc.managedObjectContextStack = managedObjectContextStack
-		
+
 		Fabric.with([Answers.self])
 
 		return true
@@ -55,4 +55,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillTerminate(_ application: UIApplication) {
 	}
 }
-

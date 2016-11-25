@@ -10,13 +10,13 @@ import UIKit
 import CoreData
 
 class ExposureViewController: UIViewController, ManagedObjectContextStackSettable {
-	
+
 	var managedObjectContextStack: ManagedObjectContextStack!
 
 	@IBAction func dismissViewController(_ sender: Any) {
 		dismiss(animated: true, completion: nil)
 	}
-	
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 		case .some("ExposurePhotoVideoViewControllerSegue"):
@@ -26,4 +26,3 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 		}
 	}
 }
-

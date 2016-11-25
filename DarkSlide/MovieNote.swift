@@ -10,38 +10,38 @@ import UIKit
 import CoreData
 
 class MovieNote: ManagedObject {
-	
+
 	@NSManaged var movieReferenceNumber: String
 	@NSManaged var subject: SubjectForExposure?
 }
 
 extension MovieNote: ManagedObjectType, ExposureNote {
-	
+
 	static var entityName: String {
 		return "MovieNote"
 	}
-	
+
 	// moviePath gives you the location of the movie.
-	
+
 	var moviePath: URL {
 		let filename = "Movie-\(movieReferenceNumber).mp4"
 		return (FileManager.applicationSupportDirectory.appendingPathComponent(filename))
 	}
-	
+
 	static var randomReferenceNumber: String {
 		return NSUUID().uuidString
 	}
-	
+
 	var exposureNoteTypeIdentifier: NoteType {
 		return NoteType.movie
 	}
-	
+
 	// this function is used for when saving to applcations directory or when Managed Object has not been yet created.
 	static func generateMoviePath(movieReferenceNumber: String) -> URL {
 		let fileName = "Movie-\(movieReferenceNumber).mp4"
 		return (FileManager.applicationSupportDirectory.appendingPathComponent(fileName))
 	}
-	
+
 	func removeMovieFile() {
 		let path = moviePath
 		let fileManager = FileManager.default

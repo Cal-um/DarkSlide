@@ -9,11 +9,11 @@
 import UIKit
 
 class PortraitNavigationController: UINavigationController {
-	
+
 	override var shouldAutorotate: Bool {
 		return true
 	}
-		
+
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		return UIInterfaceOrientationMask.portrait
 	}

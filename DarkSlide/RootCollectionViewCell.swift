@@ -9,6 +9,6 @@
 import UIKit
 
 class RootCollectionViewCell: UICollectionViewCell {
-	@IBOutlet weak var ImageView: UIImageView!
-	@IBOutlet weak var TextLabel: UITextField!
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var textLabel: UITextField!
 }

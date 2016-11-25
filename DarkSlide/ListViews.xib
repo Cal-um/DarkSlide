@@ -54,8 +54,8 @@
             </constraints>
             <size key="customSize" width="211" height="263"/>
             <connections>
-                <outlet property="ImageView" destination="njM-3y-vvy" id="Mn6-PZ-hnN"/>
-                <outlet property="TextLabel" destination="rq3-Zp-TRK" id="dz5-LQ-CTI"/>
+                <outlet property="imageView" destination="njM-3y-vvy" id="MIW-n8-EfJ"/>
+                <outlet property="textLabel" destination="rq3-Zp-TRK" id="BY8-ul-Rhj"/>
             </connections>
             <point key="canvasLocation" x="-71" y="7"/>
         </collectionViewCell>

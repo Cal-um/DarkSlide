@@ -10,32 +10,31 @@ import UIKit
 import AVFoundation
 
 protocol CameraViewDelegate: class {
-	
+
 	weak var cameraView: PreviewView! { get set }
-	
+
 	// settings observers
 	var observeLivePhotoModeSelected: LivePhotoMode { get set }
 	var observeFlashConfiguration: AVCaptureFlashMode { get set }
 	var observeCameraFacing: CameraFacing { get set }
 	var observeCaptureMode: CaptureMode { get set }
-	
+
 	func disableButtons()
 	func alertActionNoCameraPermission()
 	func unableToResumeUninteruptedSessionAlert()
 	func hideResumeButton(hide: Bool)
 	func hideCameraUnavailableLabel(hide: Bool)
 	func enableButtons(buttonconfiguration: ButtonConfiguration)
-	
+
 	func didTakePhoto(image: UIImage, livePhoto: String?)
 	func didTakeVideo(videoReferenceNumber: String)
-	
+
 	// TODO: Refactor methods into protocol extension.
-	
-	
+
 }
 
 extension CameraViewDelegate {
-	
+
 	func alertActionNoCameraPermissionAlertController() -> UIAlertController {
 		let message = "Dark Slide doesn't have permission to use the camera, please change privacy settings"
 		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
@@ -45,7 +44,7 @@ extension CameraViewDelegate {
 		}))
 		return alertController
 	}
-	
+
 	func unableToResumeUninteruptedSessionAlertController() -> UIAlertController {
 		let message = "Unable to resume"
 		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
@@ -54,7 +53,6 @@ extension CameraViewDelegate {
 		return alertController
 	}
 }
-
 
 enum LivePhotoMode {
 	case on

@@ -11,12 +11,12 @@ import AVKit
 import AVFoundation
 
 class FullScreenCameraViewController: UIViewController, ManagedObjectContextStackSettable {
-	
+
 	// MARK: ViewController Properties
 
 	var managedObjectContextStack: ManagedObjectContextStack!
 	var photoVideo: PhotoVideoCapture!
-	
+
 	@IBOutlet weak var cameraView: PreviewView!
 	@IBOutlet weak var exitFullScreenButton: UIButton!
 	@IBOutlet weak var toggleCameraOptionsButton: UIButton!
@@ -28,9 +28,9 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 	@IBOutlet weak var livePhotoToggle: UIButton!
 	@IBOutlet weak var cameraUnavailableLabel: UILabel!
 	@IBOutlet weak var resumeSessionButton: UIButton!
-	
+
 	// MARK: Delegate properies. Used to observe state of photoVideo
-	
+
 	var observeLivePhotoModeSelected: LivePhotoMode = .off {
 		didSet {
 			switch observeLivePhotoModeSelected {
@@ -51,7 +51,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 			}
 		}
 	}
-	
+
 	var observeCaptureMode: CaptureMode = .photo {
 		didSet {
 			switch observeCaptureMode {
@@ -64,7 +64,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 			}
 		}
 	}
-	
+
 	var observeCameraFacing: CameraFacing = .front {
 		didSet {
 			switch observeCameraFacing {
@@ -77,7 +77,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 			}
 		}
 	}
-	
+
 	// MARK: Life cycle
 	override func viewDidLoad() {
 		photoVideo = PhotoVideoCapture(delegate: self)
@@ -86,15 +86,15 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		// The default is livePhoto off so this ensures live photo is on for capable devices
 		photoVideo.toggleLivePhotoMode()
 	}
-	
+
 	override func viewDidAppear(_ animated: Bool) {
 		photoVideo.viewAppeared()
 	}
-	
+
 	override var prefersStatusBarHidden: Bool {
 		return true
 	}
-	
+
 	override var shouldAutorotate: Bool {
 		// Disable autorotation of the interface when recording is in progress.
 		if let movieFileOutput = photoVideo.movieFileOutput {
@@ -102,14 +102,14 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		}
 		return true
 	}
-	
+
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		return .all
 	}
-	
+
 	override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 		super.viewWillTransition(to: size, with: coordinator)
-		
+
 		if let videoPreviewLayerConnection = cameraView.videoPreviewLayer.connection {
 			let deviceOrientation = UIDevice.current.orientation
 			guard let newVideoOrientation = deviceOrientation.videoOrientation, deviceOrientation.isPortrait || deviceOrientation.isLandscape else {
@@ -120,27 +120,26 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 			print("CALLED \(videoPreviewLayerConnection.videoOrientation.rawValue)")
 		}
 	}
-	
+
 	@IBAction func tapToToggleOptionTabConstraint(_ sender: AnyObject) {
 		openCloseCameraOptionTab()
 	}
-	
+
 	@IBAction func pinchToZoom(_ sender: UIPinchGestureRecognizer) {
 		print("Pinch")
 		let vZoomFactor = sender.scale
 		print("ZOOM HAPPENING IS OF \(vZoomFactor)")
 		photoVideo.zoom(zoomFactorFromPinchGesture: vZoomFactor)	}
-	
+
 	override func viewDidLayoutSubviews() {
 		configureButton()
 	}
-	
+
 	@IBAction func backButton(_ sender: AnyObject) {
 		photoVideo.viewDissapeared()
 		self.dismiss(animated: true, completion: nil)
 	}
-	
-	
+
 	@IBAction func touchExposeButton(_ sender: AnyObject) {
 		switch observeCaptureMode {
 		case .photo:
@@ -149,27 +148,27 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 			takeMovie()
 		}
 	}
-	
+
 	@IBAction func toggleChangeCameraPosition(_ sender: Any) {
 		photoVideo.changeCamera()
 	}
-	
+
 	@IBAction func toggleFlashOrTorchOnOff(_ sender: Any) {
 		photoVideo.toggleFlashMode()
 	}
-	
+
 	@IBAction func toggleRecordMovieOrPhoto(_ sender: Any) {
 		photoVideo.toggleCaptureMode()
 	}
-	
+
 	@IBAction func toggleLivePhotoOnOff(_ sender: Any) {
 		photoVideo.toggleLivePhotoMode()
 	}
-	
+
 	@IBAction func resumeSessionAction(_ sender: Any) {
 		photoVideo.resumeInterupptedSession()
 	}
-	
+
 	func configureButton() {
 		takePhotoButton.layer.cornerRadius = takePhotoButton.bounds.width / 2
 		takePhotoButton.clipsToBounds = true
@@ -178,9 +177,9 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 		takePhotoButton.layer.borderColor = UIColor(red:0.47, green:0.85, blue:0.98, alpha:1.0).cgColor
 		takePhotoButton.layer.borderWidth = 1
 	}
-		
+
 	func openCloseCameraOptionTab() {
-		
+
 		let constraint = cameraOptionsBar.superview!.constraints.filter { $0.identifier == "height" }.first
 		let multiplier: CGFloat = (cameraOptionsBar.frame.height == 0) ? 0.2 : 0
 		constraint?.isActive = false
@@ -198,22 +197,20 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 				if !isBarOpen {
 					self.cameraOptionsBar.isHidden = true
 				}
-				
+
 		})
 	}
-	
+
 	func takeMovie() {
 		photoVideo.toggleMovieRecording()
 	}
-	
+
 	func takePhoto() {
 		photoVideo.capturePhoto()
 	}
-	
-	
-	
+
 	func bringSubviewsToFront() {
-		
+
 		cameraView.bringSubview(toFront: takePhotoButton)
 		cameraView.bringSubview(toFront: switchCameraMode)
 		cameraView.bringSubview(toFront: switchFrontBackCamera)
@@ -229,9 +226,9 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 }
 
 extension FullScreenCameraViewController: CameraViewDelegate {
-	
+
 	func didTakePhoto(image: UIImage, livePhoto: String?) {
-		
+
 		if let livePhoto = livePhoto {
 			let player = AVPlayer(url: PhotoNote.generateLivePhotoPath(livePhotoReferenceNumber: livePhoto))
 			let playerController = AVPlayerViewController()
@@ -241,9 +238,9 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 			}
 		}
 	}
-	
+
 	func didTakeVideo(videoReferenceNumber: String) {
-		
+
 		// test that shows that video does save.
 		print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
 		let player = AVPlayer(url: MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
@@ -254,7 +251,7 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 		playerController.player!.play()
 		}
 	}
-	
+
 	func disableButtons() {
 		livePhotoToggle.isEnabled = false
 		switchCameraMode.isEnabled = false
@@ -262,7 +259,7 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 		flashOnOff.isEnabled = false
 		switchFrontBackCamera.isEnabled = false
 	}
-	
+
 	func enableButtons(buttonconfiguration: ButtonConfiguration) {
 		switch buttonconfiguration {
 		case .allPossible:
@@ -271,7 +268,7 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 			takePhotoButton.isEnabled = true
 			flashOnOff.isEnabled = true
 			switchFrontBackCamera.isEnabled = true
-			
+
 		case .noLivePhoto:
 			print("called")
 			livePhotoToggle.isEnabled = false
@@ -280,7 +277,7 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 			takePhotoButton.isEnabled = true
 			flashOnOff.isEnabled = true
 			switchFrontBackCamera.isEnabled = true
-			
+
 		case .oneCameraOnly:
 			livePhotoToggle.isEnabled = true
 			switchCameraMode.isEnabled = true
@@ -288,7 +285,7 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 			flashOnOff.isEnabled = true
 			switchFrontBackCamera.isEnabled = false
 			switchFrontBackCamera.isHidden = true
-			
+
 		case .noLivePhotoOneCameraOnly:
 			livePhotoToggle.isEnabled = false
 			livePhotoToggle.isHidden = true
@@ -299,29 +296,27 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 			switchFrontBackCamera.isHidden = true
 		}
 	}
-	
+
 	func hideResumeButton(hide: Bool) {
 		if hide {
 			resumeSessionButton.isHidden = true
-		}
-		else {
+		} else {
 			resumeSessionButton.isHidden = false
 		}
 	}
-	
+
 	func hideCameraUnavailableLabel(hide: Bool) {
 		if hide {
 			cameraUnavailableLabel.isHidden = true
-		}
-		else {
+		} else {
 			cameraUnavailableLabel.isHidden = false
 		}
 	}
-	
+
 	func unableToResumeUninteruptedSessionAlert() {
 		self.present(unableToResumeUninteruptedSessionAlertController(), animated: true, completion: nil)
 	}
-	
+
 	func alertActionNoCameraPermission() {
 		self.present(alertActionNoCameraPermissionAlertController(), animated: true, completion: nil)
 	}

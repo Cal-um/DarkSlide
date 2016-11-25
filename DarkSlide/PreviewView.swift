@@ -10,19 +10,19 @@ import UIKit
 import AVFoundation
 
 class PreviewView: UIView {
-	
+
 	var videoPreviewLayer: AVCaptureVideoPreviewLayer!
-	
+
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setup()
 	}
-	
+
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		setup()
 	}
-	
+
 	func setupForPreviewLayer(previewLayer: AVCaptureVideoPreviewLayer) {
 		previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
 		layer.insertSublayer(previewLayer, at: 0)
@@ -30,13 +30,12 @@ class PreviewView: UIView {
 
 	}
 
-	
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		videoPreviewLayer.frame = bounds
 
 	}
-	
+
 	private func setup() {
 		backgroundColor = UIColor.black
 	}

@@ -10,9 +10,8 @@ import UIKit
 import AVFoundation
 
 protocol AudioRecorderDelegate: class, AVAudioRecorderDelegate {
-	
+
 	func disableRecordButton()
 	func enableRecordButton()
 	func alertActionNoMicrophonePermission()
 }
-

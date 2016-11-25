@@ -9,8 +9,5 @@
 import UIKit
 
 class WeatherViewController: UITableViewController {
-	
-	
-	
-	
+
 }

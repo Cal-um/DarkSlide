@@ -21,4 +21,3 @@ enum NoteType {
 	case movie
 	case photo
 }
-

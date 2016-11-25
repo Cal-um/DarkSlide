@@ -10,16 +10,16 @@ import Foundation
 import CoreData
 
 public final class DarkSlide: ManagedObject {
-	
+
 	@NSManaged public var refNumber: Double
 	@NSManaged public var filmType: String
-	
+
 	// Relationship properties
 	@NSManaged public var subject: SubjectForExposure?
 }
 
 extension DarkSlide: ManagedObjectType {
-	
+
 	public static var entityName: String {
 		return "DarkSlide"
 	}

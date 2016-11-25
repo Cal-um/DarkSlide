@@ -9,15 +9,15 @@
 import UIKit
 
 protocol SpeechToTextDelegate {
-	
+
 	func alertUserOfSpeechRecognitionAllowance()
-	
+
 	//func didProcessAudioFileToText()
-	
+
 }
 
 extension SpeechToTextDelegate {
-	
+
 	func alertUserOfSpeechRecognitionAllowanceAlertController() -> UIAlertController {
 		let message = "Dark Slide doesn't have permission to use Speech Recognition, please change privacy settings"
 		let alertController = UIAlertController(title: "Dark Slide", message: message, preferredStyle: .alert)
@@ -27,6 +27,5 @@ extension SpeechToTextDelegate {
 		}))
 		return alertController
 	}
-	
-	
+
 }
