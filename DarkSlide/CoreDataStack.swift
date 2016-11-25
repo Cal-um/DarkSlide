@@ -9,22 +9,20 @@
 import CoreData
 
 // Define Model URL.
-private let StoreURL = URL.documentsURL.appendingPathComponent("Model.DarkSlide")
+private let storeURL = URL.documentsURL.appendingPathComponent("Model.DarkSlide")
 
 // Create Main Context with model objects in Bundles and add PSC.
 public func getMainContext() -> NSManagedObjectContext? {
-	
 	let bundles = [Bundle(for: MovieNote.self), Bundle(for: SubjectForExposure.self), Bundle(for: PhotoNote.self), Bundle(for: DarkSlide.self),Bundle(for: AudioNote.self)]
 	guard let model = NSManagedObjectModel.mergedModel(from: bundles) else { fatalError("Model not found") }
 	
 	let psc = NSPersistentStoreCoordinator(managedObjectModel: model)
-	try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: StoreURL, options: nil)
+	try! psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
 	let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 	moc.persistentStoreCoordinator = psc
 	moc.mergePolicy = NSMergePolicy(merge: .mergeByPropertyStoreTrumpMergePolicyType)
 	return moc
 }
-
 
 extension NSManagedObjectContext {
 	

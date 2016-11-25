@@ -45,6 +45,7 @@
 		3A7319611DE7113D00C9B16A /* RootCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7319601DE7113D00C9B16A /* RootCollectionViewController.swift */; };
 		3A7319631DE7117000C9B16A /* SubjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7319621DE7117000C9B16A /* SubjectDetailViewController.swift */; };
 		3A7319651DE712E700C9B16A /* WeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7319641DE712E700C9B16A /* WeatherTableViewController.swift */; };
+		3A73196A1DE84A1500C9B16A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3A7319691DE84A1500C9B16A /* .swiftlint.yml */; };
 		3AC4472D1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */; };
 		3AC8214A1D93F613003C484D /* MovieNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC821491D93F612003C484D /* MovieNote.swift */; };
 		3AC8214C1D9929CE003C484D /* FullScreenCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC8214B1D9929CE003C484D /* FullScreenCameraViewController.swift */; };
@@ -102,6 +103,7 @@
 		3A7319601DE7113D00C9B16A /* RootCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCollectionViewController.swift; sourceTree = "<group>"; };
 		3A7319621DE7117000C9B16A /* SubjectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectDetailViewController.swift; sourceTree = "<group>"; };
 		3A7319641DE712E700C9B16A /* WeatherTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewController.swift; sourceTree = "<group>"; };
+		3A7319691DE84A1500C9B16A /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
 		3AC4472A1DCCB29000F69EC0 /* DarkSlideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DarkSlideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AC4472C1DCCB29000F69EC0 /* PhotoVideoCaptureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCaptureTests.swift; sourceTree = "<group>"; };
 		3AC4472E1DCCB29000F69EC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				3A73195C1DE70A9F00C9B16A /* ListViews.xib */,
 				3A215D191D8C075600876F00 /* LaunchScreen.storyboard */,
 				3A215D1C1D8C075600876F00 /* Info.plist */,
+				3A7319691DE84A1500C9B16A /* .swiftlint.yml */,
 				3A3CADED1DD67FDD00804424 /* .gitignore */,
 			);
 			path = DarkSlide;
@@ -273,6 +276,7 @@
 				3A215D0A1D8C075600876F00 /* Frameworks */,
 				3A215D0B1D8C075600876F00 /* Resources */,
 				3A3B2A471DC3A2F900357D00 /* ShellScript */,
+				3A7319661DE8448D00C9B16A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -348,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A73196A1DE84A1500C9B16A /* .swiftlint.yml in Resources */,
 				3A3CADEE1DD67FDD00804424 /* .gitignore in Resources */,
 				3A73195D1DE70A9F00C9B16A /* ListViews.xib in Resources */,
 				3A215D1B1D8C075600876F00 /* LaunchScreen.storyboard in Resources */,
@@ -378,6 +383,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 428e2f51a1d864cb392ee7c8b303c424ad57502a 421d6ac5fe5b07e45c6ce63cc3e71a4e441161efe812c777b3aeb1d97e174baa";
+		};
+		3A7319661DE8448D00C9B16A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -7,14 +7,21 @@
 //
 
 import UIKit
+import MapKit
 
 class SubjectDetailViewController: UIViewController {
+	
+	
+	@IBOutlet weak var mapView: MKMapView!
+	
 	
 	override func viewDidLoad() {
 		navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 		navigationItem.leftItemsSupplementBackButton = true
 		navigationItem.leftBarButtonItem?.title = "Select Exposure"
 	}
+	
+	
 	
 	
 }
