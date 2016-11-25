@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AudioNote" id="2jK-UL-RqB">
+            <rect key="frame" x="0.0" y="0.0" width="281" height="281"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="281" height="281"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72h-t3-I6w">
+                        <rect key="frame" x="0.0" y="0.0" width="281" height="281"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaySound" translatesAutoresizingMaskIntoConstraints="NO" id="Mr8-dU-C2v">
+                                <rect key="frame" x="0.0" y="0.0" width="281" height="281"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Mr8-dU-C2v" secondAttribute="bottom" id="HbX-fX-h1U"/>
+                            <constraint firstAttribute="width" secondItem="72h-t3-I6w" secondAttribute="height" multiplier="1:1" id="Z2Z-pd-tsC"/>
+                            <constraint firstItem="Mr8-dU-C2v" firstAttribute="top" secondItem="72h-t3-I6w" secondAttribute="top" id="Zx2-ir-aY5"/>
+                            <constraint firstItem="Mr8-dU-C2v" firstAttribute="leading" secondItem="72h-t3-I6w" secondAttribute="leading" id="iCx-me-D4q"/>
+                            <constraint firstAttribute="trailing" secondItem="Mr8-dU-C2v" secondAttribute="trailing" id="xoS-RF-sVI"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="72h-t3-I6w" firstAttribute="top" secondItem="2jK-UL-RqB" secondAttribute="top" id="AB3-6V-G9l"/>
+                <constraint firstAttribute="trailing" secondItem="72h-t3-I6w" secondAttribute="trailing" id="Nhm-jP-TIO"/>
+                <constraint firstItem="72h-t3-I6w" firstAttribute="leading" secondItem="2jK-UL-RqB" secondAttribute="leading" id="XXk-JC-49i"/>
+                <constraint firstAttribute="bottom" secondItem="72h-t3-I6w" secondAttribute="bottom" id="qIf-k0-wEz"/>
+            </constraints>
+            <size key="customSize" width="281" height="281"/>
+            <point key="canvasLocation" x="381" y="-921"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="PlaySound" width="300" height="300"/>
+    </resources>
+</document>

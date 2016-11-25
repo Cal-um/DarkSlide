@@ -15,7 +15,7 @@ class RootColletionViewController: UICollectionViewController, ManagedObjectCont
 
 	override func viewDidLoad() {
 		splitViewController?.delegate = self
-		collectionView?.register(UINib(nibName: "ListViews", bundle: nil), forCellWithReuseIdentifier: "RootCell")
+		collectionView?.register(UINib(nibName: "RootCell", bundle: nil), forCellWithReuseIdentifier: "RootCell")
 	}
 
 	override func viewDidLayoutSubviews() {

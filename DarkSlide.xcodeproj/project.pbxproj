@@ -10,6 +10,11 @@
 		3A03B2821DB4C5C3007926DD /* PhotoVideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */; };
 		3A03B2841DB4CF37007926DD /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2831DB4CF37007926DD /* PreviewView.swift */; };
 		3A03B2AC1DBA2B1F007926DD /* PhotoCaptureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */; };
+		3A0FA3EB1DE865CE0090D5C8 /* PhotoNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FA3EA1DE865CE0090D5C8 /* PhotoNoteCell.swift */; };
+		3A0FA3ED1DE87F630090D5C8 /* PhotoNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0FA3EC1DE87F630090D5C8 /* PhotoNoteCell.xib */; };
+		3A0FA3EF1DE87FAD0090D5C8 /* AudioNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0FA3EE1DE87FAD0090D5C8 /* AudioNoteCell.xib */; };
+		3A0FA3F11DE87FC20090D5C8 /* RootCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0FA3F01DE87FC20090D5C8 /* RootCell.xib */; };
+		3A0FA3F31DE87FE90090D5C8 /* MovieNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0FA3F21DE87FE90090D5C8 /* MovieNoteCell.xib */; };
 		3A0FFFDD1DDF068400AFA88B /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FFFDC1DDF068400AFA88B /* SpeechToText.swift */; };
 		3A0FFFDF1DDF086F00AFA88B /* SpeechToTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FFFDE1DDF086F00AFA88B /* SpeechToTextDelegate.swift */; };
 		3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D101D8C075600876F00 /* AppDelegate.swift */; };
@@ -40,7 +45,6 @@
 		3A3CADF71DDE300000804424 /* SubjectCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF61DDE300000804424 /* SubjectCameraViewController.swift */; };
 		3A3CADF91DDE537A00804424 /* PreviewSubjectPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3CADF81DDE537A00804424 /* PreviewSubjectPhotoViewController.swift */; };
 		3A43EE2E1DCFABE7002EB25B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */; };
-		3A73195D1DE70A9F00C9B16A /* ListViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A73195C1DE70A9F00C9B16A /* ListViews.xib */; };
 		3A73195F1DE70B7A00C9B16A /* RootCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A73195E1DE70B7A00C9B16A /* RootCollectionViewCell.swift */; };
 		3A7319611DE7113D00C9B16A /* RootCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7319601DE7113D00C9B16A /* RootCollectionViewController.swift */; };
 		3A7319631DE7117000C9B16A /* SubjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7319621DE7117000C9B16A /* SubjectDetailViewController.swift */; };
@@ -66,6 +70,11 @@
 		3A03B2811DB4C5C3007926DD /* PhotoVideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoCapture.swift; sourceTree = "<group>"; };
 		3A03B2831DB4CF37007926DD /* PreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		3A03B2AB1DBA2B1F007926DD /* PhotoCaptureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureDelegate.swift; sourceTree = "<group>"; };
+		3A0FA3EA1DE865CE0090D5C8 /* PhotoNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoNoteCell.swift; sourceTree = "<group>"; };
+		3A0FA3EC1DE87F630090D5C8 /* PhotoNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoNoteCell.xib; sourceTree = "<group>"; };
+		3A0FA3EE1DE87FAD0090D5C8 /* AudioNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioNoteCell.xib; sourceTree = "<group>"; };
+		3A0FA3F01DE87FC20090D5C8 /* RootCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootCell.xib; sourceTree = "<group>"; };
+		3A0FA3F21DE87FE90090D5C8 /* MovieNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieNoteCell.xib; sourceTree = "<group>"; };
 		3A0FFFDC1DDF068400AFA88B /* SpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
 		3A0FFFDE1DDF086F00AFA88B /* SpeechToTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextDelegate.swift; sourceTree = "<group>"; };
 		3A215D0D1D8C075600876F00 /* DarkSlide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarkSlide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,7 +107,6 @@
 		3A3CADF61DDE300000804424 /* SubjectCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectCameraViewController.swift; sourceTree = "<group>"; };
 		3A3CADF81DDE537A00804424 /* PreviewSubjectPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewSubjectPhotoViewController.swift; sourceTree = "<group>"; };
 		3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3A73195C1DE70A9F00C9B16A /* ListViews.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViews.xib; sourceTree = "<group>"; };
 		3A73195E1DE70B7A00C9B16A /* RootCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A7319601DE7113D00C9B16A /* RootCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCollectionViewController.swift; sourceTree = "<group>"; };
 		3A7319621DE7117000C9B16A /* SubjectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectDetailViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +151,28 @@
 			name = "Photo and Video Capture";
 			sourceTree = "<group>";
 		};
+		3A0FA3F41DE88DF40090D5C8 /* IB */ = {
+			isa = PBXGroup;
+			children = (
+				3A215D141D8C075600876F00 /* Main.storyboard */,
+				3A0FA3F01DE87FC20090D5C8 /* RootCell.xib */,
+				3A0FA3EC1DE87F630090D5C8 /* PhotoNoteCell.xib */,
+				3A0FA3EE1DE87FAD0090D5C8 /* AudioNoteCell.xib */,
+				3A0FA3F21DE87FE90090D5C8 /* MovieNoteCell.xib */,
+				3A215D191D8C075600876F00 /* LaunchScreen.storyboard */,
+			);
+			name = IB;
+			sourceTree = "<group>";
+		};
+		3A0FA3F51DE88E3A0090D5C8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3A215D461D90306500876F00 /* Utilities.swift */,
+				3A215D421D90256400876F00 /* Protocols.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		3A215D041D8C075600876F00 = {
 			isa = PBXGroup;
 			children = (
@@ -166,20 +196,17 @@
 		3A215D0F1D8C075600876F00 /* DarkSlide */ = {
 			isa = PBXGroup;
 			children = (
-				3A215D461D90306500876F00 /* Utilities.swift */,
-				3A215D421D90256400876F00 /* Protocols.swift */,
+				3A215D101D8C075600876F00 /* AppDelegate.swift */,
 				3A215D381D8EA64500876F00 /* Views */,
 				3A3CADEF1DD8B62800804424 /* Audio Recorder and Player */,
 				3A03B2801DAE8312007926DD /* Photo and Video Capture */,
 				3A215D371D8EA62E00876F00 /* View Controllers */,
+				3A0FA3F41DE88DF40090D5C8 /* IB */,
+				3A0FA3F51DE88E3A0090D5C8 /* Helpers */,
 				3A215D251D8C410500876F00 /* CoreData Model */,
-				3A215D101D8C075600876F00 /* AppDelegate.swift */,
 				3A43EE2D1DCFABE7002EB25B /* Assets.xcassets */,
-				3A215D141D8C075600876F00 /* Main.storyboard */,
-				3A73195C1DE70A9F00C9B16A /* ListViews.xib */,
-				3A215D191D8C075600876F00 /* LaunchScreen.storyboard */,
-				3A215D1C1D8C075600876F00 /* Info.plist */,
 				3A7319691DE84A1500C9B16A /* .swiftlint.yml */,
+				3A215D1C1D8C075600876F00 /* Info.plist */,
 				3A3CADED1DD67FDD00804424 /* .gitignore */,
 			);
 			path = DarkSlide;
@@ -228,6 +255,7 @@
 			children = (
 				3A03B2831DB4CF37007926DD /* PreviewView.swift */,
 				3A73195E1DE70B7A00C9B16A /* RootCollectionViewCell.swift */,
+				3A0FA3EA1DE865CE0090D5C8 /* PhotoNoteCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -353,11 +381,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A73196A1DE84A1500C9B16A /* .swiftlint.yml in Resources */,
+				3A0FA3F31DE87FE90090D5C8 /* MovieNoteCell.xib in Resources */,
+				3A0FA3F11DE87FC20090D5C8 /* RootCell.xib in Resources */,
 				3A3CADEE1DD67FDD00804424 /* .gitignore in Resources */,
-				3A73195D1DE70A9F00C9B16A /* ListViews.xib in Resources */,
 				3A215D1B1D8C075600876F00 /* LaunchScreen.storyboard in Resources */,
 				3A43EE2E1DCFABE7002EB25B /* Assets.xcassets in Resources */,
 				3A215D161D8C075600876F00 /* Main.storyboard in Resources */,
+				3A0FA3ED1DE87F630090D5C8 /* PhotoNoteCell.xib in Resources */,
+				3A0FA3EF1DE87FAD0090D5C8 /* AudioNoteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +445,7 @@
 				3A215D341D8D42BD00876F00 /* HelperExtensions.swift in Sources */,
 				3A3CADF11DD8B6C000804424 /* AudioRecorder.swift in Sources */,
 				3A3CADF71DDE300000804424 /* SubjectCameraViewController.swift in Sources */,
+				3A0FA3EB1DE865CE0090D5C8 /* PhotoNoteCell.swift in Sources */,
 				3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */,
 				3A215D2E1D8C518C00876F00 /* PhotoNote.swift in Sources */,
 				3A215D271D8C422A00876F00 /* SubjectForExposure.swift in Sources */,

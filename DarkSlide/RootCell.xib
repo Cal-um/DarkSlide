@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAk-IM-jqT">
-                        <rect key="frame" x="0.0" y="0.0" width="210.5" height="263"/>
+                        <rect key="frame" x="0.0" y="0.0" width="211" height="263"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="DefaultPic" translatesAutoresizingMaskIntoConstraints="NO" id="njM-3y-vvy">
                                 <rect key="frame" x="8" y="8" width="194.5" height="209"/>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoNote" id="UmL-gj-Oxe" customClass="PhotoNoteCell" customModule="DarkSlide" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="281" height="281"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="281" height="281"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AD7-dk-qTJ">
+                        <rect key="frame" x="0.0" y="0.0" width="281" height="281"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lOV-p8-L12">
+                                <rect key="frame" x="0.0" y="0.0" width="281" height="281"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lOV-p8-L12" firstAttribute="leading" secondItem="AD7-dk-qTJ" secondAttribute="leading" id="0CG-1w-oTf"/>
+                            <constraint firstAttribute="bottom" secondItem="lOV-p8-L12" secondAttribute="bottom" id="1RM-Ie-lqe"/>
+                            <constraint firstAttribute="width" secondItem="AD7-dk-qTJ" secondAttribute="height" multiplier="1:1" id="Dpc-lh-2sB"/>
+                            <constraint firstItem="lOV-p8-L12" firstAttribute="top" secondItem="AD7-dk-qTJ" secondAttribute="top" id="fdF-n3-p5o"/>
+                            <constraint firstAttribute="trailing" secondItem="lOV-p8-L12" secondAttribute="trailing" id="yTC-B4-Qz9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="AD7-dk-qTJ" secondAttribute="bottom" id="dor-Za-66J"/>
+                <constraint firstItem="AD7-dk-qTJ" firstAttribute="leading" secondItem="UmL-gj-Oxe" secondAttribute="leading" id="hWg-3I-z61"/>
+                <constraint firstAttribute="trailing" secondItem="AD7-dk-qTJ" secondAttribute="trailing" id="iS7-up-8ck"/>
+                <constraint firstItem="AD7-dk-qTJ" firstAttribute="top" secondItem="UmL-gj-Oxe" secondAttribute="top" id="pVO-QE-Zch"/>
+            </constraints>
+            <size key="customSize" width="281" height="281"/>
+            <connections>
+                <outlet property="imageView" destination="lOV-p8-L12" id="VWD-nw-vo1"/>
+            </connections>
+            <point key="canvasLocation" x="369.5" y="-103.5"/>
+        </collectionViewCell>
+    </objects>
+</document>
