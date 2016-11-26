@@ -10,7 +10,11 @@ import UIKit
 import MapKit
 
 class SubjectDetailViewController: UIViewController {
-
+	
+	// MOC properties
+	var subject: SubjectForExposure!
+	var exposureNotes: ExposureNote?
+	//IB properties
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var viewWeatherForecastButton: UIBarButtonItem!
 	@IBOutlet weak var subjectImageView: UIImageView!
@@ -18,7 +22,8 @@ class SubjectDetailViewController: UIViewController {
 	@IBOutlet weak var coordinatesLabel: UILabel!
 	@IBOutlet weak var facingLabel: UILabel!
 	@IBOutlet weak var collectionView: UICollectionView!
-
+	
+	// View life cycle
 	override func viewDidLoad() {
 		collectionView?.delegate = self
 		collectionView?.dataSource = self
@@ -35,8 +40,9 @@ class SubjectDetailViewController: UIViewController {
 		let width = collectionView.bounds.height
 		layout.itemSize = CGSize(width: width, height: width)
 		//layout.sectionInset = UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 6)
+		layout.invalidateLayout()
 	}
-	
+
 	let testArray = [1,1,3,2,2,3,2,3,1,1,1]
 }
 
