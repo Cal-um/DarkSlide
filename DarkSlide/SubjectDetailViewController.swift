@@ -18,7 +18,7 @@ class SubjectDetailViewController: UIViewController {
 	@IBOutlet weak var coordinatesLabel: UILabel!
 	@IBOutlet weak var facingLabel: UILabel!
 	@IBOutlet weak var collectionView: UICollectionView!
-	
+
 	override func viewDidLoad() {
 		collectionView?.delegate = self
 		collectionView?.dataSource = self
@@ -29,7 +29,7 @@ class SubjectDetailViewController: UIViewController {
 		navigationItem.leftItemsSupplementBackButton = true
 		navigationItem.leftBarButtonItem?.title = "Select Exposure"
 	}
-	
+
 	override func viewDidLayoutSubviews() {
 		guard let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { fatalError("Wrong layout type") }
 		let width = collectionView.bounds.height
