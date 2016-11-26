@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class SubjectDetailViewController: UIViewController {
-	
+
 	// MOC properties
 	var subject: SubjectForExposure!
 	var exposureNotes: ExposureNote?
@@ -22,7 +22,7 @@ class SubjectDetailViewController: UIViewController {
 	@IBOutlet weak var coordinatesLabel: UILabel!
 	@IBOutlet weak var facingLabel: UILabel!
 	@IBOutlet weak var collectionView: UICollectionView!
-	
+
 	// View life cycle
 	override func viewDidLoad() {
 		collectionView?.delegate = self
@@ -43,15 +43,14 @@ class SubjectDetailViewController: UIViewController {
 		layout.invalidateLayout()
 	}
 
-	let testArray = [1,1,3,2,2,3,2,3,1,1,1]
+	let testArray = [1, 1, 3, 2, 2, 3, 2, 3, 1, 1, 1 ]
 }
-
 
 extension SubjectDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return testArray.count
 	}
-	
+
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		switch testArray[indexPath.row] {
 		case 1:
