@@ -24,6 +24,10 @@ class WeatherViewController: UITableViewController {
 		}
 	}
 
+	@IBAction func exitScreen(_ sender: Any)
+ {
+	dismiss(animated: true, completion: nil)
+	}
 	func pullToRefreshAction() {
 		loadSevenDayForecast(completion: { _ in
 			DispatchQueue.main.async { [unowned self] in
