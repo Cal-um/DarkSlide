@@ -24,10 +24,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="211" height="263"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPic" translatesAutoresizingMaskIntoConstraints="NO" id="njM-3y-vvy">
-                                <rect key="frame" x="8" y="8" width="194.5" height="210.5"/>
+                                <rect key="frame" x="8" y="8" width="194.5" height="184"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Date" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rq3-Zp-TRK">
-                                <rect key="frame" x="8" y="226.5" width="194.5" height="28.5"/>
+                                <rect key="frame" x="8" y="200" width="194.5" height="55"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -38,7 +38,7 @@
                             <constraint firstAttribute="width" secondItem="IAk-IM-jqT" secondAttribute="height" multiplier="4:5" id="PLz-Uo-RKl"/>
                             <constraint firstItem="njM-3y-vvy" firstAttribute="top" secondItem="IAk-IM-jqT" secondAttribute="top" constant="8" id="Wg2-ew-nf1"/>
                             <constraint firstItem="njM-3y-vvy" firstAttribute="leading" secondItem="IAk-IM-jqT" secondAttribute="leading" constant="8" id="bUm-6Z-5ee"/>
-                            <constraint firstItem="njM-3y-vvy" firstAttribute="height" secondItem="IAk-IM-jqT" secondAttribute="height" multiplier="0.8" id="ccz-Cq-hiK"/>
+                            <constraint firstItem="njM-3y-vvy" firstAttribute="height" secondItem="IAk-IM-jqT" secondAttribute="height" multiplier="0.7" id="ccz-Cq-hiK"/>
                             <constraint firstAttribute="trailing" secondItem="rq3-Zp-TRK" secondAttribute="trailing" constant="8" id="jmv-lf-ui7"/>
                             <constraint firstItem="rq3-Zp-TRK" firstAttribute="top" secondItem="njM-3y-vvy" secondAttribute="bottom" constant="8" id="kXc-14-6xA"/>
                             <constraint firstItem="rq3-Zp-TRK" firstAttribute="leading" secondItem="IAk-IM-jqT" secondAttribute="leading" constant="8" id="kxK-Je-VeA"/>
