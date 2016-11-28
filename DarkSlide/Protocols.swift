@@ -6,7 +6,7 @@
 //  Copyright © 2016 Calum Harris. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ManagedObjectContextStackSettable {
 	var managedObjectContextStack: ManagedObjectContextStack! { get set }
@@ -19,5 +19,5 @@ protocol ExposureNote {
 enum NoteType {
 	case audio
 	case movie
-	case photo
+	case photo(UIImage?)
 }

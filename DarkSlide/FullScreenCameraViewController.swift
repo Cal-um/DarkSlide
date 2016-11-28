@@ -10,12 +10,12 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class FullScreenCameraViewController: UIViewController, ManagedObjectContextStackSettable {
+class FullScreenCameraViewController: UIViewController {
 
 	// MARK: ViewController Properties
 
-	var managedObjectContextStack: ManagedObjectContextStack!
 	var photoVideo: PhotoVideoCapture!
+	var cameraOutputDelegate: CameraOutputDelegate!
 
 	@IBOutlet weak var cameraView: PreviewView!
 	@IBOutlet weak var exitFullScreenButton: UIButton!
@@ -80,7 +80,7 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 
 	// MARK: Life cycle
 	override func viewDidLoad() {
-		photoVideo = PhotoVideoCapture(delegate: self)
+		photoVideo = PhotoVideoCapture(cameraViewDelegate: self, cameraOutputDelegate: cameraOutputDelegate)
 		openCloseCameraOptionTab()
 		bringSubviewsToFront()
 		// The default is livePhoto off so this ensures live photo is on for capable devices
@@ -226,31 +226,6 @@ class FullScreenCameraViewController: UIViewController, ManagedObjectContextStac
 }
 
 extension FullScreenCameraViewController: CameraViewDelegate {
-
-	func didTakePhoto(image: UIImage, livePhoto: String?) {
-
-		if let livePhoto = livePhoto {
-			let player = AVPlayer(url: PhotoNote.generateLivePhotoPath(livePhotoReferenceNumber: livePhoto))
-			let playerController = AVPlayerViewController()
-			playerController.player = player
-			self.present(playerController, animated: true) {
-				playerController.player!.play()
-			}
-		}
-	}
-
-	func didTakeVideo(videoReferenceNumber: String) {
-
-		// test that shows that video does save.
-		print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
-		let player = AVPlayer(url: MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
-		let playerController = AVPlayerViewController()
-		playerController.player = player
-		photoVideo.viewDissapeared()
-		self.present(playerController, animated: true) {
-		playerController.player!.play()
-		}
-	}
 
 	func disableButtons() {
 		livePhotoToggle.isEnabled = false

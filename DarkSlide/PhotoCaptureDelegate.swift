@@ -24,12 +24,15 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 
 	private let cameraViewDelegate: CameraViewDelegate!
 
-	init(with requestedPhotoSettings: AVCapturePhotoSettings, delegate: CameraViewDelegate, willCapturePhotoAnimation: @escaping () -> (), capturingLivePhoto: @escaping (Bool) -> (), completed: @escaping (PhotoCaptureDelegate) -> ()) {
+	private let cameraOutputDelegate: CameraOutputDelegate!
+
+	init(with requestedPhotoSettings: AVCapturePhotoSettings, cameraViewDelegate: CameraViewDelegate, cameraOutputDelegate: CameraOutputDelegate, willCapturePhotoAnimation: @escaping () -> (), capturingLivePhoto: @escaping (Bool) -> (), completed: @escaping (PhotoCaptureDelegate) -> ()) {
 		self.requestedPhotoSettings = requestedPhotoSettings
 		self.willCapturePhotoAnimation = willCapturePhotoAnimation
 		self.capturingLivePhoto = capturingLivePhoto
 		self.completed = completed
-		self.cameraViewDelegate = delegate
+		self.cameraViewDelegate = cameraViewDelegate
+		self.cameraOutputDelegate = cameraOutputDelegate
 	}
 
 	private func didFinish() {
@@ -100,14 +103,14 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 			do {
 				let livePhoto = try Data(contentsOf: livePhotoCompanionMovieURL)
 				try livePhoto.write(to: PhotoNote.generateLivePhotoPath(livePhotoReferenceNumber: livePhotoReferenceNumber))
-				cameraViewDelegate.didTakePhoto(image: photo, livePhoto: livePhotoReferenceNumber)
+				cameraOutputDelegate.didTakePhoto(image: photo, livePhoto: livePhotoReferenceNumber)
 				didFinish()
 			} catch {
 				print("Error saving livePhotoFile")
 				didFinish()
 			}
 		} else {
-			cameraViewDelegate.didTakePhoto(image: photo, livePhoto: nil)
+			cameraOutputDelegate.didTakePhoto(image: photo, livePhoto: nil)
 		}
 	}
 }

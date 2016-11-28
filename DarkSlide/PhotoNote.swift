@@ -11,12 +11,12 @@ import CoreData
 
 public final class PhotoNote: ManagedObject {
 
-	@NSManaged public var photoNote: Data
+	@NSManaged public var photoNote: Data?
 	@NSManaged public var livePhotoReferenceNumber: String?
 
 	// Relationship properties
 
-	@NSManaged public var subject: SubjectForExposure?
+	@NSManaged public var subject: SubjectForExposure
 }
 
 extension PhotoNote: ManagedObjectType, ExposureNote {
@@ -26,7 +26,11 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 	}
 
 	var exposureNoteTypeIdentifier: NoteType {
-		return NoteType.photo
+		if let photoNote = photoNote {
+			return NoteType.photo(UIImage(data: photoNote))
+		} else {
+			return NoteType.photo(nil)
+		}
 	}
 
 	var livePhotoPath: URL? {

@@ -27,6 +27,14 @@ class RootColletionViewController: UICollectionViewController, ManagedObjectCont
 		layout.itemSize = CGSize(width: width, height: width * 1.25)
 		layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 	}
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "ShootSubjectSegue" {
+			guard let vc = segue.destination as? SubjectCameraViewController else { fatalError("Wrong view controller type") }
+			vc.managedObjectContextStack = managedObjectContextStack
+		}
+	}
+
 }
 
 extension RootColletionViewController {

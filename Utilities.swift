@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 extension FileManager {
 	// find or create applicationSupportDirectory for Movie and Audio saves.

@@ -45,7 +45,7 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 	}
 
 	override func viewDidLoad() {
-		photoVideo = PhotoVideoCapture(delegate: self)
+		photoVideo = PhotoVideoCapture(cameraViewDelegate: self, cameraOutputDelegate: self)
 		photoVideo.toggleFlashMode()
 		photoVideo.toggleFlashMode()
 		print(observeFlashConfiguration)
@@ -152,13 +152,13 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 			}
 
 			if let heading = heading {
-				vc.compassBearing = heading
+				vc.compassHeading = heading
 			}
 		}
 	}
 }
 
-extension SubjectCameraViewController: CameraViewDelegate {
+extension SubjectCameraViewController: CameraViewDelegate, CameraOutputDelegate {
 
 	func alertActionNoCameraPermission() {
 		self.present(alertActionNoCameraPermissionAlertController(), animated: true, completion: nil)

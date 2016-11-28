@@ -13,6 +13,8 @@ protocol CameraUtils: class {
 
 }
 
+// This protocol was created to make it easier to test the functions. See DarkSlide Tests.
+
 extension CameraUtils {
 
 	func calculateZoomResult(gestureFactor: CGFloat, lastZoomFactor: CGFloat, currentVideoZoomFactor: CGFloat, maxZoomFactor: CGFloat) -> CGFloat {
@@ -26,7 +28,7 @@ extension CameraUtils {
 		case let factor where factor <= lastZoomFactor:
 			print("Zoom Out")
 			result = gestureFactor * -1
-		default: fatalError("Durp")
+		default: fatalError("Something is wrong with the calculation")
 		}
 
 		let newVideoZoomFactor = result + currentVideoZoomFactor

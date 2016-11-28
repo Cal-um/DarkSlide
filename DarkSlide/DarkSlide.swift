@@ -15,7 +15,7 @@ public final class DarkSlide: ManagedObject {
 	@NSManaged public var filmType: String
 
 	// Relationship properties
-	@NSManaged public var subject: SubjectForExposure?
+	@NSManaged public var subject: SubjectForExposure
 }
 
 extension DarkSlide: ManagedObjectType {

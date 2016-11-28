@@ -17,10 +17,12 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	// MARK: Init
 
 	weak var cameraViewDelegate: CameraViewDelegate!
+	weak var cameraOutputDelegate: CameraOutputDelegate!
 
-	init(delegate: CameraViewDelegate) {
+	init(cameraViewDelegate: CameraViewDelegate, cameraOutputDelegate: CameraOutputDelegate) {
+		self.cameraViewDelegate = cameraViewDelegate
+		self.cameraOutputDelegate = cameraOutputDelegate
 		super.init()
-		self.cameraViewDelegate = delegate
 		initialLoad()
 	}
 
@@ -555,7 +557,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			print(MovieNote.generateMoviePath(movieReferenceNumber: referenceNumber))
 			try movie.write(to: MovieNote.generateMoviePath(movieReferenceNumber: referenceNumber))
 
-			cameraViewDelegate.didTakeVideo(videoReferenceNumber: referenceNumber)
+			cameraOutputDelegate.didTakeVideo(videoReferenceNumber: referenceNumber)
 			} catch {
 				print("Error saving movie ERROR:\(error)")
 				cleanUp()
@@ -748,7 +750,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			}
 
 			// Use a separate object for the photo capture delegate to isolate each capture life cycle.
-			let photoCaptureDelegate = PhotoCaptureDelegate(with: photoSettings, delegate: self.cameraViewDelegate, willCapturePhotoAnimation: {
+			let photoCaptureDelegate = PhotoCaptureDelegate(with: photoSettings, cameraViewDelegate: self.cameraViewDelegate, cameraOutputDelegate: self.cameraOutputDelegate, willCapturePhotoAnimation: {
 				  DispatchQueue.main.async { [unowned self] in
 				    self.cameraViewDelegate.cameraView.videoPreviewLayer.opacity = 0
 				  	UIView.animate(withDuration: 0.25) { [unowned self] in

@@ -11,25 +11,34 @@ import UIKit
 class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextStackSettable {
 
 	var managedObjectContextStack: ManagedObjectContextStack!
-	var subjectPhoto: UIImage!
+	var subjectPhoto: UIImage?
 	var latitude: Double?
 	var longitude: Double?
-	var compassBearing: Double?
+	var compassHeading: Double?
+	var subject: SubjectForExposure?
 
 	@IBOutlet weak var imageView: UIImageView!
-	@IBOutlet weak var choosePhotoButton: UINavigationItem!
 
 	override func viewDidLoad() {
 		imageView.image = subjectPhoto
 	}
+
 	@IBAction func tryAgainAction(_ sender: Any) {
 		dismiss(animated: true, completion: nil)
 	}
 
+	@IBAction func choosePhotoAction(_ sender: Any) {
+
+		subject = SubjectForExposure.insertIntoContext(moc: managedObjectContextStack.mainContext, imageOfSubject: subjectPhoto, locationLat: latitude, locationLong: longitude, compassHeading: compassHeading)
+		managedObjectContextStack.mainContext.trySave()
+		performSegue(withIdentifier: "Chosen Photo Segue", sender: self)
+	}
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "Chosen Photo Segue" {
-			guard let nc = segue.destination as? UINavigationController, var vc = nc.viewControllers.first as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
+			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? ExposureViewController else { fatalError("wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
+			vc.subject = subject
 		}
 	}
 }

@@ -24,10 +24,10 @@ class WeatherViewController: UITableViewController {
 		}
 	}
 
-	@IBAction func exitScreen(_ sender: Any)
- {
+	@IBAction func exitScreen(_ sender: Any) {
 	dismiss(animated: true, completion: nil)
 	}
+
 	func pullToRefreshAction() {
 		loadSevenDayForecast(completion: { _ in
 			DispatchQueue.main.async { [unowned self] in
@@ -40,7 +40,7 @@ class WeatherViewController: UITableViewController {
 	func loadSevenDayForecast(completion: @escaping () -> ()) {
 
 		downloadQueue.async { [unowned self] in
-			DarkSkyConvienience.fetchSevenDayForecast(55.8643, 4.2518) { [unowned self] result in
+			DarkSkyConvienience.fetchSevenDayForecast(55.8567, -4.2436) { [unowned self] result in
 				switch result {
 				case .success(let result):
 					DispatchQueue.main.async { [unowned self] in

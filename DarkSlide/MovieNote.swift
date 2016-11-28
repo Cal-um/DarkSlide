@@ -9,15 +9,15 @@
 import UIKit
 import CoreData
 
-class MovieNote: ManagedObject {
+public final class MovieNote: ManagedObject {
 
-	@NSManaged var movieReferenceNumber: String
-	@NSManaged var subject: SubjectForExposure?
+	@NSManaged public var movieReferenceNumber: String
+	@NSManaged public var subject: SubjectForExposure
 }
 
 extension MovieNote: ManagedObjectType, ExposureNote {
 
-	static var entityName: String {
+	public static var entityName: String {
 		return "MovieNote"
 	}
 

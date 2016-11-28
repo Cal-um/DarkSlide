@@ -16,6 +16,7 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	// MARK: View Controller properties and life cycle
 
 	var managedObjectContextStack: ManagedObjectContextStack!
+	var cameraOutputDelegate: CameraOutputDelegate!
 
 	@IBOutlet weak var cameraUnavailableLabel: UILabel!
 	@IBOutlet weak var resumeSessionButton: UIButton!
@@ -32,7 +33,7 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 
 	override func viewDidLoad() {
 		// set up video preview and PhotoAudioVideo object
-		photoVideo = PhotoVideoCapture(delegate: self)
+		photoVideo = PhotoVideoCapture(cameraViewDelegate: self, cameraOutputDelegate: cameraOutputDelegate)
 		// The default is livePhoto off so this ensures live photo is on for capable devices
 		photoVideo.toggleLivePhotoMode()
 
@@ -67,8 +68,8 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 			guard var vc = segue.destination as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
 		case .some("FullViewSegue"):
-			guard var vc = segue.destination as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
-			vc.managedObjectContextStack = managedObjectContextStack
+			guard var vc = segue.destination as? FullScreenCameraViewController else { fatalError("wrong view controller type") }
+			vc.cameraOutputDelegate = cameraOutputDelegate
 		default: break
 		}
 	}
@@ -106,14 +107,5 @@ extension ExposurePhotoVideoViewController: CameraViewDelegate {
 		} else {
 			cameraUnavailableLabel.isHidden = false
 		}
-	}
-
-	// Unused in ExposureViewController
-	func didTakeVideo(videoReferenceNumber: String) {
-
-	}
-
-	func didTakePhoto(image: UIImage, livePhoto: String?) {
-		print(image)
 	}
 }

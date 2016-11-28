@@ -25,12 +25,6 @@ protocol CameraViewDelegate: class {
 	func hideResumeButton(hide: Bool)
 	func hideCameraUnavailableLabel(hide: Bool)
 	func enableButtons(buttonconfiguration: ButtonConfiguration)
-
-	func didTakePhoto(image: UIImage, livePhoto: String?)
-	func didTakeVideo(videoReferenceNumber: String)
-
-	// TODO: Refactor methods into protocol extension.
-
 }
 
 extension CameraViewDelegate {
