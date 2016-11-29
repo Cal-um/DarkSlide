@@ -15,3 +15,8 @@ protocol AudioRecorderDelegate: class, AVAudioRecorderDelegate {
 	func enableRecordButton()
 	func alertActionNoMicrophonePermission()
 }
+
+protocol AudioNoteDelegate: class {
+	
+	func didSaveAudioRecording(fileReferenceNumber: String)	
+}

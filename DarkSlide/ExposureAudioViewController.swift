@@ -11,12 +11,13 @@ import CoreData
 import AVFoundation
 import AVKit
 
-class ExposureAudioNoteViewController: UIViewController, ManagedObjectContextStackSettable {
+class ExposureAudioNoteViewController: UIViewController {
 
-	var managedObjectContextStack: ManagedObjectContextStack!
+	weak var audioNoteDelegate: AudioNoteDelegate!
 	var audioRecorder: AudioRecorder!
 
 	@IBAction func dismissViewController(_ sender: Any) {
+		audioRecorder.viewDissapeared()
 		dismiss(animated: true, completion: nil)
 	}
 
@@ -60,15 +61,15 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate, SpeechToTextDe
 
 	func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
 		if flag {
-			print(recorder.url)
+			audioNoteDelegate.didSaveAudioRecording(fileReferenceNumber: recorder.url.absoluteString)
 			// Play sound with AudioPlayer class
 			//player = AudioPlayer()
 			//player.playSoundFile(atPath: recorder.url)
 
 			// Play sounds with AVPlayer
 
-			let sR = SpeechToText(delegate: self)
-			sR.processAudioFile(url: recorder.url)
+//			let sR = SpeechToText(delegate: self)
+//			sR.processAudioFile(url: recorder.url)
 
 			/*let player = AVPlayer(url: recorder.url)
 			let playerController = AVPlayerViewController()

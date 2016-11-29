@@ -15,12 +15,7 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 
 	var managedObjectContextStack: ManagedObjectContextStack!
 	var subject: SubjectForExposure!
-	var exposureNotes: [ExposureNote] = [] {
-		didSet {
-			exposureNotes.count
-			print(exposureNotes[0])
-		}
-	}
+	var exposureNotes: [ExposureNote] = []
 
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet weak var collectionView: UICollectionView!
@@ -51,6 +46,7 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 			guard let vc = segue.destination as? ExposurePhotoVideoViewController else { fatalError("wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
 			vc.cameraOutputDelegate = self
+			vc.audioOutputDelegate = self
 		}
 	}
 }
@@ -58,21 +54,16 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 extension ExposureViewController: CameraOutputDelegate {
 
 	func didTakePhoto(image: UIImage, livePhoto: String?) {
-
-	//	if let _ = livePhoto {
-
-	//	}
-	//	else {
-			print(image)
-			print(exposureNotes.count)
-			let photo: PhotoNote = managedObjectContextStack.mainContext.insertObject()
-			photo.photoNote = UIImageJPEGRepresentation(image, 0.2)!
-			photo.subject = subject
-			exposureNotes.insert(photo, at: 0)
-			var paths = [IndexPath]()
-			paths.append(IndexPath(row: 0, section: 0))
-			collectionView.insertItems(at: paths)
-		//}
+		// running this on a different thread so it does not interupt UI.
+		DispatchQueue.global(qos: .utility).async {
+			let photo = PhotoNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, photoNote: image, livePhotoRefNumber: livePhoto, subjectForExposure: self.subject)
+			DispatchQueue.main.async {
+				self.exposureNotes.insert(photo, at: 0)
+				let paths = [IndexPath(row: 0, section: 0)]
+				self.collectionView.insertItems(at: paths)
+			}
+		}
+		
 
 //		if let livePhoto = livePhoto {
 //			let player = AVPlayer(url: PhotoNote.generateLivePhotoPath(livePhotoReferenceNumber: livePhoto))
@@ -85,11 +76,17 @@ extension ExposureViewController: CameraOutputDelegate {
 	}
 
 	func didTakeVideo(videoReferenceNumber: String) {
-
 		// test that shows that video does save.
 		print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
+		DispatchQueue.global(qos: .utility).async {
+			let video = MovieNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, movieReferenceNumber: videoReferenceNumber, subjectForExposure: self.subject)
+			DispatchQueue.main.async {
+				self.exposureNotes.insert(video, at: 0)
+				let paths = [IndexPath(row: 0, section: 0)]
+				self.collectionView.insertItems(at: paths)
+			}
 		}
-
+	}
 }
 
 extension ExposureViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -104,7 +101,7 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 
 		let note = exposureNotes[indexPath.row]
 		switch note.exposureNoteTypeIdentifier {
-		case .photo(let image):
+		case .photo(let image, _):
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoNote", for: indexPath) as? PhotoNoteCell else { fatalError("Wrong cell type") }
 			cell.imageView.image = image
 			return cell
@@ -112,8 +109,45 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 		return cell
 		case .audio: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AudioNote", for: indexPath)
 		return cell
-		default: fatalError("Incorrect Cell at index path")
 		}
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let note = exposureNotes[indexPath.row]
+		
+		switch note.exposureNoteTypeIdentifier {
+		case .photo(_):
+			break
+			
+		case .movie(let url):
+			let player = AVPlayer(url: url)
+			let playerController = AVPlayerViewController()
+			playerController.player = player
+			self.present(playerController, animated: true) {
+				playerController.player!.play()
+			}
+			
+		case .audio(let url):
+			let player = AVPlayer(url: url)
+			let playerController = AVPlayerViewController()
+			playerController.player = player
+			self.present(playerController, animated: true) {
+				playerController.player!.play()
+			}			
+		}
+	}
+}
 
+extension ExposureViewController: AudioNoteDelegate {
+	
+	func didSaveAudioRecording(fileReferenceNumber: String) {
+		DispatchQueue.global(qos: .utility).async {
+			let audio = AudioNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, audioURL: fileReferenceNumber, subjectForExposure: self.subject)
+			DispatchQueue.main.async {
+				self.exposureNotes.insert(audio, at: 0)
+				let paths = [IndexPath(row: 0, section: 0)]
+				self.collectionView.insertItems(at: paths)
+			}
+		}
 	}
 }

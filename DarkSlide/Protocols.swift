@@ -17,7 +17,7 @@ protocol ExposureNote {
 }
 
 enum NoteType {
-	case audio
-	case movie
-	case photo(UIImage?)
+	case audio(url: URL)
+	case movie(url: URL)
+	case photo(lowRes: UIImage, highRes: UIImage)
 }

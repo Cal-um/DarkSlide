@@ -33,7 +33,7 @@ extension MovieNote: ManagedObjectType, ExposureNote {
 	}
 
 	var exposureNoteTypeIdentifier: NoteType {
-		return NoteType.movie
+		return NoteType.movie(url: self.moviePath)
 	}
 
 	// this function is used for when saving to applcations directory or when Managed Object has not been yet created.
@@ -52,5 +52,13 @@ extension MovieNote: ManagedObjectType, ExposureNote {
 				print("Error removing file: \(error)")
 			}
 		}
+	}
+	
+	static func insertIntoContext(moc: NSManagedObjectContext, movieReferenceNumber ref: String, subjectForExposure subject: SubjectForExposure) -> MovieNote {
+		
+		let movieNote: MovieNote = moc.insertObject()
+		movieNote.movieReferenceNumber = ref
+		movieNote.subject = subject
+		return movieNote
 	}
 }

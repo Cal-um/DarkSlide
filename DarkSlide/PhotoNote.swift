@@ -11,12 +11,16 @@ import CoreData
 
 public final class PhotoNote: ManagedObject {
 
-	@NSManaged public var photoNote: Data?
+	@NSManaged public var photoNote: Data
 	@NSManaged public var livePhotoReferenceNumber: String?
 
 	// Relationship properties
 
 	@NSManaged public var subject: SubjectForExposure
+
+	// this variable was added to improve collectionView scroll perfomance.
+	var lowResCachedThumbnail: UIImage?
+	var highResCachedThumbnail: UIImage?
 }
 
 extension PhotoNote: ManagedObjectType, ExposureNote {
@@ -26,10 +30,13 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 	}
 
 	var exposureNoteTypeIdentifier: NoteType {
-		if let photoNote = photoNote {
-			return NoteType.photo(UIImage(data: photoNote))
+
+		if let lowResCachedThumbnail = lowResCachedThumbnail, let highResCachedThumbnail = highResCachedThumbnail {
+			return NoteType.photo(lowRes: lowResCachedThumbnail, highRes: highResCachedThumbnail)
 		} else {
-			return NoteType.photo(nil)
+			lowResCachedThumbnail = UIImage(data: photoNote, scale: 0)
+			highResCachedThumbnail = UIImage(data:photoNote, scale: 1)
+			return self.exposureNoteTypeIdentifier
 		}
 	}
 
@@ -64,5 +71,14 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 				}
 			}
 		}
+	}
+
+	static func insertIntoContext(moc: NSManagedObjectContext, photoNote photo: UIImage, livePhotoRefNumber ref: String?, subjectForExposure subject: SubjectForExposure) -> PhotoNote {
+
+		let photoNote: PhotoNote = moc.insertObject()
+		photoNote.photoNote = UIImageJPEGRepresentation(photo, 1)!
+		photoNote.livePhotoReferenceNumber = (ref != nil) ? ref : nil
+		photoNote.subject = subject
+		return photoNote
 	}
 }

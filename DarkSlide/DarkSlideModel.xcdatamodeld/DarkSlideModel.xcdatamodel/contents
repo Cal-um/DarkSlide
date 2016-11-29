@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AudioNote" representedClassName=".AudioNote" syncable="YES">
-        <attribute name="audioNote" attributeType="Binary" syncable="YES"/>
+        <attribute name="audioRecordingURL" attributeType="String" syncable="YES"/>
         <attribute name="audoTranscript" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="subject" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="audioNote" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
@@ -10,7 +10,7 @@
         <attribute name="refNumber" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="subject" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="darkSlideUsed" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>
-    <entity name="MovieNote" syncable="YES">
+    <entity name="MovieNote" representedClassName=".MovieNote" syncable="YES">
         <attribute name="movieReferenceNumber" attributeType="String" syncable="YES"/>
         <relationship name="subject" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectForExposure" inverseName="movieNotes" inverseEntity="SubjectForExposure" syncable="YES"/>
     </entity>

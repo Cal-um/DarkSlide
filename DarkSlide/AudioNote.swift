@@ -11,7 +11,7 @@ import CoreData
 
 public final class AudioNote: ManagedObject {
 
-	@NSManaged public var audioRecordingReferenceNumber: String
+	@NSManaged public var audioRecordingURL: String
 	@NSManaged public var audioTranscript: String?
 
 	// Relationship properties
@@ -26,8 +26,7 @@ extension AudioNote: ManagedObjectType, ExposureNote {
 	}
 
 	var audioPath: URL {
-		let filename = "Audio-\(audioRecordingReferenceNumber).wav"
-		return (FileManager.applicationSupportDirectory.appendingPathComponent(filename))
+		return URL(string: audioRecordingURL)!
 	}
 
 	static var randomReferenceNumber: String {
@@ -35,7 +34,7 @@ extension AudioNote: ManagedObjectType, ExposureNote {
 	}
 
 	// this function is used for when saving to applcations directory or when Managed Object has not been yet created.
-	static func generateMoviePath(audioReferenceNumber: String) -> URL {
+	static func generateAudioPath(audioReferenceNumber: String) -> URL {
 		let fileName = "Audio-\(audioReferenceNumber).wav"
 		return (FileManager.applicationSupportDirectory.appendingPathComponent(fileName))
 	}
@@ -53,7 +52,15 @@ extension AudioNote: ManagedObjectType, ExposureNote {
 	}
 
 	var exposureNoteTypeIdentifier: NoteType {
-		return NoteType.audio
+		return NoteType.audio(url: self.audioPath)
+	}
+	
+	static func insertIntoContext(moc: NSManagedObjectContext, audioURL url: String, subjectForExposure subject: SubjectForExposure) -> AudioNote {
+		
+		let audioNote: AudioNote = moc.insertObject()
+		audioNote.audioRecordingURL = url
+		audioNote.subject = subject
+		return audioNote
 	}
 
 }

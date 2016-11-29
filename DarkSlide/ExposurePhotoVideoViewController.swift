@@ -17,6 +17,7 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 
 	var managedObjectContextStack: ManagedObjectContextStack!
 	var cameraOutputDelegate: CameraOutputDelegate!
+	var audioOutputDelegate: AudioNoteDelegate!
 
 	@IBOutlet weak var cameraUnavailableLabel: UILabel!
 	@IBOutlet weak var resumeSessionButton: UIButton!
@@ -65,10 +66,10 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		switch segue.identifier {
 		case .some("AudioSegue"):
-			guard var vc = segue.destination as? ManagedObjectContextStackSettable else { fatalError("wrong view controller type") }
-			vc.managedObjectContextStack = managedObjectContextStack
+			guard let vc = segue.destination as? ExposureAudioNoteViewController else { fatalError("wrong view controller type") }
+			vc.audioNoteDelegate = audioOutputDelegate
 		case .some("FullViewSegue"):
-			guard var vc = segue.destination as? FullScreenCameraViewController else { fatalError("wrong view controller type") }
+			guard let vc = segue.destination as? FullScreenCameraViewController else { fatalError("wrong view controller type") }
 			vc.cameraOutputDelegate = cameraOutputDelegate
 		default: break
 		}
@@ -108,4 +109,10 @@ extension ExposurePhotoVideoViewController: CameraViewDelegate {
 			cameraUnavailableLabel.isHidden = false
 		}
 	}
+}
+
+extension ExposurePhotoVideoViewController: AVAudioRecorderDelegate {
+	
+	
+	
 }
