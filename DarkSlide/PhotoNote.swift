@@ -32,7 +32,7 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 	var exposureNoteTypeIdentifier: NoteType {
 
 		if let lowResCachedThumbnail = lowResCachedThumbnail, let highResCachedThumbnail = highResCachedThumbnail {
-			return NoteType.photo(lowRes: lowResCachedThumbnail, highRes: highResCachedThumbnail)
+			return NoteType.photo((lowRes: lowResCachedThumbnail, highRes: highResCachedThumbnail), livePhotoRef: livePhotoReferenceNumber)
 		} else {
 			lowResCachedThumbnail = UIImage(data: photoNote, scale: 0)
 			highResCachedThumbnail = UIImage(data:photoNote, scale: 1)

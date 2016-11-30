@@ -54,9 +54,9 @@ extension AudioNote: ManagedObjectType, ExposureNote {
 	var exposureNoteTypeIdentifier: NoteType {
 		return NoteType.audio(url: self.audioPath)
 	}
-	
+
 	static func insertIntoContext(moc: NSManagedObjectContext, audioURL url: String, subjectForExposure subject: SubjectForExposure) -> AudioNote {
-		
+
 		let audioNote: AudioNote = moc.insertObject()
 		audioNote.audioRecordingURL = url
 		audioNote.subject = subject

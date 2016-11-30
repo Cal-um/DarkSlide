@@ -112,7 +112,5 @@ extension ExposurePhotoVideoViewController: CameraViewDelegate {
 }
 
 extension ExposurePhotoVideoViewController: AVAudioRecorderDelegate {
-	
-	
-	
+
 }

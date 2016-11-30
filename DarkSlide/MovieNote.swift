@@ -53,9 +53,9 @@ extension MovieNote: ManagedObjectType, ExposureNote {
 			}
 		}
 	}
-	
+
 	static func insertIntoContext(moc: NSManagedObjectContext, movieReferenceNumber ref: String, subjectForExposure subject: SubjectForExposure) -> MovieNote {
-		
+
 		let movieNote: MovieNote = moc.insertObject()
 		movieNote.movieReferenceNumber = ref
 		movieNote.subject = subject

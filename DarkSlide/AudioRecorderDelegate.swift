@@ -17,6 +17,6 @@ protocol AudioRecorderDelegate: class, AVAudioRecorderDelegate {
 }
 
 protocol AudioNoteDelegate: class {
-	
-	func didSaveAudioRecording(fileReferenceNumber: String)	
+
+	func didSaveAudioRecording(fileReferenceNumber: String)
 }

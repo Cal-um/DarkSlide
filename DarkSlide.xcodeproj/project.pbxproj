@@ -20,6 +20,7 @@
 		3A0FA3FC1DE9F4B20090D5C8 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FA3FB1DE9F4B20090D5C8 /* Resource.swift */; };
 		3A0FA4001DE9F9A00090D5C8 /* DarkSkyConvienience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FA3FF1DE9F9A00090D5C8 /* DarkSkyConvienience.swift */; };
 		3A0FA40B1DEC26EA0090D5C8 /* CameraOutputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FA40A1DEC26EA0090D5C8 /* CameraOutputDelegate.swift */; };
+		3A0FA40E1DEE32770090D5C8 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FA40D1DEE32770090D5C8 /* ImagePreviewViewController.swift */; };
 		3A0FFFDD1DDF068400AFA88B /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FFFDC1DDF068400AFA88B /* SpeechToText.swift */; };
 		3A0FFFDF1DDF086F00AFA88B /* SpeechToTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FFFDE1DDF086F00AFA88B /* SpeechToTextDelegate.swift */; };
 		3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D101D8C075600876F00 /* AppDelegate.swift */; };
@@ -85,6 +86,7 @@
 		3A0FA3FB1DE9F4B20090D5C8 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		3A0FA3FF1DE9F9A00090D5C8 /* DarkSkyConvienience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkSkyConvienience.swift; sourceTree = "<group>"; };
 		3A0FA40A1DEC26EA0090D5C8 /* CameraOutputDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraOutputDelegate.swift; sourceTree = "<group>"; };
+		3A0FA40D1DEE32770090D5C8 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		3A0FFFDC1DDF068400AFA88B /* SpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
 		3A0FFFDE1DDF086F00AFA88B /* SpeechToTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextDelegate.swift; sourceTree = "<group>"; };
 		3A215D0D1D8C075600876F00 /* DarkSlide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarkSlide.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,6 +270,7 @@
 				3A7319601DE7113D00C9B16A /* RootCollectionViewController.swift */,
 				3A7319621DE7117000C9B16A /* SubjectDetailViewController.swift */,
 				3A7319641DE712E700C9B16A /* WeatherTableViewController.swift */,
+				3A0FA40D1DEE32770090D5C8 /* ImagePreviewViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				3A215D271D8C422A00876F00 /* SubjectForExposure.swift in Sources */,
 				3A03B2821DB4C5C3007926DD /* PhotoVideoCapture.swift in Sources */,
 				3A7319651DE712E700C9B16A /* WeatherTableViewController.swift in Sources */,
+				3A0FA40E1DEE32770090D5C8 /* ImagePreviewViewController.swift in Sources */,
 				3A7319631DE7117000C9B16A /* SubjectDetailViewController.swift in Sources */,
 				3A3CADF51DDDD57D00804424 /* AudioPlayer.swift in Sources */,
 				3A215D361D8D4C7200876F00 /* ManagedObjectContextStack.swift in Sources */,

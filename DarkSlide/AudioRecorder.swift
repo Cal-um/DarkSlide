@@ -59,11 +59,11 @@ class AudioRecorder: NSObject {
 			self.delegate.enableRecordButton()
 		}
 	}
-	
+
 	func viewDissapeared() {
-		if audioRecorder.isRecording {
-			audioRecorder.stop()
-		}
+//		if audioRecorder.isRecording {
+//			audioRecorder.stop()
+//		}
 	}
 
 	private func beginRecording() {
@@ -84,7 +84,7 @@ class AudioRecorder: NSObject {
 				} catch {
 				fatalError("Error recording audio file ERROR:\(error)")
 			}
-			
+
 			self.audioRecorder.delegate = self.delegate
 			self.audioRecorder.isMeteringEnabled = true
 			self.audioRecorder.prepareToRecord()

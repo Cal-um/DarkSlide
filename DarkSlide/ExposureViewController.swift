@@ -42,11 +42,20 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "ExposurePhotoVideoViewControllerSegue" {
+		print(sender ?? "bones")
+		switch segue.identifier {
+		case .some("ExposurePhotoVideoViewControllerSegue"):
 			guard let vc = segue.destination as? ExposurePhotoVideoViewController else { fatalError("wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
 			vc.cameraOutputDelegate = self
 			vc.audioOutputDelegate = self
+		case .some("ExposurePreviewImageSegue") :
+			guard let vc = segue.destination as? ImagePreviewViewController else { fatalError("wrong view controller type") }
+			guard let data = sender as? (UIImage, String?) else { fatalError("Wrong sender type") }
+			vc.highResPhotoWithLivePhotoRef = data
+
+		default:
+			break
 		}
 	}
 }
@@ -63,16 +72,6 @@ extension ExposureViewController: CameraOutputDelegate {
 				self.collectionView.insertItems(at: paths)
 			}
 		}
-		
-
-//		if let livePhoto = livePhoto {
-//			let player = AVPlayer(url: PhotoNote.generateLivePhotoPath(livePhotoReferenceNumber: livePhoto))
-//			let playerController = AVPlayerViewController()
-//			playerController.player = player
-//			self.present(playerController, animated: true) {
-//				playerController.player!.play()
-//			}
-//		}
 	}
 
 	func didTakeVideo(videoReferenceNumber: String) {
@@ -101,9 +100,9 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 
 		let note = exposureNotes[indexPath.row]
 		switch note.exposureNoteTypeIdentifier {
-		case .photo(let image, _):
+		case .photo((let lowResImage, _), _):
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoNote", for: indexPath) as? PhotoNoteCell else { fatalError("Wrong cell type") }
-			cell.imageView.image = image
+			cell.imageView.image = lowResImage
 			return cell
 		case .movie: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieNote", for: indexPath)
 		return cell
@@ -111,14 +110,16 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 		return cell
 		}
 	}
-	
+
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let note = exposureNotes[indexPath.row]
-		
+
 		switch note.exposureNoteTypeIdentifier {
-		case .photo(_):
-			break
+		case .photo((_, let image), let reference):
 			
+			let tuple: (UIImage, String?) = (image, reference)
+			performSegue(withIdentifier: "ExposurePreviewImageSegue", sender: tuple as Any)
+
 		case .movie(let url):
 			let player = AVPlayer(url: url)
 			let playerController = AVPlayerViewController()
@@ -126,20 +127,20 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 			self.present(playerController, animated: true) {
 				playerController.player!.play()
 			}
-			
+
 		case .audio(let url):
 			let player = AVPlayer(url: url)
 			let playerController = AVPlayerViewController()
 			playerController.player = player
 			self.present(playerController, animated: true) {
 				playerController.player!.play()
-			}			
+			}
 		}
 	}
 }
 
 extension ExposureViewController: AudioNoteDelegate {
-	
+
 	func didSaveAudioRecording(fileReferenceNumber: String) {
 		DispatchQueue.global(qos: .utility).async {
 			let audio = AudioNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, audioURL: fileReferenceNumber, subjectForExposure: self.subject)
