@@ -13,14 +13,16 @@ class WeatherViewController: UITableViewController {
 	var sevenDayWeather: [DailyForecast]?
   let pullToRefresh = UIRefreshControl()
 	let downloadQueue = DispatchQueue(label: "WeatherQueue", qos: .utility, target: nil)
-
+	let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+	
 	override func viewDidLoad() {
 		pullToRefresh.addTarget(self, action: #selector(self.pullToRefreshAction), for: .valueChanged)
 		tableView.addSubview(pullToRefresh)
-		navigationItem.title = "Loading..."
+		navigationItem.titleView = activityView
+		activityView.startAnimating()
 		loadSevenDayForecast() { _ in
-			self.navigationItem.title = ""
-
+			self.activityView.stopAnimating()
+			self.navigationItem.titleView = nil
 		}
 	}
 
@@ -29,6 +31,7 @@ class WeatherViewController: UITableViewController {
 	}
 
 	func pullToRefreshAction() {
+		sevenDayWeather = []
 		loadSevenDayForecast(completion: { _ in
 			DispatchQueue.main.async { [unowned self] in
 				self.pullToRefresh.endRefreshing()
@@ -69,9 +72,11 @@ class WeatherViewController: UITableViewController {
 		let ac = UIAlertController(title: "Whoops", message: "No Internet Connection", preferredStyle: .alert)
 		let okButton = UIAlertAction(title: "OK", style: .cancel, handler: { _ in
 			self.pullToRefresh.endRefreshing()
+			self.activityView.stopAnimating()
+			self.navigationController?.popViewController(animated: true)
 		})
 		ac.addAction(okButton)
-		present(ac, animated: true, completion: { self.navigationItem.title = "" })
+		present(ac, animated: true, completion: nil)
 	}
 }
 

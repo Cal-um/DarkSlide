@@ -11,14 +11,14 @@ import AVKit
 import AVFoundation
 
 class ImagePreviewViewController: UIViewController {
-	
+
 	var highResPhotoWithLivePhotoRef: (UIImage, String?)!
 	@IBOutlet weak var imageView: UIImageView!
-	
+
 	override func viewDidLoad() {
 		imageView.image = highResPhotoWithLivePhotoRef.0
 	}
-	
+
 	@IBAction func tapToPlayLivePhoto(_ sender: Any) {
 		print("tap, \(highResPhotoWithLivePhotoRef.1)")
 		// if PhotoNote contains a live photo play it by tapping imageview.
@@ -32,8 +32,4 @@ class ImagePreviewViewController: UIViewController {
 		}
 	}
 
-	
-
-
-	
 }

@@ -103,7 +103,7 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 
 	private var correctedScreenOrientationHeading: Double? {
 		didSet {
-			print(correctedScreenOrientationHeading)
+			print(correctedScreenOrientationHeading ?? "")
 		}
 	}
 

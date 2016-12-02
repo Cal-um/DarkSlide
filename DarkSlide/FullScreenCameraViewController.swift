@@ -137,7 +137,8 @@ class FullScreenCameraViewController: UIViewController {
 
 	@IBAction func backButton(_ sender: AnyObject) {
 		photoVideo.viewDissapeared()
-		self.dismiss(animated: true, completion: nil)
+		//self.dismiss(animated: true, completion: nil)
+		presentingViewController!.dismiss(animated: true, completion: nil)
 	}
 
 	@IBAction func touchExposeButton(_ sender: AnyObject) {

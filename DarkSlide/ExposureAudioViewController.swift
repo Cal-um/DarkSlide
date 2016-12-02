@@ -15,10 +15,11 @@ class ExposureAudioNoteViewController: UIViewController {
 
 	weak var audioNoteDelegate: AudioNoteDelegate!
 	var audioRecorder: AudioRecorder!
+	
 
 	@IBAction func dismissViewController(_ sender: Any) {
 		audioRecorder.viewDissapeared()
-		dismiss(animated: true, completion: nil)
+		presentingViewController!.dismiss(animated: true, completion: nil)
 	}
 
 	@IBOutlet weak var audioRecordButton: UIButton!

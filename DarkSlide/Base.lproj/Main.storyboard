@@ -121,12 +121,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQ5-gL-DuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1637" y="-36"/>
+            <point key="canvasLocation" x="1669" y="33"/>
         </scene>
         <!--Exposure Photo Video View Controller-->
         <scene sceneID="FLP-NI-65t">
             <objects>
-                <viewController definesPresentationContext="YES" id="uKw-RA-TCz" customClass="ExposurePhotoVideoViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController definesPresentationContext="YES" modalPresentationStyle="currentContext" id="uKw-RA-TCz" customClass="ExposurePhotoVideoViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gjh-d7-Zuz"/>
                         <viewControllerLayoutGuide type="bottom" id="qXD-RO-u3O"/>
@@ -176,7 +176,7 @@
                                 <rect key="frame" x="264" y="10" width="40" height="30"/>
                                 <state key="normal" title="Audio"/>
                                 <connections>
-                                    <segue destination="QDx-XM-MsZ" kind="presentation" identifier="AudioSegue" modalPresentationStyle="currentContext" id="bqX-eU-43F"/>
+                                    <segue destination="QDx-XM-MsZ" kind="presentation" identifier="AudioSegue" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="bqX-eU-43F"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHy-Ru-Pib">
@@ -412,7 +412,7 @@
         <!--Exposure Audio Note View Controller-->
         <scene sceneID="HNg-tZ-nO8">
             <objects>
-                <viewController modalPresentationStyle="currentContext" id="QDx-XM-MsZ" customClass="ExposureAudioNoteViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overCurrentContext" id="QDx-XM-MsZ" customClass="ExposureAudioNoteViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GFE-Ie-1xK"/>
                         <viewControllerLayoutGuide type="bottom" id="yFv-cS-8Gx"/>
@@ -668,7 +668,7 @@
                     <navigationItem key="navigationItem" id="FN2-PZ-3Q3">
                         <barButtonItem key="rightBarButtonItem" title="Weather Forecast" id="YxG-wO-upe">
                             <connections>
-                                <segue destination="8pf-YE-Ya5" kind="presentation" id="Twr-fG-6yf"/>
+                                <segue destination="26D-zv-HDu" kind="show" action="showDetailViewController:sender:" id="SBV-9i-3D6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -839,17 +839,11 @@
                             <outlet property="delegate" destination="26D-zv-HDu" id="z2j-LW-rMg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Weather" id="J5d-dQ-Pd9">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="8Tv-ot-V7J">
-                            <connections>
-                                <action selector="exitScreen:" destination="26D-zv-HDu" id="p9N-E9-dPz"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Weather" id="J5d-dQ-Pd9"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7n-7H-4Ph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4736.231884057971" y="-1363.0434782608697"/>
+            <point key="canvasLocation" x="3544" y="-1362"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DpR-eM-86l">
@@ -1019,29 +1013,11 @@
             </objects>
             <point key="canvasLocation" x="1669.5652173913045" y="-1361.413043478261"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cvn-nZ-Enx">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8pf-YE-Ya5" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Rx-Q5-0Cc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="26D-zv-HDu" kind="relationship" relationship="rootViewController" id="yEB-9Q-7MZ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rrX-Ga-RaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3828.985507246377" y="-1363.0434782608697"/>
-        </scene>
     </scenes>
     <resources>
         <image name="Sunshine" width="402" height="402"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5c5-1I-9Fz"/>
+        <segue reference="EeT-yT-k5a"/>
     </inferredMetricsTieBreakers>
 </document>

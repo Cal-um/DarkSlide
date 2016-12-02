@@ -116,7 +116,7 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 
 		switch note.exposureNoteTypeIdentifier {
 		case .photo((_, let image), let reference):
-			
+
 			let tuple: (UIImage, String?) = (image, reference)
 			performSegue(withIdentifier: "ExposurePreviewImageSegue", sender: tuple as Any)
 
