@@ -12,10 +12,12 @@ import CoreData
 class RootColletionViewController: UICollectionViewController, ManagedObjectContextStackSettable {
 
 	var managedObjectContextStack: ManagedObjectContextStack!
+	var savedSubjects: [SubjectForExposure]!
 
 	override func viewDidLoad() {
 		splitViewController?.delegate = self
 		collectionView?.register(UINib(nibName: "RootCell", bundle: nil), forCellWithReuseIdentifier: "RootCell")
+		savedSubjects = initialFetchRequest()
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -34,17 +36,35 @@ class RootColletionViewController: UICollectionViewController, ManagedObjectCont
 			vc.managedObjectContextStack = managedObjectContextStack
 		}
 	}
+	
+	@IBAction func unwindToRoot(_ seg:UIStoryboardSegue!) {
+		print("UNWOUNDROOT")
+		savedSubjects = initialFetchRequest()
+		collectionView?.reloadData()
+	}
+	
+	// swiftlint:disable force_try
 
+	func initialFetchRequest() -> [SubjectForExposure] {
+		let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SubjectForExposure")
+		guard let result = try! managedObjectContextStack.mainContext.fetch(fetchRequest) as? [SubjectForExposure] else { fatalError("Objects have wrong entity type") }
+		return result
+	}
 }
 
 extension RootColletionViewController {
 
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 6
+		return savedSubjects.count
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RootCell", for: indexPath) as? RootCollectionViewCell else { fatalError("wrong cell type") }
+		cell.imageView.image = savedSubjects[indexPath.row].lowResImage
+		let formatter = DateFormatter()
+		formatter.locale = Locale(identifier: "en_GB")
+		cell.titleLabel.text = formatter.string(from: savedSubjects[indexPath.row].dateOfExposure)
+		print(cell.titleLabel.text)
 		return cell
 	}
 }

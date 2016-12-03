@@ -25,10 +25,10 @@
         <attribute name="imageOfSubject" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="locationLat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="locationLong" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="audioNote" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AudioNote" inverseName="subject" inverseEntity="AudioNote" syncable="YES"/>
-        <relationship name="darkSlideUsed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DarkSlide" inverseName="subject" inverseEntity="DarkSlide" syncable="YES"/>
-        <relationship name="movieNotes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MovieNote" inverseName="subject" inverseEntity="MovieNote" syncable="YES"/>
-        <relationship name="photoNotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhotoNote" inverseName="subject" inverseEntity="PhotoNote" syncable="YES"/>
+        <relationship name="audioNote" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AudioNote" inverseName="subject" inverseEntity="AudioNote" syncable="YES"/>
+        <relationship name="darkSlideUsed" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DarkSlide" inverseName="subject" inverseEntity="DarkSlide" syncable="YES"/>
+        <relationship name="movieNotes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MovieNote" inverseName="subject" inverseEntity="MovieNote" syncable="YES"/>
+        <relationship name="photoNotes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PhotoNote" inverseName="subject" inverseEntity="PhotoNote" syncable="YES"/>
     </entity>
     <elements>
         <element name="AudioNote" positionX="-18" positionY="27" width="128" height="90"/>

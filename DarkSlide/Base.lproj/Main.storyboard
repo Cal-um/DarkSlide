@@ -40,7 +40,13 @@
                             <constraint firstAttribute="trailing" secondItem="Tw7-kX-6QT" secondAttribute="trailing" id="p2q-KT-r8v"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="UtT-30-gu5"/>
+                    <navigationItem key="navigationItem" id="UtT-30-gu5">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="dzF-vD-g4J">
+                            <connections>
+                                <action selector="doDismiss:" destination="xrZ-AM-ztD" id="Mfz-GJ-h3g"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="Tw7-kX-6QT" id="WWc-mX-42n"/>
                     </connections>
@@ -52,7 +58,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2574" y="-585"/>
+            <point key="canvasLocation" x="3570" y="-585.21126760563379"/>
         </scene>
         <!--Exposure Notes-->
         <scene sceneID="fjl-Fy-Hln">
@@ -106,20 +112,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Exposure Notes" id="1XK-bU-Egc">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="grW-yQ-Tkk">
+                        <barButtonItem key="leftBarButtonItem" title="Discard" id="grW-yQ-Tkk">
                             <connections>
-                                <action selector="dismissViewController:" destination="jme-7a-NOa" id="2hE-KP-BEh"/>
+                                <action selector="discardSubjetAndUnwind:" destination="jme-7a-NOa" id="w2i-uh-wAz"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="r9i-09-rDe"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="r9i-09-rDe">
+                            <connections>
+                                <action selector="saveSubjectAndUnwind:" destination="jme-7a-NOa" id="Nj8-Ph-4XT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="DjU-XA-wnC" id="wn3-Ts-0M0"/>
                         <outlet property="imageView" destination="NHp-xV-wXc" id="Yjx-n6-vEU"/>
-                        <segue destination="xrZ-AM-ztD" kind="show" identifier="ExposurePreviewImageSegue" id="jDP-Vh-0iw"/>
+                        <segue destination="Swu-9M-KJH" kind="show" identifier="ExposurePreviewImageSegue" id="jDP-Vh-0iw"/>
+                        <segue destination="Mzb-mk-nN8" kind="unwind" identifier="unwindToRoot" unwindAction="unwindToRoot:" id="NAf-Jl-DP0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQ5-gL-DuB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Mzb-mk-nN8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1669" y="33"/>
         </scene>
@@ -451,7 +463,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLB-NQ-Zhx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3438" y="35"/>
+            <point key="canvasLocation" x="4434.375" y="34.859154929577464"/>
         </scene>
         <!--Subject Camera View Controller-->
         <scene sceneID="jc7-jr-uSR">
@@ -1012,6 +1024,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ii6-YN-vJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1669.5652173913045" y="-1361.413043478261"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nec-Zn-QGd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Swu-9M-KJH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wV2-fU-nh4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xrZ-AM-ztD" kind="relationship" relationship="rootViewController" id="Rd2-Pa-t8m"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zr7-nL-Eis" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2572.5" y="-585.21126760563379"/>
         </scene>
     </scenes>
     <resources>

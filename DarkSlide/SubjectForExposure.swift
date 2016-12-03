@@ -25,14 +25,21 @@ public final class SubjectForExposure: ManagedObject {
 	@NSManaged public var darkSlideUsed: DarkSlide?
 	@NSManaged public var audioNote: Set<AudioNote>?
 	@NSManaged public var movieNote: Set<MovieNote>?
+	
+	lazy var lowResImage: UIImage? = {
+		guard let imageData = self.imageOfSubject else { return nil }
+		return UIImage(data: imageData, scale: 0)
+	}()
 }
 
 extension SubjectForExposure: ManagedObjectType {
 
+	
+	
 	public static var entityName: String {
 		return "SubjectForExposure"
 	}
-
+	
 	static func insertIntoContext(moc: NSManagedObjectContext, imageOfSubject image: UIImage?, locationLat lat: Double?, locationLong long: Double?, compassHeading heading: Double?) -> SubjectForExposure {
 
 		let subject: SubjectForExposure = moc.insertObject()
