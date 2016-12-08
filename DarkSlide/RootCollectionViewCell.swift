@@ -14,9 +14,11 @@ class RootCollectionViewCell: UICollectionViewCell {
 }
 
 extension RootCollectionViewCell: ConfigurableCell {
-	
-	func configureCell(_ object: SubjectForExposure) {
-		
+
+	func configureCell(_ subject: SubjectForExposure) {
+		imageView.image = subject.lowResImage
+		let formatter = DateFormatter()
+		formatter.dateStyle = .short
+		titleLabel.text = formatter.string(from: subject.dateOfExposure)
 	}
-	
 }

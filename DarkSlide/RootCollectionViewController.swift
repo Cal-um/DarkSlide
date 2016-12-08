@@ -9,15 +9,14 @@
 import UIKit
 import CoreData
 
-class RootColletionViewController: UICollectionViewController, ManagedObjectContextStackSettable {
+class RootCollectionViewController: UICollectionViewController, ManagedObjectContextStackSettable {
 
 	var managedObjectContextStack: ManagedObjectContextStack!
-	var savedSubjects: [SubjectForExposure]!
 
 	override func viewDidLoad() {
 		splitViewController?.delegate = self
 		collectionView?.register(UINib(nibName: "RootCell", bundle: nil), forCellWithReuseIdentifier: "RootCell")
-		savedSubjects = initialFetchRequest()
+		setUpCollectionView()
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -30,51 +29,47 @@ class RootColletionViewController: UICollectionViewController, ManagedObjectCont
 		layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 	}
 
+	fileprivate typealias PhotosDataProvider = FetchedResultsDataProvider<RootCollectionViewController>
+	fileprivate var dataSource: CollectionViewDataSource<RootCollectionViewController, PhotosDataProvider, RootCollectionViewCell>!
+
+	private func setUpCollectionView() {
+		let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SubjectForExposure")
+		request.sortDescriptors = [NSSortDescriptor(key: "dateOfExposure", ascending: true)]
+		let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContextStack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+		let dataProvider = FetchedResultsDataProvider(fetchedResultsController: frc, delegate: self)
+		guard let cv = collectionView else { fatalError("must have collection view") }
+		dataSource = CollectionViewDataSource(collectionView: cv, dataProvider: dataProvider, delegate: self)
+	}
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "ShootSubjectSegue" {
 			guard let vc = segue.destination as? SubjectCameraViewController else { fatalError("Wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
 		}
 	}
-	
-	@IBAction func unwindToRoot(_ seg:UIStoryboardSegue!) {
-		print("UNWOUNDROOT")
-		savedSubjects = initialFetchRequest()
-		collectionView?.reloadData()
-	}
-	
-	// swiftlint:disable force_try
 
-	func initialFetchRequest() -> [SubjectForExposure] {
-		let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SubjectForExposure")
-		guard let result = try! managedObjectContextStack.mainContext.fetch(fetchRequest) as? [SubjectForExposure] else { fatalError("Objects have wrong entity type") }
-		return result
+	@IBAction func unwindToRoot(_ seg: UIStoryboardSegue!) {
 	}
 }
 
-extension RootColletionViewController {
+extension RootCollectionViewController: DataSourceDelegate {
 
-	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return savedSubjects.count
-	}
-
-	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RootCell", for: indexPath) as? RootCollectionViewCell else { fatalError("wrong cell type") }
-		cell.imageView.image = savedSubjects[indexPath.row].lowResImage
-		let formatter = DateFormatter()
-		formatter.locale = Locale(identifier: "en_GB")
-		cell.titleLabel.text = String(describing: savedSubjects[indexPath.row].dateOfExposure)
-		print(formatter.string(from: savedSubjects[indexPath.row].dateOfExposure)
-)
-		return cell
+	func cellIdentifierForObject(_ object: SubjectForExposure) -> String {
+		return "RootCell"
 	}
 }
 
-extension RootColletionViewController: UISplitViewControllerDelegate {
+extension RootCollectionViewController: DataProviderDelegate {
+	func dataProviderDidUpdate(_ updates: [DataProviderUpdate<SubjectForExposure>]?) {
+		print("updates")
+		dataSource.processUpdates(updates)
+	}
+}
+
+extension RootCollectionViewController: UISplitViewControllerDelegate {
 
 	// This ensures that the first screen displayed in portrait mode is self.
 	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
 		return true
 	}
-
 }

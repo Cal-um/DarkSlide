@@ -9,42 +9,44 @@
 import CoreData
 import UIKit
 
+// swiftlint:disable force_try
+
 class FetchedResultsDataProvider<Delegate: DataProviderDelegate>: NSObject, DataProvider, NSFetchedResultsControllerDelegate {
-	
+
 	typealias Object = Delegate.Object
-	
+
 	init(fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>, delegate: Delegate) {
 		self.fetchedResultsController = fetchedResultsController
 		self.delegate = delegate
 		super.init()
 		fetchedResultsController.delegate = self
 		try! fetchedResultsController.performFetch()
-		
+
 	}
-	
+
 	func objectAtIndexPath(_ indexPath: IndexPath) -> Object {
 		guard let result = fetchedResultsController.object(at: indexPath) as? Object else { fatalError("Unexpected object at \(indexPath)") }
 		return result
 	}
-	
+
 	func numberOfItemsInSection(_ section: Int) -> Int {
 		guard let sec = fetchedResultsController.sections?[section] else { return 0 }
 		return sec.numberOfObjects
 	}
-	
+
 	// MARK: Private
-	
+
 	fileprivate var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>
 	fileprivate weak var delegate: Delegate!
 	fileprivate var updates: [DataProviderUpdate<Object>] = []
-	
+
 	// MARK: NSFetchedResultsControllerDelegate
-	
+
 	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		print("hi")
 		updates = []
 	}
-	
+
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 		print(123)
 		switch type {
@@ -64,7 +66,7 @@ class FetchedResultsDataProvider<Delegate: DataProviderDelegate>: NSObject, Data
 			updates.append(.delete(indexPath))
 		}
 	}
-	
+
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 		delegate.dataProviderDidUpdate(updates)
 		print("changed")

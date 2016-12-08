@@ -31,26 +31,24 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 		collectionView?.register(UINib(nibName: "MovieNoteCell", bundle: nil), forCellWithReuseIdentifier: "MovieNote")
 	}
 
-	
 	override func viewDidLayoutSubviews() {
 		guard let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { fatalError("Wrong layout type") }
 		let width = collectionView.bounds.height
 		layout.itemSize = CGSize(width: width, height: width)
 	}
-	
-	
+
 	@IBAction func discardSubjetAndUnwind(_ sender: Any) {
 		managedObjectContextStack.mainContext.delete(subject)
 		managedObjectContextStack.mainContext.trySave()
-		
+
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
 	}
-	
+
 	@IBAction func saveSubjectAndUnwind(_ sender: Any) {
 		 managedObjectContextStack.mainContext.trySave()
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
 	}
-	
+
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		print(sender ?? "bones")
 		switch segue.identifier {

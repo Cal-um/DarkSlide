@@ -876,7 +876,7 @@
         <!--Choose Exposure-->
         <scene sceneID="8C0-uE-W6g">
             <objects>
-                <collectionViewController title="Choose Exposure" id="vcc-11-xH8" customClass="RootColletionViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController title="Choose Exposure" id="vcc-11-xH8" customClass="RootCollectionViewController" customModule="DarkSlide" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="qat-sH-2OY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

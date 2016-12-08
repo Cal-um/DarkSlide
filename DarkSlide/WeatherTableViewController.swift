@@ -14,7 +14,7 @@ class WeatherViewController: UITableViewController {
   let pullToRefresh = UIRefreshControl()
 	let downloadQueue = DispatchQueue(label: "WeatherQueue", qos: .utility, target: nil)
 	let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-	
+
 	override func viewDidLoad() {
 		pullToRefresh.addTarget(self, action: #selector(self.pullToRefreshAction), for: .valueChanged)
 		tableView.addSubview(pullToRefresh)

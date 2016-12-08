@@ -25,4 +25,3 @@ enum DataProviderUpdate<Object> {
 	case move(IndexPath, IndexPath)
 	case delete(IndexPath)
 }
-

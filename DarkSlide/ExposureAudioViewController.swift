@@ -15,7 +15,6 @@ class ExposureAudioNoteViewController: UIViewController {
 
 	weak var audioNoteDelegate: AudioNoteDelegate!
 	var audioRecorder: AudioRecorder!
-	
 
 	@IBAction func dismissViewController(_ sender: Any) {
 		audioRecorder.viewDissapeared()
