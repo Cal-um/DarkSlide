@@ -10,6 +10,13 @@ import UIKit
 
 class RootCollectionViewCell: UICollectionViewCell {
 	@IBOutlet weak var imageView: UIImageView!
-
 	@IBOutlet weak var titleLabel: UILabel!
+}
+
+extension RootCollectionViewCell: ConfigurableCell {
+	
+	func configureCell(_ object: SubjectForExposure) {
+		
+	}
+	
 }

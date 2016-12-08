@@ -21,3 +21,8 @@ enum NoteType {
 	case movie(url: URL)
 	case photo((lowRes: UIImage, highRes: UIImage), livePhotoRef: String?)
 }
+
+protocol ConfigurableCell {
+	associatedtype DataSource
+	func configureCell(_ object: DataSource)
+}

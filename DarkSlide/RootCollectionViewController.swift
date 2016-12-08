@@ -63,8 +63,9 @@ extension RootColletionViewController {
 		cell.imageView.image = savedSubjects[indexPath.row].lowResImage
 		let formatter = DateFormatter()
 		formatter.locale = Locale(identifier: "en_GB")
-		cell.titleLabel.text = formatter.string(from: savedSubjects[indexPath.row].dateOfExposure)
-		print(cell.titleLabel.text)
+		cell.titleLabel.text = String(describing: savedSubjects[indexPath.row].dateOfExposure)
+		print(formatter.string(from: savedSubjects[indexPath.row].dateOfExposure)
+)
 		return cell
 	}
 }
