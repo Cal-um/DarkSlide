@@ -29,8 +29,8 @@ class RootCollectionViewController: UICollectionViewController, ManagedObjectCon
 		layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
 	}
 
-	fileprivate typealias PhotosDataProvider = FetchedResultsDataProvider<RootCollectionViewController>
-	fileprivate var dataSource: CollectionViewDataSource<RootCollectionViewController, PhotosDataProvider, RootCollectionViewCell>!
+	fileprivate typealias SubjectsDataProvider = FetchedResultsDataProvider<RootCollectionViewController>
+	fileprivate var dataSource: CollectionViewDataSource<RootCollectionViewController, SubjectsDataProvider, RootCollectionViewCell>!
 
 	private func setUpCollectionView() {
 		let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SubjectForExposure")

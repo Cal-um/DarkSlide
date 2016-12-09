@@ -2,4 +2,70 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DarkSlide/WebService.swift"
+            timestampString = "502914074.12846"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "load(resource:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DarkSlide.WebService.load &lt;A&gt; (resource : DarkSlide.Resource&lt;A&gt;, completion : (DarkSlide.Result&lt;A&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "DarkSlide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/calumharris/Documents/iOS%20Projects/DarkSlide/DarkSlide/WebService.swift"
+                  timestampString = "502968514.599819"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DarkSlide.WebService.(load &lt;A&gt; (resource : DarkSlide.Resource&lt;A&gt;, completion : (DarkSlide.Result&lt;A&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "DarkSlide"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/calumharris/Documents/iOS%20Projects/DarkSlide/DarkSlide/WebService.swift"
+                  timestampString = "502968514.60266"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DarkSlide/CollectionViewDataSource.swift"
+            timestampString = "502968513.476445"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "processUpdates(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

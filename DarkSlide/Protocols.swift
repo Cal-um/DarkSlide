@@ -25,4 +25,5 @@ enum NoteType {
 protocol ConfigurableCell {
 	associatedtype DataSource
 	func configureCell(_ object: DataSource)
+	func nameCell()
 }

@@ -45,7 +45,7 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 	}
 
 	@IBAction func saveSubjectAndUnwind(_ sender: Any) {
-		 managedObjectContextStack.mainContext.trySave()
+		 managedObjectContextStack.backgroundContext.trySave()
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
 	}
 
@@ -70,15 +70,11 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 extension ExposureViewController: CameraOutputDelegate {
 
 	func didTakePhoto(image: UIImage, livePhoto: String?) {
-		// running this on a different thread so it does not interupt UI.
-		DispatchQueue.global(qos: .utility).async {
-			let photo = PhotoNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, photoNote: image, livePhotoRefNumber: livePhoto, subjectForExposure: self.subject)
-			DispatchQueue.main.async {
-				self.exposureNotes.insert(photo, at: 0)
-				let paths = [IndexPath(row: 0, section: 0)]
-				self.collectionView.insertItems(at: paths)
-			}
-		}
+		let photo = PhotoNote.insertIntoContext(moc: self.managedObjectContextStack.backgroundContext, photoNote: image, livePhotoRefNumber: livePhoto, subjectForExposure: self.subject)
+		managedObjectContextStack.backgroundContext.trySave()
+		self.exposureNotes.insert(photo, at: 0)
+		let paths = [IndexPath(row: 0, section: 0)]
+		self.collectionView.insertItems(at: paths)
 	}
 
 	func didTakeVideo(videoReferenceNumber: String) {

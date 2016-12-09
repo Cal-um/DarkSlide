@@ -21,4 +21,8 @@ extension RootCollectionViewCell: ConfigurableCell {
 		formatter.dateStyle = .short
 		titleLabel.text = formatter.string(from: subject.dateOfExposure)
 	}
+	
+	func nameCell() {
+		print("RootCell")
+	}
 }

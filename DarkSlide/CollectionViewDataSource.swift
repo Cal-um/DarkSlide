@@ -33,6 +33,9 @@ class CollectionViewDataSource<Delegate: DataSourceDelegate, Data: DataProvider,
 		return dataProvider.objectAtIndexPath(indexPath)
 	}
 
+	// swiftlint:disable force_cast
+	// After an undefined amount of updates the indexPath returns nil and the app will crash. Find out what is going on. This was only noticed after switching to a fetched results controller and background thread.
+
 	func processUpdates(_ updates: [DataProviderUpdate<Data.Object>]?) {
 		guard let updates = updates else { return collectionView.reloadData() }
 		collectionView.performBatchUpdates({
@@ -42,6 +45,7 @@ class CollectionViewDataSource<Delegate: DataSourceDelegate, Data: DataProvider,
 					print("inserted")
 					self.collectionView.insertItems(at: [indexPath])
 				case .update(let indexPath, let object):
+					let checkForNil = self.collectionView.cellForItem(at: indexPath)
 					guard let cell = self.collectionView.cellForItem(at: indexPath) as? Cell else { fatalError("wrong cell type") }
 					cell.configureCell(object)
 				case .move(let indexPath, let newIndexPath):
