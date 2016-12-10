@@ -15,7 +15,7 @@ class FullScreenCameraViewController: UIViewController {
 	// MARK: ViewController Properties
 
 	var photoVideo: PhotoVideoCapture!
-	var cameraOutputDelegate: CameraOutputDelegate!
+	weak var cameraOutputDelegate: CameraOutputDelegate!
 
 	@IBOutlet weak var cameraView: PreviewView!
 	@IBOutlet weak var exitFullScreenButton: UIButton!

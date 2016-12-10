@@ -19,8 +19,10 @@ public final class PhotoNote: ManagedObject {
 	@NSManaged public var subject: SubjectForExposure
 
 	// this variable was added to improve collectionView scroll perfomance.
-	var lowResCachedThumbnail: UIImage?
-	var highResCachedThumbnail: UIImage?
+	//var lowResCachedThumbnail: UIImage?
+	lazy var lowResCachedThumbnail: UIImage = {
+		return UIImage(data: self.photoNote, scale: 0)
+	}()!
 }
 
 extension PhotoNote: ManagedObjectType, ExposureNote {
@@ -28,16 +30,13 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 	public static var entityName: String {
 		return "PhotoNote"
 	}
-
+	
+	var highResImage : UIImage {
+		return UIImage(data: photoNote, scale: 0.5)!
+	}
+	
 	var exposureNoteTypeIdentifier: NoteType {
-
-		if let lowResCachedThumbnail = lowResCachedThumbnail, let highResCachedThumbnail = highResCachedThumbnail {
-			return NoteType.photo((lowRes: lowResCachedThumbnail, highRes: highResCachedThumbnail), livePhotoRef: livePhotoReferenceNumber)
-		} else {
-			lowResCachedThumbnail = UIImage(data: photoNote, scale: 0)
-			highResCachedThumbnail = UIImage(data:photoNote, scale: 1)
-			return self.exposureNoteTypeIdentifier
-		}
+		return .photo(self)
 	}
 
 	var livePhotoPath: URL? {
@@ -76,7 +75,9 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 	static func insertIntoContext(moc: NSManagedObjectContext, photoNote photo: UIImage, livePhotoRefNumber ref: String?, subjectForExposure subject: SubjectForExposure) -> PhotoNote {
 
 		let photoNote: PhotoNote = moc.insertObject()
-		photoNote.photoNote = UIImageJPEGRepresentation(photo, 1)!
+		photoNote.photoNote = UIImageJPEGRepresentation(photo, 0)!
+		let byte = ByteCountFormatter()
+		print(byte.string(fromByteCount: Int64(photoNote.photoNote.count)))
 		photoNote.livePhotoReferenceNumber = (ref != nil) ? ref : nil
 		photoNote.subject = subject
 		return photoNote

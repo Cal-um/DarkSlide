@@ -93,9 +93,12 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 			didFinish()
 			return
 		}
+		
+		let byte = ByteCountFormatter()
+		print(byte.string(fromByteCount: Int64(photoData.count)))
 
-		let photo = UIImage(data: photoData)!
-
+		let photo = UIImage(data: photoData, scale: 1)!
+		
 		if let livePhotoCompanionMovieURL = self.livePhotoCompanionMovieURL {
 
 			let livePhotoReferenceNumber = PhotoNote.randomReferenceNumber

@@ -17,7 +17,6 @@ class ExposureAudioNoteViewController: UIViewController {
 	var audioRecorder: AudioRecorder!
 
 	@IBAction func dismissViewController(_ sender: Any) {
-		audioRecorder.viewDissapeared()
 		presentingViewController!.dismiss(animated: true, completion: nil)
 	}
 

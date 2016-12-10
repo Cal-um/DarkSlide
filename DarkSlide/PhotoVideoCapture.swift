@@ -162,11 +162,9 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 
 			if let dualCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInDuoCamera, mediaType: AVMediaTypeVideo, position: .back) {
 				defaultVideoDevice = dualCameraDevice
-				print("moot1")
 			} else if let backCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .back) {
 				// If the back dual camera is not available, default to the back wide angle camera.
 				defaultVideoDevice = backCameraDevice
-				print("moot2")
 			} else if let frontCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .front) {
 				// In some cases where users break their phones, the back wide angle camera is not available. In this case, we should default to the front wide angle camera.
 				defaultVideoDevice = frontCameraDevice
@@ -720,12 +718,11 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			func configPhotoSettings(flashMode: AVCaptureFlashMode) -> AVCapturePhotoSettings {
 
 				let photoSettings = AVCapturePhotoSettings()
-				photoSettings.isHighResolutionPhotoEnabled = true
+				photoSettings.isHighResolutionPhotoEnabled = false
 				if photoSettings.availablePreviewPhotoPixelFormatTypes.count > 0 {
 					photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String : photoSettings.availablePreviewPhotoPixelFormatTypes.first!]
 				}
 
-				print("\n'nSUPPORTED FLASH MODES\(self.photoOutput.supportedFlashModes)\n\n")
 				guard self.photoOutput.supportedFlashModes.contains(NSNumber(value: flashMode.rawValue)) else {
 					photoSettings.flashMode = .off
 					return photoSettings

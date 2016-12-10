@@ -12,14 +12,14 @@ protocol ManagedObjectContextStackSettable {
 	var managedObjectContextStack: ManagedObjectContextStack! { get set }
 }
 
-protocol ExposureNote {
+protocol ExposureNote: class {
 	var exposureNoteTypeIdentifier: NoteType { get }
 }
 
 enum NoteType {
 	case audio(url: URL)
 	case movie(url: URL)
-	case photo((lowRes: UIImage, highRes: UIImage), livePhotoRef: String?)
+	case photo(PhotoNote)
 }
 
 protocol ConfigurableCell {

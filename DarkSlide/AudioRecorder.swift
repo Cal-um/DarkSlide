@@ -60,12 +60,6 @@ class AudioRecorder: NSObject {
 		}
 	}
 
-	func viewDissapeared() {
-//		if audioRecorder.isRecording {
-//			audioRecorder.stop()
-//		}
-	}
-
 	private func beginRecording() {
 
 		audioQueue.async { [unowned self] in

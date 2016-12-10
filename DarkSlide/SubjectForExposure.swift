@@ -28,7 +28,7 @@ public final class SubjectForExposure: ManagedObject {
 
 	lazy var lowResImage: UIImage? = {
 		guard let imageData = self.imageOfSubject else { return nil }
-		return UIImage(data: imageData, scale: 0.4)
+		return UIImage(data: imageData, scale: 0)
 	}()
 }
 
@@ -41,7 +41,10 @@ extension SubjectForExposure: ManagedObjectType {
 	static func insertIntoContext(moc: NSManagedObjectContext, imageOfSubject image: UIImage?, locationLat lat: Double?, locationLong long: Double?, compassHeading heading: Double?) -> SubjectForExposure {
 
 		let subject: SubjectForExposure = moc.insertObject()
-		subject.imageOfSubject = UIImageJPEGRepresentation(image!, 1)
+		subject.imageOfSubject = UIImageJPEGRepresentation(image!, 0.3)
+		let byte = ByteCountFormatter()
+		print(byte.string(fromByteCount: Int64(subject.imageOfSubject!.count)))
+		
 		subject.dateOfExposure = Date()
 
 		if let lat = lat, let long = long {

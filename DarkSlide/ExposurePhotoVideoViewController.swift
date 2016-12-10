@@ -16,11 +16,12 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	// MARK: View Controller properties and life cycle
 
 	var managedObjectContextStack: ManagedObjectContextStack!
-	var cameraOutputDelegate: CameraOutputDelegate!
-	var audioOutputDelegate: AudioNoteDelegate!
+	weak var cameraOutputDelegate: CameraOutputDelegate!
+	weak var audioOutputDelegate: AudioNoteDelegate!
 
 	@IBOutlet weak var cameraUnavailableLabel: UILabel!
 	@IBOutlet weak var resumeSessionButton: UIButton!
+	
 	// MARK: Delegate properies. Used to observe state of photoVideo.
 
 	var observeLivePhotoModeSelected: LivePhotoMode = .off
@@ -74,6 +75,10 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		default: break
 		}
 	}
+	
+	deinit {
+		print("DEINIT ExposurePhotoVideoViewController")
+	}
 }
 
 extension ExposurePhotoVideoViewController: CameraViewDelegate {
@@ -111,6 +116,4 @@ extension ExposurePhotoVideoViewController: CameraViewDelegate {
 	}
 }
 
-extension ExposurePhotoVideoViewController: AVAudioRecorderDelegate {
-
-}
+extension ExposurePhotoVideoViewController: AVAudioRecorderDelegate {}

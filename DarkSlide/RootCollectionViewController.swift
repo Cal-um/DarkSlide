@@ -34,7 +34,7 @@ class RootCollectionViewController: UICollectionViewController, ManagedObjectCon
 
 	private func setUpCollectionView() {
 		let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SubjectForExposure")
-		request.sortDescriptors = [NSSortDescriptor(key: "dateOfExposure", ascending: true)]
+		request.sortDescriptors = [NSSortDescriptor(key: "dateOfExposure", ascending: false)]
 		let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContextStack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
 		let dataProvider = FetchedResultsDataProvider(fetchedResultsController: frc, delegate: self)
 		guard let cv = collectionView else { fatalError("must have collection view") }

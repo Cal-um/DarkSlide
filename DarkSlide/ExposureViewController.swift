@@ -38,14 +38,15 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 	}
 
 	@IBAction func discardSubjetAndUnwind(_ sender: Any) {
-		managedObjectContextStack.mainContext.delete(subject)
-		managedObjectContextStack.mainContext.trySave()
-
+		//managedObjectContextStack.mainContext.delete(subject)
+		//managedObjectContextStack.mainContext.trySave()
+		exposureNotes = []
+		collectionView.reloadData()
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
 	}
 
 	@IBAction func saveSubjectAndUnwind(_ sender: Any) {
-		 managedObjectContextStack.backgroundContext.trySave()
+		managedObjectContextStack.backgroundContext.trySave()
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
 	}
 
@@ -65,22 +66,28 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 			break
 		}
 	}
+	
+	deinit {
+		print("DEINIT ExposureViewController")
+	}
 }
 
 extension ExposureViewController: CameraOutputDelegate {
 
 	func didTakePhoto(image: UIImage, livePhoto: String?) {
-		let photo = PhotoNote.insertIntoContext(moc: self.managedObjectContextStack.backgroundContext, photoNote: image, livePhotoRefNumber: livePhoto, subjectForExposure: self.subject)
-		managedObjectContextStack.backgroundContext.trySave()
+		
+		let photo = PhotoNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, photoNote: image, livePhotoRefNumber: livePhoto, subjectForExposure: self.subject)
+		self.managedObjectContextStack.mainContext.trySave()
 		self.exposureNotes.insert(photo, at: 0)
 		let paths = [IndexPath(row: 0, section: 0)]
 		self.collectionView.insertItems(at: paths)
+	
 	}
 
 	func didTakeVideo(videoReferenceNumber: String) {
 		// test that shows that video does save.
 		print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
-		DispatchQueue.global(qos: .utility).async {
+		DispatchQueue.global(qos: .utility).async  { [unowned self] in
 			let video = MovieNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, movieReferenceNumber: videoReferenceNumber, subjectForExposure: self.subject)
 			DispatchQueue.main.async {
 				self.exposureNotes.insert(video, at: 0)
@@ -103,9 +110,9 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 
 		let note = exposureNotes[indexPath.row]
 		switch note.exposureNoteTypeIdentifier {
-		case .photo((let lowResImage, _), _):
+		case .photo(let photo):
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoNote", for: indexPath) as? PhotoNoteCell else { fatalError("Wrong cell type") }
-			cell.imageView.image = lowResImage
+			cell.imageView.image = photo.lowResCachedThumbnail
 			return cell
 		case .movie: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieNote", for: indexPath)
 		return cell
@@ -118,9 +125,9 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 		let note = exposureNotes[indexPath.row]
 
 		switch note.exposureNoteTypeIdentifier {
-		case .photo((_, let image), let reference):
-
-			let tuple: (UIImage, String?) = (image, reference)
+		case .photo(let photo):
+			
+			let tuple: (UIImage, String?) = (photo.highResImage, photo.livePhotoReferenceNumber)
 			performSegue(withIdentifier: "ExposurePreviewImageSegue", sender: tuple as Any)
 
 		case .movie(let url):

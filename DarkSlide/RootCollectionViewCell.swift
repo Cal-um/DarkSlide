@@ -16,6 +16,7 @@ class RootCollectionViewCell: UICollectionViewCell {
 extension RootCollectionViewCell: ConfigurableCell {
 
 	func configureCell(_ subject: SubjectForExposure) {
+		print("CONFIGURE CELL CALLED")
 		imageView.image = subject.lowResImage
 		let formatter = DateFormatter()
 		formatter.dateStyle = .short

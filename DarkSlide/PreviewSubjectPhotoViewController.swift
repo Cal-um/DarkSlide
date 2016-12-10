@@ -29,8 +29,8 @@ class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextS
 
 	@IBAction func choosePhotoAction(_ sender: Any) {
 
-		subject = SubjectForExposure.insertIntoContext(moc: managedObjectContextStack.backgroundContext, imageOfSubject: subjectPhoto, locationLat: latitude, locationLong: longitude, compassHeading: compassHeading)
-		managedObjectContextStack.backgroundContext.trySave()
+		subject = SubjectForExposure.insertIntoContext(moc: managedObjectContextStack.mainContext, imageOfSubject: subjectPhoto, locationLat: latitude, locationLong: longitude, compassHeading: compassHeading)
+		managedObjectContextStack.mainContext.trySave()
 		performSegue(withIdentifier: "Chosen Photo Segue", sender: self)
 	}
 
