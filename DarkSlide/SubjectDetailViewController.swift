@@ -8,13 +8,16 @@
 
 import UIKit
 import MapKit
+import AVFoundation
+import AVKit
 
 class SubjectDetailViewController: UIViewController {
 
 	// MOC properties
 	var subject: SubjectForExposure!
-	var exposureNotes: ExposureNote?
+	var exposureNotes: [ExposureNote] = []
 	//IB properties
+	@IBOutlet weak var showWeatherButton: UIBarButtonItem!
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var viewWeatherForecastButton: UIBarButtonItem!
 	@IBOutlet weak var subjectImageView: UIImageView!
@@ -32,35 +35,185 @@ class SubjectDetailViewController: UIViewController {
 		collectionView?.register(UINib(nibName: "MovieNoteCell", bundle: nil), forCellWithReuseIdentifier: "MovieNote")
 		navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 		navigationItem.leftItemsSupplementBackButton = true
-		navigationItem.leftBarButtonItem?.title = "Select Exposure"
+		configureLabels()
+		fetchNotes() { results in exposureNotes = results }
+		collectionView.reloadData()
+		setMapView()
 	}
+
+	// swiftlint:disable force_cast
 
 	override func viewDidLayoutSubviews() {
 		guard let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { fatalError("Wrong layout type") }
 		let width = collectionView.bounds.height
 		layout.itemSize = CGSize(width: width, height: width)
-		//layout.sectionInset = UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 6)
 		layout.invalidateLayout()
 	}
 
-	let testArray = [1, 1, 3, 2, 2, 3, 2, 3, 1, 1, 1 ]
+	func setMapView() {
+
+		guard let lat = subject.locationLat as? Double, let long = subject.locationLong as? Double else { return }
+		mapView.isScrollEnabled = false
+		mapView.isZoomEnabled = false
+		let span = MKCoordinateSpanMake(0.030, 0.030)
+		let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
+		mapView.setRegion(region, animated: true)
+		let annotation = MKPointAnnotation()
+		annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+		mapView.addAnnotation(annotation)
+	}
+
+	func fetchNotes(completion: ([ExposureNote]) -> ()) {
+
+		var exposureNotes: [ExposureNote] = []
+
+		let photoNotes: [PhotoNote] = PhotoNote.fetchInContext(subject.managedObjectContext!) { (request) -> () in
+			request.predicate = NSPredicate(format: "subject = %@", argumentArray: [subject])
+		}
+		let audioNotes: [AudioNote] = AudioNote.fetchInContext(subject.managedObjectContext!) { (request) -> () in
+			request.predicate = NSPredicate(format: "subject = %@", argumentArray: [subject])
+		}
+		let movieNotes: [MovieNote] = MovieNote.fetchInContext(subject.managedObjectContext!) { (request) -> () in
+			request.predicate = NSPredicate(format: "subject = %@", argumentArray: [subject])
+		}
+
+		for i in photoNotes {
+			exposureNotes.append(i)
+		}
+
+		for i in audioNotes {
+			exposureNotes.append(i)
+		}
+
+		for i in movieNotes {
+			exposureNotes.append(i)
+		}
+
+		completion(exposureNotes)
+	}
+
+	func configureLabels() {
+
+		let date: String = {
+			let dateFormatter = DateFormatter()
+			dateFormatter.dateStyle = .medium
+			return dateFormatter.string(from: subject.dateOfExposure)
+		}()
+
+		let coordinates: String = {
+			if let latitude = subject.locationLat as? Double, let longitude = subject.locationLong as? Double {
+				showWeatherButton.isEnabled = true
+				var lat = Double(round(latitude * 100) / 100)
+				var long = Double(round(longitude * 1000) / 1000)
+				let latNS: String
+				let longEW: String
+
+				if lat >= 0 {
+					latNS = "N"
+				} else {
+					latNS = "S"
+					lat = lat * -1
+				}
+
+				if long >= 0 {
+					longEW = "E"
+				} else {
+					longEW = "W"
+					long = long * -1
+				}
+				return "\(lat) \(latNS), \(long) \(longEW)"
+			} else {
+				return "N/A"
+			}
+		}()
+
+		let heading: String = {
+			if let bearing = subject.compassHeading as? Double {
+				switch bearing {
+				case 0..<22.5: return "N"
+				case 22.5..<67.5: return "NE"
+				case 67.5..<112.5: return "E"
+				case 112.5..<157.5: return "SE"
+				case 157.5..<202.5: return "S"
+				case 202.5..<247.5: return "SW"
+				case 247.5..<292.5: return "W"
+				case 292.5..<337.5: return "NW"
+				case 337.5...360: return "N"
+				default: return "N/A"
+				}
+			} else {
+				return "N/A"
+			}
+		}()
+
+		subjectImageView.image = subject.lowResImage
+		dateLabel.text = "Date: \(date)"
+		coordinatesLabel.text = "Coordinates: \(coordinates)"
+		facingLabel.text = "Bearing: \(heading)"
+	}
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+		switch segue.identifier {
+		case .some("SubjectDetailImagePreviewSegue"):
+			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? ImagePreviewViewController else { fatalError("wrong view controller type") }
+			guard let data = sender as? (UIImage, String?) else { fatalError("Wrong sender type") }
+			vc.highResPhotoWithLivePhotoRef = data
+		case .some("WeatherSegue"):
+			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? WeatherViewController else { fatalError("wrong view controller type") }
+			vc.latitude = subject.locationLat as! Double
+			vc.longitude = subject.locationLong as! Double
+		default: break
+		}
+	}
+
+	deinit {
+		print("SubjectDetailViewController DEINIT")
+	}
 }
 
 extension SubjectDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return testArray.count
+		return exposureNotes.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		switch testArray[indexPath.row] {
-		case 1:
+		let note = exposureNotes[indexPath.row]
+		switch note.exposureNoteTypeIdentifier {
+		case .photo(let photo):
 			guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoNote", for: indexPath) as? PhotoNoteCell else { fatalError("Wrong cell type") }
+			cell.imageView.image = photo.lowResCachedThumbnail
 			return cell
-		case 2: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieNote", for: indexPath)
-			return cell
-		case 3: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AudioNote", for: indexPath)
-			return cell
-		default: fatalError("Incorrect Cell at index path")
+		case .movie: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieNote", for: indexPath)
+		return cell
+		case .audio: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AudioNote", for: indexPath)
+		return cell
+		}
+	}
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let note = exposureNotes[indexPath.row]
+
+		switch note.exposureNoteTypeIdentifier {
+		case .photo(let photo):
+			let tuple: (UIImage, String?) = (photo.highResImage, photo.livePhotoReferenceNumber)
+			performSegue(withIdentifier: "SubjectDetailImagePreviewSegue", sender: tuple as Any)
+
+		case .movie(let url):
+			let player = AVPlayer(url: url)
+			let playerController = AVPlayerViewController()
+			playerController.player = player
+			self.present(playerController, animated: true) {
+				playerController.player!.play()
+			}
+
+		case .audio(let url):
+			let player = AVPlayer(url: url)
+			let playerController = AVPlayerViewController()
+			playerController.player = player
+			self.present(playerController, animated: true) {
+				playerController.player!.play()
+			}
 		}
 	}
 }

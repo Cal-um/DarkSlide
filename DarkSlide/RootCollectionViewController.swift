@@ -42,10 +42,19 @@ class RootCollectionViewController: UICollectionViewController, ManagedObjectCon
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "ShootSubjectSegue" {
+		switch segue.identifier {
+		case .some("ShootSubjectSegue"):
 			guard let vc = segue.destination as? SubjectCameraViewController else { fatalError("Wrong view controller type") }
 			vc.managedObjectContextStack = managedObjectContextStack
+		case .some("ShowExposureDetailSegue"):
+			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? SubjectDetailViewController else { fatalError("Wrong view controller type") }
+			vc.subject = dataSource.selectedObject
+		default: break
 		}
+	}
+
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		performSegue(withIdentifier: "ShowExposureDetailSegue", sender: nil)
 	}
 
 	@IBAction func unwindToRoot(_ seg: UIStoryboardSegue!) {

@@ -10,6 +10,8 @@ import UIKit
 
 class WeatherViewController: UITableViewController {
 
+	var latitude: Double!
+	var longitude: Double!
 	var sevenDayWeather: [DailyForecast]?
   let pullToRefresh = UIRefreshControl()
 	let downloadQueue = DispatchQueue(label: "WeatherQueue", qos: .utility, target: nil)
@@ -20,19 +22,19 @@ class WeatherViewController: UITableViewController {
 		tableView.addSubview(pullToRefresh)
 		navigationItem.titleView = activityView
 		activityView.startAnimating()
-		loadSevenDayForecast() { _ in
+		loadSevenDayForecast(lat: String(latitude), long: String(longitude)) { _ in
 			self.activityView.stopAnimating()
 			self.navigationItem.titleView = nil
 		}
 	}
 
-	@IBAction func exitScreen(_ sender: Any) {
-	dismiss(animated: true, completion: nil)
+	@IBAction func exit(_ sender: Any) {
+		dismiss(animated: true, completion: nil)
 	}
 
 	func pullToRefreshAction() {
 		sevenDayWeather = []
-		loadSevenDayForecast(completion: { _ in
+		loadSevenDayForecast(lat: String(latitude), long: String(longitude), completion: { _ in
 			DispatchQueue.main.async { [unowned self] in
 				self.pullToRefresh.endRefreshing()
 				self.tableView.reloadData()
@@ -40,7 +42,7 @@ class WeatherViewController: UITableViewController {
 		})
 	}
 
-	func loadSevenDayForecast(completion: @escaping () -> ()) {
+	func loadSevenDayForecast(lat: String, long: String, completion: @escaping () -> ()) {
 
 		downloadQueue.async { [unowned self] in
 			DarkSkyConvienience.fetchSevenDayForecast(55.8567, -4.2436) { [unowned self] result in
@@ -73,7 +75,7 @@ class WeatherViewController: UITableViewController {
 		let okButton = UIAlertAction(title: "OK", style: .cancel, handler: { _ in
 			self.pullToRefresh.endRefreshing()
 			self.activityView.stopAnimating()
-			self.navigationController?.popViewController(animated: true)
+			self.dismiss(animated: true, completion: nil)
 		})
 		ac.addAction(okButton)
 		present(ac, animated: true, completion: nil)

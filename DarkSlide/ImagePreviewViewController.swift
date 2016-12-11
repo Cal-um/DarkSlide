@@ -35,7 +35,7 @@ class ImagePreviewViewController: UIViewController {
 	@IBAction func doDismiss(_ sender: Any) {
 		presentingViewController?.dismiss(animated: true, completion: nil)
 	}
-	
+
 	deinit {
 		print("deinit")
 	}

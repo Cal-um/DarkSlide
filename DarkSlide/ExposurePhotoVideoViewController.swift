@@ -21,7 +21,7 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 
 	@IBOutlet weak var cameraUnavailableLabel: UILabel!
 	@IBOutlet weak var resumeSessionButton: UIButton!
-	
+
 	// MARK: Delegate properies. Used to observe state of photoVideo.
 
 	var observeLivePhotoModeSelected: LivePhotoMode = .off
@@ -75,7 +75,7 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 		default: break
 		}
 	}
-	
+
 	deinit {
 		print("DEINIT ExposurePhotoVideoViewController")
 	}

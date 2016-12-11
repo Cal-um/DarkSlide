@@ -44,7 +44,7 @@ extension SubjectForExposure: ManagedObjectType {
 		subject.imageOfSubject = UIImageJPEGRepresentation(image!, 0.3)
 		let byte = ByteCountFormatter()
 		print(byte.string(fromByteCount: Int64(subject.imageOfSubject!.count)))
-		
+
 		subject.dateOfExposure = Date()
 
 		if let lat = lat, let long = long {

@@ -30,11 +30,11 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 	public static var entityName: String {
 		return "PhotoNote"
 	}
-	
-	var highResImage : UIImage {
+
+	var highResImage: UIImage {
 		return UIImage(data: photoNote, scale: 0.5)!
 	}
-	
+
 	var exposureNoteTypeIdentifier: NoteType {
 		return .photo(self)
 	}
