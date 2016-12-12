@@ -11,7 +11,7 @@ import UIKit
 class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextStackSettable {
 
 	var managedObjectContextStack: ManagedObjectContextStack!
-	var subjectPhoto: UIImage?
+	var subjectPhoto: Data!
 	var latitude: Double?
 	var longitude: Double?
 	var compassHeading: Double?
@@ -20,7 +20,7 @@ class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextS
 	@IBOutlet weak var imageView: UIImageView!
 
 	override func viewDidLoad() {
-		imageView.image = subjectPhoto
+		imageView.image = UIImage(data: subjectPhoto)
 	}
 
 	@IBAction func tryAgainAction(_ sender: Any) {

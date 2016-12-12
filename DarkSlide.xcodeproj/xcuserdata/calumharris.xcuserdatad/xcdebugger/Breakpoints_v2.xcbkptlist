@@ -26,7 +26,7 @@
                   moduleName = "DarkSlide"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/calumharris/Documents/iOS%20Projects/DarkSlide/DarkSlide/WebService.swift"
-                  timestampString = "503173581.439873"
+                  timestampString = "503246173.506984"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -41,7 +41,7 @@
                   moduleName = "DarkSlide"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/calumharris/Documents/iOS%20Projects/DarkSlide/DarkSlide/WebService.swift"
-                  timestampString = "503173581.44415"
+                  timestampString = "503246173.511514"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "18"
@@ -57,14 +57,40 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DarkSlide/CollectionViewDataSource.swift"
-            timestampString = "502970635.772513"
+            filePath = "DarkSlide/SubjectDetailViewController.swift"
+            timestampString = "503185948.398435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "processUpdates(_:)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DarkSlide/SubjectDetailViewController.swift"
+            timestampString = "503241270.8015"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -38,10 +38,10 @@ extension SubjectForExposure: ManagedObjectType {
 		return "SubjectForExposure"
 	}
 
-	static func insertIntoContext(moc: NSManagedObjectContext, imageOfSubject image: UIImage?, locationLat lat: Double?, locationLong long: Double?, compassHeading heading: Double?) -> SubjectForExposure {
+	static func insertIntoContext(moc: NSManagedObjectContext, imageOfSubject image: Data, locationLat lat: Double?, locationLong long: Double?, compassHeading heading: Double?) -> SubjectForExposure {
 
 		let subject: SubjectForExposure = moc.insertObject()
-		subject.imageOfSubject = UIImageJPEGRepresentation(image!, 0.3)
+		subject.imageOfSubject = image
 		let byte = ByteCountFormatter()
 		print(byte.string(fromByteCount: Int64(subject.imageOfSubject!.count)))
 

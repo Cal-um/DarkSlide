@@ -72,10 +72,10 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 		}
 	}
 
-	static func insertIntoContext(moc: NSManagedObjectContext, photoNote photo: UIImage, livePhotoRefNumber ref: String?, subjectForExposure subject: SubjectForExposure) -> PhotoNote {
+	static func insertIntoContext(moc: NSManagedObjectContext, photoNote photo: Data, livePhotoRefNumber ref: String?, subjectForExposure subject: SubjectForExposure) -> PhotoNote {
 
 		let photoNote: PhotoNote = moc.insertObject()
-		photoNote.photoNote = UIImageJPEGRepresentation(photo, 0)!
+		photoNote.photoNote = photo
 		let byte = ByteCountFormatter()
 		print(byte.string(fromByteCount: Int64(photoNote.photoNote.count)))
 		photoNote.livePhotoReferenceNumber = (ref != nil) ? ref : nil

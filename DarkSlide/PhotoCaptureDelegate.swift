@@ -97,8 +97,6 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 		let byte = ByteCountFormatter()
 		print(byte.string(fromByteCount: Int64(photoData.count)))
 
-		let photo = UIImage(data: photoData, scale: 1)!
-
 		if let livePhotoCompanionMovieURL = self.livePhotoCompanionMovieURL {
 
 			let livePhotoReferenceNumber = PhotoNote.randomReferenceNumber
@@ -106,14 +104,14 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 			do {
 				let livePhoto = try Data(contentsOf: livePhotoCompanionMovieURL)
 				try livePhoto.write(to: PhotoNote.generateLivePhotoPath(livePhotoReferenceNumber: livePhotoReferenceNumber))
-				cameraOutputDelegate.didTakePhoto(image: photo, livePhoto: livePhotoReferenceNumber)
+				cameraOutputDelegate.didTakePhoto(jpeg: photoData, livePhoto: livePhotoReferenceNumber)
 				didFinish()
 			} catch {
 				print("Error saving livePhotoFile")
 				didFinish()
 			}
 		} else {
-			cameraOutputDelegate.didTakePhoto(image: photo, livePhoto: nil)
+			cameraOutputDelegate.didTakePhoto(jpeg: photoData, livePhoto: nil)
 		}
 	}
 }

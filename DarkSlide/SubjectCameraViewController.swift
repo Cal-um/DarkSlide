@@ -16,7 +16,7 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 	var locationManager: CLLocationManager!
 	var managedObjectContextStack: ManagedObjectContextStack!
 	var photoVideo: PhotoVideoCapture!
-	var chosenSubjectImage: UIImage!
+	var chosenSubjectImage: Data!
 
 	@IBOutlet weak var cameraView: PreviewView!
 	@IBOutlet weak var resumeSessionButton: UIButton!
@@ -168,8 +168,8 @@ extension SubjectCameraViewController: CameraViewDelegate, CameraOutputDelegate 
 		self.present(unableToResumeUninteruptedSessionAlertController(), animated: true, completion: nil)
 	}
 
-	func didTakePhoto(image: UIImage, livePhoto: String?) {
-		chosenSubjectImage = image
+	func didTakePhoto(jpeg: Data, livePhoto: String?) {
+		chosenSubjectImage = jpeg
 		performSegue(withIdentifier: "Preview Subject Photo Segue", sender: self)
 	}
 

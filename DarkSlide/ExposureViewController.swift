@@ -44,7 +44,7 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 	}
 
 	@IBAction func saveSubjectAndUnwind(_ sender: Any) {
-		managedObjectContextStack.backgroundContext.trySave()
+		managedObjectContextStack.mainContext.trySave()
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
 	}
 
@@ -71,9 +71,9 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 
 extension ExposureViewController: CameraOutputDelegate {
 
-	func didTakePhoto(image: UIImage, livePhoto: String?) {
+	func didTakePhoto(jpeg: Data, livePhoto: String?) {
 
-		let photo = PhotoNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, photoNote: image, livePhotoRefNumber: livePhoto, subjectForExposure: self.subject)
+		let photo = PhotoNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, photoNote: jpeg, livePhotoRefNumber: livePhoto, subjectForExposure: self.subject)
 		self.exposureNotes.insert(photo, at: 0)
 		let paths = [IndexPath(row: 0, section: 0)]
 		self.collectionView.insertItems(at: paths)

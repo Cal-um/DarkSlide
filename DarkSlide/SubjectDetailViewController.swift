@@ -36,8 +36,10 @@ class SubjectDetailViewController: UIViewController {
 		navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 		navigationItem.leftItemsSupplementBackButton = true
 		configureLabels()
-		fetchNotes() { results in exposureNotes = results }
-		collectionView.reloadData()
+		fetchNotes() { results in
+			exposureNotes = results
+			collectionView.reloadData()
+		}
 		setMapView()
 	}
 
@@ -69,12 +71,15 @@ class SubjectDetailViewController: UIViewController {
 
 		let photoNotes: [PhotoNote] = PhotoNote.fetchInContext(subject.managedObjectContext!) { (request) -> () in
 			request.predicate = NSPredicate(format: "subject = %@", argumentArray: [subject])
+			request.returnsObjectsAsFaults = false
 		}
 		let audioNotes: [AudioNote] = AudioNote.fetchInContext(subject.managedObjectContext!) { (request) -> () in
 			request.predicate = NSPredicate(format: "subject = %@", argumentArray: [subject])
+			request.returnsObjectsAsFaults = false
 		}
 		let movieNotes: [MovieNote] = MovieNote.fetchInContext(subject.managedObjectContext!) { (request) -> () in
 			request.predicate = NSPredicate(format: "subject = %@", argumentArray: [subject])
+			request.returnsObjectsAsFaults = false
 		}
 
 		for i in photoNotes {
