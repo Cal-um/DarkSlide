@@ -7,17 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
-class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextStackSettable {
+class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextSettable {
 
-	var managedObjectContextStack: ManagedObjectContextStack!
+	var managedObjectContext: NSManagedObjectContext!
 	var subjectPhoto: Data!
+	var thumbnailImage: Data!
 	var latitude: Double?
 	var longitude: Double?
 	var compassHeading: Double?
 	var subject: SubjectForExposure?
+	
+	
+	weak var delegate: PreviewSubjectPhotoViewControllerDelegate!
 
 	@IBOutlet weak var imageView: UIImageView!
+	
+	deinit {
+		print("PreviewSubjectPhotoViewController DEINIT")
+	}
 
 	override func viewDidLoad() {
 		imageView.image = UIImage(data: subjectPhoto)
@@ -28,16 +37,16 @@ class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextS
 	}
 
 	@IBAction func choosePhotoAction(_ sender: Any) {
-
-		subject = SubjectForExposure.insertIntoContext(moc: managedObjectContextStack.mainContext, imageOfSubject: subjectPhoto, locationLat: latitude, locationLong: longitude, compassHeading: compassHeading)
-		managedObjectContextStack.mainContext.trySave()
+		delegate.loadOnAppear = false
+		subject = SubjectForExposure.insertIntoContext(moc: managedObjectContext, imageOfSubject: subjectPhoto, thumbnailImage: thumbnailImage, locationLat: latitude, locationLong: longitude, compassHeading: compassHeading)
+		managedObjectContext.trySave()
 		performSegue(withIdentifier: "Chosen Photo Segue", sender: self)
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "Chosen Photo Segue" {
 			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? ExposureViewController else { fatalError("wrong view controller type") }
-			vc.managedObjectContextStack = managedObjectContextStack
+			vc.managedObjectContext = managedObjectContext
 			vc.subject = subject
 		}
 	}

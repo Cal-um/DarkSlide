@@ -11,11 +11,10 @@ import AVFoundation
 import CoreData
 import AVKit
 
-class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextStackSettable {
+class ExposurePhotoVideoViewController: UIViewController {
 
 	// MARK: View Controller properties and life cycle
 
-	var managedObjectContextStack: ManagedObjectContextStack!
 	weak var cameraOutputDelegate: CameraOutputDelegate!
 	weak var audioOutputDelegate: AudioNoteDelegate!
 
@@ -32,36 +31,40 @@ class ExposurePhotoVideoViewController: UIViewController, ManagedObjectContextSt
 	@IBOutlet weak var cameraView: PreviewView!
 
 	var photoVideo: PhotoVideoCapture!
-
+	
 	override func viewDidLoad() {
 		// set up video preview and PhotoAudioVideo object
+
 		photoVideo = PhotoVideoCapture(cameraViewDelegate: self, cameraOutputDelegate: cameraOutputDelegate)
 		// The default is livePhoto off so this ensures live photo is on for capable devices
 		photoVideo.toggleLivePhotoMode()
-
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		photoVideo.viewAppeared()
 	}
-
+	
 	override func viewWillDisappear(_ animated: Bool) {
 		photoVideo.viewDissapeared()
-		super.viewWillDisappear(true)
 	}
 
 	@IBOutlet weak var takeExposureButton: UIButton!
+	
+	@IBAction func audioButtonTapped(_ sender: Any) {
+		photoVideo.viewDissapeared()
+	}
+	
+	@IBAction func fullScreenTapped(_ sender: Any) {
+		photoVideo.viewDissapeared()
+	}
+	
 
 	@IBAction func resumeSession(_ sender: Any) {
 		photoVideo.resumeInterupptedSession()
 	}
 
 	@IBAction func tapExposureButton(_ sender: Any) {
-		takePhoto()
-	}
-
-	func takePhoto() {
-			photoVideo.capturePhoto()
+		photoVideo.capturePhoto()
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

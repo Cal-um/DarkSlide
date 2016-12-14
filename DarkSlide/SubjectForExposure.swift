@@ -13,7 +13,8 @@ public final class SubjectForExposure: ManagedObject {
 
 	// Some properties are defined with private(set) to disable changes. The remaining properties may be updated at a later time to allow concurrency.
 
-	@NSManaged public var imageOfSubject: Data?
+	@NSManaged public var imageOfSubject: Data
+	@NSManaged public var thumbnailImage: Data
 	@NSManaged public var dateOfExposure: Date
 	@NSManaged public var locationLat: NSNumber?
 	@NSManaged public var locationLong: NSNumber?
@@ -25,10 +26,9 @@ public final class SubjectForExposure: ManagedObject {
 	@NSManaged public var darkSlideUsed: DarkSlide?
 	@NSManaged public var audioNote: Set<AudioNote>?
 	@NSManaged public var movieNote: Set<MovieNote>?
-
+	
 	lazy var lowResImage: UIImage? = {
-		guard let imageData = self.imageOfSubject else { return nil }
-		return UIImage(data: imageData, scale: 0)
+		return UIImage(data: self.thumbnailImage, scale: 1)
 	}()
 }
 
@@ -38,13 +38,11 @@ extension SubjectForExposure: ManagedObjectType {
 		return "SubjectForExposure"
 	}
 
-	static func insertIntoContext(moc: NSManagedObjectContext, imageOfSubject image: Data, locationLat lat: Double?, locationLong long: Double?, compassHeading heading: Double?) -> SubjectForExposure {
+	static func insertIntoContext(moc: NSManagedObjectContext, imageOfSubject image: Data, thumbnailImage thumbnail: Data, locationLat lat: Double?, locationLong long: Double?, compassHeading heading: Double?) -> SubjectForExposure {
 
 		let subject: SubjectForExposure = moc.insertObject()
 		subject.imageOfSubject = image
-		let byte = ByteCountFormatter()
-		print(byte.string(fromByteCount: Int64(subject.imageOfSubject!.count)))
-
+		subject.thumbnailImage = thumbnail
 		subject.dateOfExposure = Date()
 
 		if let lat = lat, let long = long {

@@ -11,9 +11,9 @@ import CoreData
 import AVFoundation
 import AVKit
 
-class ExposureViewController: UIViewController, ManagedObjectContextStackSettable {
+class ExposureViewController: UIViewController, ManagedObjectContextSettable {
 
-	var managedObjectContextStack: ManagedObjectContextStack!
+	var managedObjectContext: NSManagedObjectContext!
 	var subject: SubjectForExposure!
 	var exposureNotes: [ExposureNote] = []
 
@@ -21,9 +21,8 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 	@IBOutlet weak var collectionView: UICollectionView!
 
 	override func viewDidLoad() {
-		if let image = subject.imageOfSubject {
-			imageView.image = UIImage(data: image)
-		}
+		let image = subject.thumbnailImage
+		imageView.image = UIImage(data: image)
 		collectionView.delegate = self
 		collectionView.dataSource = self
 		collectionView?.register(UINib(nibName: "PhotoNoteCell", bundle: nil), forCellWithReuseIdentifier: "PhotoNote")
@@ -36,15 +35,21 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 		let width = collectionView.bounds.height
 		layout.itemSize = CGSize(width: width, height: width)
 	}
-
+	
 	@IBAction func discardSubjetAndUnwind(_ sender: Any) {
-		managedObjectContextStack.mainContext.delete(subject)
-		managedObjectContextStack.mainContext.trySave()
+		NotificationCenter.default.post(name: Notification.Name(NotificationIdentifiers.PhotoVideo.WillClosePreviewView), object: nil)
+		managedObjectContext.delete(subject)
+		managedObjectContext.trySave()
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		print("ViewDissapeared 2")
 	}
 
 	@IBAction func saveSubjectAndUnwind(_ sender: Any) {
-		managedObjectContextStack.mainContext.trySave()
+		NotificationCenter.default.post(name: Notification.Name(NotificationIdentifiers.PhotoVideo.WillClosePreviewView), object: nil)
+		managedObjectContext.trySave()
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
 	}
 
@@ -52,7 +57,6 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 		switch segue.identifier {
 		case .some("ExposurePhotoVideoViewControllerSegue"):
 			guard let vc = segue.destination as? ExposurePhotoVideoViewController else { fatalError("wrong view controller type") }
-			vc.managedObjectContextStack = managedObjectContextStack
 			vc.cameraOutputDelegate = self
 			vc.audioOutputDelegate = self
 		case .some("ExposurePreviewImageSegue") :
@@ -71,26 +75,20 @@ class ExposureViewController: UIViewController, ManagedObjectContextStackSettabl
 
 extension ExposureViewController: CameraOutputDelegate {
 
-	func didTakePhoto(jpeg: Data, livePhoto: String?) {
+	func didTakePhoto(jpeg: Data, thumbnail: Data, livePhoto: String?) {
 
-		let photo = PhotoNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, photoNote: jpeg, livePhotoRefNumber: livePhoto, subjectForExposure: self.subject)
+		let photo = PhotoNote.insertIntoContext(moc: managedObjectContext, photoNote: jpeg, thumbnailImage: thumbnail, livePhotoRefNumber: livePhoto, subjectForExposure: self.subject)
 		self.exposureNotes.insert(photo, at: 0)
 		let paths = [IndexPath(row: 0, section: 0)]
 		self.collectionView.insertItems(at: paths)
-
 	}
 
 	func didTakeVideo(videoReferenceNumber: String) {
-		// test that shows that video does save.
 		print(MovieNote.generateMoviePath(movieReferenceNumber: videoReferenceNumber))
-		DispatchQueue.global(qos: .utility).async { [unowned self] in
-			let video = MovieNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, movieReferenceNumber: videoReferenceNumber, subjectForExposure: self.subject)
-			DispatchQueue.main.async {
+			let video = MovieNote.insertIntoContext(moc: self.managedObjectContext, movieReferenceNumber: videoReferenceNumber, subjectForExposure: self.subject)
 				self.exposureNotes.insert(video, at: 0)
 				let paths = [IndexPath(row: 0, section: 0)]
 				self.collectionView.insertItems(at: paths)
-			}
-		}
 	}
 }
 
@@ -148,13 +146,9 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 extension ExposureViewController: AudioNoteDelegate {
 
 	func didSaveAudioRecording(fileReferenceNumber: String) {
-		DispatchQueue.global(qos: .utility).async {
-			let audio = AudioNote.insertIntoContext(moc: self.managedObjectContextStack.mainContext, audioURL: fileReferenceNumber, subjectForExposure: self.subject)
-			DispatchQueue.main.async {
-				self.exposureNotes.insert(audio, at: 0)
-				let paths = [IndexPath(row: 0, section: 0)]
-				self.collectionView.insertItems(at: paths)
-			}
-		}
+			let audio = AudioNote.insertIntoContext(moc: self.managedObjectContext, audioURL: fileReferenceNumber, subjectForExposure: self.subject)
+			self.exposureNotes.insert(audio, at: 0)
+			let paths = [IndexPath(row: 0, section: 0)]
+			self.collectionView.insertItems(at: paths)
 	}
 }

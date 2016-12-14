@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-class RootCollectionViewController: UICollectionViewController, ManagedObjectContextStackSettable {
+class RootCollectionViewController: UICollectionViewController, ManagedObjectContextSettable {
 
-	var managedObjectContextStack: ManagedObjectContextStack!
+	var managedObjectContext: NSManagedObjectContext!
 
 	override func viewDidLoad() {
 		splitViewController?.delegate = self
@@ -35,7 +35,7 @@ class RootCollectionViewController: UICollectionViewController, ManagedObjectCon
 	private func setUpCollectionView() {
 		let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "SubjectForExposure")
 		request.sortDescriptors = [NSSortDescriptor(key: "dateOfExposure", ascending: false)]
-		let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContextStack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+		let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
 		let dataProvider = FetchedResultsDataProvider(fetchedResultsController: frc, delegate: self)
 		guard let cv = collectionView else { fatalError("must have collection view") }
 		dataSource = CollectionViewDataSource(collectionView: cv, dataProvider: dataProvider, delegate: self)
@@ -45,7 +45,7 @@ class RootCollectionViewController: UICollectionViewController, ManagedObjectCon
 		switch segue.identifier {
 		case .some("ShootSubjectSegue"):
 			guard let vc = segue.destination as? SubjectCameraViewController else { fatalError("Wrong view controller type") }
-			vc.managedObjectContextStack = managedObjectContextStack
+			vc.managedObjectContext = managedObjectContext
 		case .some("ShowExposureDetailSegue"):
 			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? SubjectDetailViewController else { fatalError("Wrong view controller type") }
 			vc.subject = dataSource.selectedObject

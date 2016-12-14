@@ -23,6 +23,7 @@
 		3A0FA40E1DEE32770090D5C8 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FA40D1DEE32770090D5C8 /* ImagePreviewViewController.swift */; };
 		3A0FFFDD1DDF068400AFA88B /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FFFDC1DDF068400AFA88B /* SpeechToText.swift */; };
 		3A0FFFDF1DDF086F00AFA88B /* SpeechToTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0FFFDE1DDF086F00AFA88B /* SpeechToTextDelegate.swift */; };
+		3A1293381DFFEA0200F7BD4A /* NotificationIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1293371DFFEA0200F7BD4A /* NotificationIdentifiers.swift */; };
 		3A215D111D8C075600876F00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D101D8C075600876F00 /* AppDelegate.swift */; };
 		3A215D161D8C075600876F00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A215D141D8C075600876F00 /* Main.storyboard */; };
 		3A215D1B1D8C075600876F00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A215D191D8C075600876F00 /* LaunchScreen.storyboard */; };
@@ -93,6 +94,7 @@
 		3A0FA40D1DEE32770090D5C8 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		3A0FFFDC1DDF068400AFA88B /* SpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
 		3A0FFFDE1DDF086F00AFA88B /* SpeechToTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextDelegate.swift; sourceTree = "<group>"; };
+		3A1293371DFFEA0200F7BD4A /* NotificationIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationIdentifiers.swift; sourceTree = "<group>"; };
 		3A215D0D1D8C075600876F00 /* DarkSlide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarkSlide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A215D101D8C075600876F00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A215D151D8C075600876F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			children = (
 				3A215D461D90306500876F00 /* Utilities.swift */,
 				3A215D421D90256400876F00 /* Protocols.swift */,
+				3A1293371DFFEA0200F7BD4A /* NotificationIdentifiers.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				3A55D67F1DF9650100FD1AD9 /* DataProvider.swift in Sources */,
 				3A0FA4001DE9F9A00090D5C8 /* DarkSkyConvienience.swift in Sources */,
 				3A7319611DE7113D00C9B16A /* RootCollectionViewController.swift in Sources */,
+				3A1293381DFFEA0200F7BD4A /* NotificationIdentifiers.swift in Sources */,
 				3A215D491D9149A300876F00 /* PortraitNavigationController.swift in Sources */,
 				3AC8214A1D93F613003C484D /* MovieNote.swift in Sources */,
 				3A215D321D8C542900876F00 /* CoreDataStack.swift in Sources */,

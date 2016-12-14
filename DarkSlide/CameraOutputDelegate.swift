@@ -9,6 +9,6 @@
 import UIKit
 
 protocol CameraOutputDelegate: class {
-	func didTakePhoto(jpeg: Data, livePhoto: String?)
+	func didTakePhoto(jpeg: Data, thumbnail: Data, livePhoto: String?)
 	func didTakeVideo(videoReferenceNumber: String)
 }

@@ -7,9 +7,15 @@
 //
 
 import AVFoundation
+import UIKit
 import Photos
 
 class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
+	
+	deinit {
+		print("PhotoCaptureDelegate DEINIT")
+	}
+	
 	private(set) var requestedPhotoSettings: AVCapturePhotoSettings
 
 	private let willCapturePhotoAnimation: () -> ()
@@ -19,6 +25,7 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 	private let completed: (PhotoCaptureDelegate) -> ()
 
 	private var photoData: Data? = nil
+	private var previewImage: UIImage? = nil
 
 	private var livePhotoCompanionMovieURL: URL? = nil
 
@@ -26,7 +33,7 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 
 	private let cameraOutputDelegate: CameraOutputDelegate!
 
-	init(with requestedPhotoSettings: AVCapturePhotoSettings, cameraViewDelegate: CameraViewDelegate, cameraOutputDelegate: CameraOutputDelegate, willCapturePhotoAnimation: @escaping () -> (), capturingLivePhoto: @escaping (Bool) -> (), completed: @escaping (PhotoCaptureDelegate) -> ()) {
+	init(with requestedPhotoSettings: AVCapturePhotoSettings, cameraViewDelegate: CameraViewDelegate, cameraOutputDelegate: CameraOutputDelegate,  willCapturePhotoAnimation: @escaping () -> (), capturingLivePhoto: @escaping (Bool) -> (), completed: @escaping (PhotoCaptureDelegate) -> ()) {
 		self.requestedPhotoSettings = requestedPhotoSettings
 		self.willCapturePhotoAnimation = willCapturePhotoAnimation
 		self.capturingLivePhoto = capturingLivePhoto
@@ -45,7 +52,6 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 				}
 			}
 		}
-
 		completed(self)
 	}
 
@@ -60,8 +66,14 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 	}
 
 	func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
-		if let photoSampleBuffer = photoSampleBuffer {
-			photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
+		if let photoSampleBuffer = photoSampleBuffer, let previewPhotoSampleBuffer = previewPhotoSampleBuffer {
+			photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: nil)
+			let imageOrientation = UIImage(data: photoData!, scale: 0)?.imageOrientation
+			let previewBuff = CMSampleBufferGetImageBuffer(previewPhotoSampleBuffer)
+			let ciPreview = CIImage(cvPixelBuffer: previewBuff!)
+			let cgPreview = CIContext(options: nil).createCGImage(ciPreview, from: ciPreview.extent)
+			previewImage = UIImage(cgImage: cgPreview!, scale: 0.3, orientation: imageOrientation!)
+			
 		} else {
 			print("Error capturing photo: \(error)")
 			return
@@ -88,14 +100,17 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 			return
 		}
 
-		guard let photoData = photoData else {
+		guard let photoData = photoData, let previewImage = previewImage else {
 			print("No photo data resource")
 			didFinish()
 			return
 		}
-
+		
+		let thumbnailData = UIImageJPEGRepresentation(previewImage, 0.3)!
 		let byte = ByteCountFormatter()
-		print(byte.string(fromByteCount: Int64(photoData.count)))
+		print("FULL IMAGE \(byte.string(fromByteCount: Int64(photoData.count)))")
+		print("PREVIEW IMAGE \(byte.string(fromByteCount: Int64(thumbnailData.count)))")
+		
 
 		if let livePhotoCompanionMovieURL = self.livePhotoCompanionMovieURL {
 
@@ -104,14 +119,15 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 			do {
 				let livePhoto = try Data(contentsOf: livePhotoCompanionMovieURL)
 				try livePhoto.write(to: PhotoNote.generateLivePhotoPath(livePhotoReferenceNumber: livePhotoReferenceNumber))
-				cameraOutputDelegate.didTakePhoto(jpeg: photoData, livePhoto: livePhotoReferenceNumber)
+				cameraOutputDelegate.didTakePhoto(jpeg: photoData, thumbnail: thumbnailData,  livePhoto: livePhotoReferenceNumber)
 				didFinish()
 			} catch {
 				print("Error saving livePhotoFile")
 				didFinish()
 			}
 		} else {
-			cameraOutputDelegate.didTakePhoto(jpeg: photoData, livePhoto: nil)
+			cameraOutputDelegate.didTakePhoto(jpeg: photoData, thumbnail: thumbnailData, livePhoto: nil)
+			didFinish()
 		}
 	}
 }

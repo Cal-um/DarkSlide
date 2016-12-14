@@ -12,7 +12,9 @@ import AVFoundation
 class PreviewView: UIView {
 
 	var videoPreviewLayer: AVCaptureVideoPreviewLayer!
-
+	
+	var shutterSimulation: UIView!
+	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setup()
@@ -27,16 +29,19 @@ class PreviewView: UIView {
 		previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
 		layer.insertSublayer(previewLayer, at: 0)
 		videoPreviewLayer = previewLayer
-
 	}
 
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		videoPreviewLayer.frame = bounds
-
+		
 	}
 
 	private func setup() {
-		backgroundColor = UIColor.black
+		shutterSimulation = UIView(frame: bounds)
+		shutterSimulation.backgroundColor = .black
+		shutterSimulation.alpha = 0
+		addSubview(shutterSimulation)
+		backgroundColor = .black
 	}
 }

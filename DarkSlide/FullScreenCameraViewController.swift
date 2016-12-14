@@ -28,6 +28,10 @@ class FullScreenCameraViewController: UIViewController {
 	@IBOutlet weak var livePhotoToggle: UIButton!
 	@IBOutlet weak var cameraUnavailableLabel: UILabel!
 	@IBOutlet weak var resumeSessionButton: UIButton!
+	
+	deinit {
+		print("FullScreenCameraViewController DEINIT")
+	}
 
 	// MARK: Delegate properies. Used to observe state of photoVideo
 
@@ -136,7 +140,7 @@ class FullScreenCameraViewController: UIViewController {
 	}
 
 	@IBAction func backButton(_ sender: AnyObject) {
-		photoVideo.viewDissapeared()
+		photoVideo.stopAndNullifySession()
 		//self.dismiss(animated: true, completion: nil)
 		presentingViewController!.dismiss(animated: true, completion: nil)
 	}

@@ -9,14 +9,28 @@
 import UIKit
 import AVFoundation
 import CoreLocation
+import CoreData
 
-class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSettable {
+class SubjectCameraViewController: UIViewController, ManagedObjectContextSettable {
 
 	// MARK: properties and life cycle
 	var locationManager: CLLocationManager!
-	var managedObjectContextStack: ManagedObjectContextStack!
+	var managedObjectContext: NSManagedObjectContext!
+	
 	var photoVideo: PhotoVideoCapture!
 	var chosenSubjectImage: Data!
+	var thumbnailImage: Data!
+	var loadOnAppear: Bool = true {
+		didSet {
+			if !loadOnAppear {
+				photoVideo.stopAndNullifySession()
+			}
+		}
+	}
+	
+	deinit {
+		print("SubjectCameraViewController DEINIT")
+	}
 
 	@IBOutlet weak var cameraView: PreviewView!
 	@IBOutlet weak var resumeSessionButton: UIButton!
@@ -50,12 +64,15 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 		photoVideo.toggleFlashMode()
 		print(observeFlashConfiguration)
 		locationManager = CLLocationManager()
+
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(true)
-		photoVideo.viewAppeared()
-		configureLocationManager()
+		if loadOnAppear {
+			photoVideo.viewAppeared()
+			configureLocationManager()
+		}
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {
@@ -75,22 +92,23 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 	// MARK: Camera Actions
 
 	@IBAction func resumeCameraSession(_ sender: Any) {
-		photoVideo.resumeInterupptedSession()
+		photoVideo?.resumeInterupptedSession()
 	}
 
 	@IBAction func dissmissViewController(_ sender: Any) {
+		photoVideo.stopAndNullifySession()
 		self.dismiss(animated: true)
 	}
 
 	@IBAction func takePhoto(_ sender: Any) {
-		photoVideo.capturePhoto()
+		photoVideo?.capturePhoto()
 	}
 
 	@IBAction func pinchToZoom(_ sender: UIPinchGestureRecognizer) {
 		print("Pinch")
 		let vZoomFactor = sender.scale
 		print("ZOOM HAPPENING IS OF \(vZoomFactor)")
-		photoVideo.zoom(zoomFactorFromPinchGesture: vZoomFactor)
+		photoVideo?.zoom(zoomFactorFromPinchGesture: vZoomFactor)
 	}
 
 	// MARK: Location and heading variables
@@ -143,8 +161,10 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextStackSe
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "Preview Subject Photo Segue" {
 			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? PreviewSubjectPhotoViewController else { fatalError("wrong view controller type") }
-			vc.managedObjectContextStack = managedObjectContextStack
+			vc.managedObjectContext = managedObjectContext
 			vc.subjectPhoto = chosenSubjectImage
+			vc.thumbnailImage = thumbnailImage
+			vc.delegate = self
 
 			if let coordinates = coordinates {
 				vc.latitude = coordinates.latitude
@@ -168,8 +188,9 @@ extension SubjectCameraViewController: CameraViewDelegate, CameraOutputDelegate 
 		self.present(unableToResumeUninteruptedSessionAlertController(), animated: true, completion: nil)
 	}
 
-	func didTakePhoto(jpeg: Data, livePhoto: String?) {
+	func didTakePhoto(jpeg: Data, thumbnail: Data, livePhoto: String?) {
 		chosenSubjectImage = jpeg
+		thumbnailImage = thumbnail
 		performSegue(withIdentifier: "Preview Subject Photo Segue", sender: self)
 	}
 
@@ -236,3 +257,5 @@ extension SubjectCameraViewController: CLLocationManagerDelegate {
 
 	}
 }
+
+extension SubjectCameraViewController: PreviewSubjectPhotoViewControllerDelegate {}

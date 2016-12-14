@@ -12,6 +12,7 @@ import CoreData
 public final class PhotoNote: ManagedObject {
 
 	@NSManaged public var photoNote: Data
+	@NSManaged public var thumbnailImage: Data
 	@NSManaged public var livePhotoReferenceNumber: String?
 
 	// Relationship properties
@@ -21,7 +22,7 @@ public final class PhotoNote: ManagedObject {
 	// this variable was added to improve collectionView scroll perfomance.
 	//var lowResCachedThumbnail: UIImage?
 	lazy var lowResCachedThumbnail: UIImage = {
-		return UIImage(data: self.photoNote, scale: 0)
+		return UIImage(data: self.thumbnailImage, scale: 1)
 	}()!
 }
 
@@ -72,10 +73,11 @@ extension PhotoNote: ManagedObjectType, ExposureNote {
 		}
 	}
 
-	static func insertIntoContext(moc: NSManagedObjectContext, photoNote photo: Data, livePhotoRefNumber ref: String?, subjectForExposure subject: SubjectForExposure) -> PhotoNote {
+	static func insertIntoContext(moc: NSManagedObjectContext, photoNote photo: Data, thumbnailImage thumbnail: Data, livePhotoRefNumber ref: String?, subjectForExposure subject: SubjectForExposure) -> PhotoNote {
 
 		let photoNote: PhotoNote = moc.insertObject()
 		photoNote.photoNote = photo
+		photoNote.thumbnailImage = thumbnail
 		let byte = ByteCountFormatter()
 		print(byte.string(fromByteCount: Int64(photoNote.photoNote.count)))
 		photoNote.livePhotoReferenceNumber = (ref != nil) ? ref : nil

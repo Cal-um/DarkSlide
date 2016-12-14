@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 protocol ManagedObjectContextStackSettable {
 	var managedObjectContextStack: ManagedObjectContextStack! { get set }
+}
+
+protocol ManagedObjectContextSettable {
+	var managedObjectContext: NSManagedObjectContext! { get set }
 }
 
 protocol ExposureNote: class {
@@ -26,4 +31,8 @@ protocol ConfigurableCell {
 	associatedtype DataSource
 	func configureCell(_ object: DataSource)
 	func nameCell()
+}
+
+protocol PreviewSubjectPhotoViewControllerDelegate: class {
+	var loadOnAppear: Bool { get set }
 }

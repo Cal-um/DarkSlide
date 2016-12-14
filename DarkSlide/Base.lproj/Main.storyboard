@@ -188,6 +188,7 @@
                                 <rect key="frame" x="264" y="10" width="40" height="30"/>
                                 <state key="normal" title="Audio"/>
                                 <connections>
+                                    <action selector="audioButtonTapped:" destination="uKw-RA-TCz" eventType="touchUpInside" id="Kxx-4x-CQO"/>
                                     <segue destination="QDx-XM-MsZ" kind="presentation" identifier="AudioSegue" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="bqX-eU-43F"/>
                                 </connections>
                             </button>
@@ -195,6 +196,7 @@
                                 <rect key="frame" x="16" y="10" width="76" height="30"/>
                                 <state key="normal" title="Full Screen"/>
                                 <connections>
+                                    <action selector="fullScreenTapped:" destination="uKw-RA-TCz" eventType="touchUpInside" id="aYX-LA-2v7"/>
                                     <segue destination="xhV-1D-f0p" kind="presentation" identifier="FullViewSegue" id="Q77-Fy-ru0"/>
                                 </connections>
                             </button>
@@ -254,7 +256,7 @@
                                             <constraint firstAttribute="width" secondItem="WQE-rb-kt4" secondAttribute="height" multiplier="1:1" id="Wrb-02-IaV"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <state key="normal" title="arrow"/>
+                                        <state key="normal" title="Options"/>
                                         <connections>
                                             <action selector="tapToToggleOptionTabConstraint:" destination="xhV-1D-f0p" eventType="touchUpInside" id="LVv-Nd-fHU"/>
                                         </connections>
@@ -339,12 +341,12 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHH-Z9-oWy">
-                                        <rect key="frame" x="8" y="13" width="35" height="35"/>
+                                        <rect key="frame" x="8" y="13" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="NHH-Z9-oWy" secondAttribute="height" multiplier="1:1" id="DRh-Em-z0a"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Back"/>
                                         <connections>
                                             <action selector="backButton:" destination="xhV-1D-f0p" eventType="touchUpInside" id="1aj-IY-PL2"/>
                                         </connections>

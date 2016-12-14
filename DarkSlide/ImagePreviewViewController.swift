@@ -15,6 +15,10 @@ class ImagePreviewViewController: UIViewController {
 	var highResPhotoWithLivePhotoRef: (UIImage, String?)!
 	@IBOutlet weak var imageView: UIImageView!
 
+	deinit {
+		print("ImagePreviewViewController DEINIT")
+	}
+	
 	override func viewDidLoad() {
 		imageView.image = highResPhotoWithLivePhotoRef.0
 	}
@@ -35,9 +39,4 @@ class ImagePreviewViewController: UIViewController {
 	@IBAction func doDismiss(_ sender: Any) {
 		presentingViewController?.dismiss(animated: true, completion: nil)
 	}
-
-	deinit {
-		print("deinit")
-	}
-
 }

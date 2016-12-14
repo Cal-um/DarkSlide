@@ -10,6 +10,10 @@ import UIKit
 import AVFoundation
 
 class AudioRecorder: NSObject {
+	
+	deinit {
+		print("AudioRecorder DEINIT")
+	}
 
 	weak var delegate: AudioRecorderDelegate!
 

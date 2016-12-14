@@ -15,6 +15,10 @@ class ExposureAudioNoteViewController: UIViewController {
 
 	weak var audioNoteDelegate: AudioNoteDelegate!
 	var audioRecorder: AudioRecorder!
+	
+	deinit {
+		print("ExposureAudioViewController DEINIT")
+	}
 
 	@IBAction func dismissViewController(_ sender: Any) {
 		presentingViewController!.dismiss(animated: true, completion: nil)
@@ -24,6 +28,7 @@ class ExposureAudioNoteViewController: UIViewController {
 
 	override func viewDidLoad() {
 		audioRecorder = AudioRecorder(delegate: self)
+		addObservers()
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -32,6 +37,14 @@ class ExposureAudioNoteViewController: UIViewController {
 
 	@IBAction func toggleAudioRecording(_ sender: Any) {
 		audioRecorder.toggleAudioRecording()
+	}
+	
+	func addObservers() {
+		NotificationCenter.default.addObserver(self, selector: #selector(self.exitViewController), name: Notification.Name(NotificationIdentifiers.PhotoVideo.WillClosePreviewView), object: nil)
+	}
+	
+	func exitViewController() {
+		dismiss(animated: true, completion: nil)
 	}
 
 	var player: AudioPlayer!
