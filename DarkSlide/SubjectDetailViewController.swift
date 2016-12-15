@@ -14,7 +14,7 @@ import AVKit
 class SubjectDetailViewController: UIViewController {
 
 	// MOC properties
-	var subject: SubjectForExposure!
+	var subject: SubjectForExposure?
 	var exposureNotes: [ExposureNote] = []
 	//IB properties
 	@IBOutlet weak var showWeatherButton: UIBarButtonItem!
@@ -25,9 +25,14 @@ class SubjectDetailViewController: UIViewController {
 	@IBOutlet weak var coordinatesLabel: UILabel!
 	@IBOutlet weak var facingLabel: UILabel!
 	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var stackView: UIStackView!
+	@IBOutlet weak var darkSlideTitle: UILabel!
 
 	// View life cycle
 	override func viewDidLoad() {
+		if SubjectForExposure == nil {
+			hideAllAndShowLabel()
+		}
 		collectionView?.delegate = self
 		collectionView?.dataSource = self
 		collectionView?.register(UINib(nibName: "PhotoNoteCell", bundle: nil), forCellWithReuseIdentifier: "PhotoNote")
@@ -63,6 +68,14 @@ class SubjectDetailViewController: UIViewController {
 		let annotation = MKPointAnnotation()
 		annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
 		mapView.addAnnotation(annotation)
+	}
+	
+	func hideAllAndShowLabel() {
+		mapView.isHidden = true
+		subjectImageView.isHidden = true
+		collectionView.isHidden = true
+		stackView.isHidden = true
+		darkSlideTitle.isHidden = false
 	}
 
 	func fetchNotes(completion: ([ExposureNote]) -> ()) {

@@ -29,7 +29,9 @@ class ExposurePhotoVideoViewController: UIViewController {
 	var observeCameraFacing: CameraFacing = .front
 	var observeLivePhotoPlaying: Bool = false {
 		didSet {
-			livePhotoIndicator.isHidden = !observeLivePhotoPlaying
+			DispatchQueue.main.async {
+				self.livePhotoIndicator.isHidden = !self.observeLivePhotoPlaying
+			}
 		}
 	}
 	var observeMovieRecording: Bool = false
@@ -101,8 +103,8 @@ extension ExposurePhotoVideoViewController: CameraViewDelegate {
 		livePhotoIndicator.layer.cornerRadius = livePhotoIndicator.bounds.width / 2
 		livePhotoIndicator.clipsToBounds = true
 		livePhotoIndicator.layer.masksToBounds = true
-		livePhotoIndicator.backgroundColor = .orange
 		livePhotoIndicator.isHidden = true
+		livePhotoIndicator.backgroundColor = .orange
 	}
 
 	func enableButtons(buttonconfiguration: ButtonConfiguration) {

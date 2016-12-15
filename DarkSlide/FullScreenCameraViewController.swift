@@ -39,8 +39,10 @@ class FullScreenCameraViewController: UIViewController {
 	var observeLivePhotoPlaying: Bool = false {
 		didSet {
 			print("LIVEPHOTO")
-			livePhotoIndicator.backgroundColor = .orange
-			livePhotoIndicator.isHidden = !observeLivePhotoPlaying
+			DispatchQueue.main.async {
+				self.livePhotoIndicator.backgroundColor = .orange
+				self.livePhotoIndicator.isHidden = !self.observeLivePhotoPlaying
+			}
 		}
 	}
 
@@ -123,6 +125,7 @@ class FullScreenCameraViewController: UIViewController {
 		photoVideo = PhotoVideoCapture(cameraViewDelegate: self, cameraOutputDelegate: cameraOutputDelegate)
 		openCloseCameraOptionTab()
 		bringSubviewsToFront()
+		livePhotoIndicator.isHidden = true
 		// The default is livePhoto off so this ensures live photo is on for capable devices
 		photoVideo.toggleLivePhotoMode()
 	}
@@ -219,10 +222,8 @@ class FullScreenCameraViewController: UIViewController {
 		livePhotoIndicator.layer.cornerRadius = livePhotoIndicator.bounds.width / 2
 		livePhotoIndicator.clipsToBounds = true
 		livePhotoIndicator.layer.masksToBounds = true
-		livePhotoIndicator.backgroundColor = .orange
-		livePhotoIndicator.isHidden = true
 	}
-
+	
 	func openCloseCameraOptionTab() {
 
 		let constraint = cameraOptionsBar.superview!.constraints.filter { $0.identifier == "height" }.first
