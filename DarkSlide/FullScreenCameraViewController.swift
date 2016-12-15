@@ -49,16 +49,21 @@ class FullScreenCameraViewController: UIViewController {
 			switch observeMovieRecording {
 
 			case false:
+				DispatchQueue.main.async {
+					self.livePhotoIndicator.isHidden = true
+				}
 				self.takePhotoButton.setTitle("Record", for: .normal)
-				self.livePhotoIndicator.isHidden = true
+				
 				self.switchCameraMode.isEnabled = true
 				self.switchFrontBackCamera.isEnabled = true
 
 			case true:
 
 				self.takePhotoButton.setTitle("Stop", for: .normal)
-				self.livePhotoIndicator.isHidden = false
-				self.livePhotoIndicator.backgroundColor = .red
+				DispatchQueue.main.async {
+					self.livePhotoIndicator.isHidden = false
+					self.livePhotoIndicator.backgroundColor = .red
+				}
 				self.switchCameraMode.isEnabled = false
 				self.switchFrontBackCamera.isEnabled = false
 			}

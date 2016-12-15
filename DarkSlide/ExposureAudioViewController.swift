@@ -30,6 +30,7 @@ class ExposureAudioNoteViewController: UIViewController {
 	override func viewDidLoad() {
 		audioRecorder = AudioRecorder(delegate: self)
 		addObservers()
+		audioRecordButton.setTitle("Record Audio", for: .normal)
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -59,6 +60,22 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate, SpeechToTextDe
 
 	func enableRecordButton() {
 		audioRecordButton.isEnabled = true
+	}
+	
+	func didBeginRecording() {
+		print("didBeginRecording")
+		DispatchQueue.main.async {
+			self.audioRecordButton.isEnabled = false
+			self.audioRecordButton.isHidden = true
+			self.audioRecordButton.setTitle("Stop Recording", for: .normal)
+		}
+	}
+	
+	func didEndRecording() {
+		print("didEndRecording")
+		DispatchQueue.main.async {
+			self.audioRecordButton.setTitle("Record Audio", for: .normal)
+		}
 	}
 
 	func alertActionNoMicrophonePermission() {

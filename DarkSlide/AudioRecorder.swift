@@ -95,10 +95,11 @@ class AudioRecorder: NSObject {
 
 		audioQueue.async { [unowned self] in
 			if self.audioRecorder != nil, self.audioRecorder.isRecording {
+				self.delegate.didEndRecording()
 				self.audioRecorder.stop()
-				
 			} else {
 				guard self.setupResult else { fatalError("incorrect button config") }
+				self.delegate.didBeginRecording()
 				self.beginRecording()
 			}
 		}
