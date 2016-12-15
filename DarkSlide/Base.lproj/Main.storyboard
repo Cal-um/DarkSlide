@@ -171,17 +171,27 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOq-SZ-p8U">
+                                        <rect key="frame" x="151" y="154" width="18.5" height="18"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="rOq-SZ-p8U" secondAttribute="height" multiplier="1:1" id="y8A-Vq-IOO"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.00025843492772980908" green="0.1580328525641026" blue="0.041794453005706111" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="rOq-SZ-p8U" firstAttribute="centerX" secondItem="UgO-1j-leJ" secondAttribute="centerX" id="0Nx-Ol-rvf"/>
                                     <constraint firstItem="Vgr-J7-g6o" firstAttribute="centerX" secondItem="UgO-1j-leJ" secondAttribute="centerX" id="4hv-Fp-pXD"/>
                                     <constraint firstItem="3tB-4M-9JU" firstAttribute="top" secondItem="UgO-1j-leJ" secondAttribute="top" id="4tW-x4-f3u"/>
                                     <constraint firstItem="3tB-4M-9JU" firstAttribute="leading" secondItem="UgO-1j-leJ" secondAttribute="leading" id="B2S-gC-Olh"/>
                                     <constraint firstAttribute="trailing" secondItem="3tB-4M-9JU" secondAttribute="trailing" id="DGm-47-fJC"/>
                                     <constraint firstItem="Vgr-J7-g6o" firstAttribute="centerY" secondItem="UgO-1j-leJ" secondAttribute="centerY" id="WAM-bt-stf"/>
+                                    <constraint firstItem="rOq-SZ-p8U" firstAttribute="height" secondItem="3tB-4M-9JU" secondAttribute="height" multiplier="0.1" id="hbK-U0-DTx"/>
                                     <constraint firstItem="Y5M-O4-xa0" firstAttribute="centerX" secondItem="UgO-1j-leJ" secondAttribute="centerX" id="iR4-YH-awt"/>
                                     <constraint firstItem="Y5M-O4-xa0" firstAttribute="centerY" secondItem="UgO-1j-leJ" secondAttribute="centerY" id="mZP-qf-ekf"/>
                                     <constraint firstAttribute="bottom" secondItem="3tB-4M-9JU" secondAttribute="bottom" id="uLp-03-12y"/>
+                                    <constraint firstAttribute="bottom" secondItem="rOq-SZ-p8U" secondAttribute="bottom" constant="8" id="y7o-hx-ODg"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="335-L1-f2M">
@@ -216,13 +226,14 @@
                     <connections>
                         <outlet property="cameraUnavailableLabel" destination="Vgr-J7-g6o" id="EQv-gV-0fR"/>
                         <outlet property="cameraView" destination="UgO-1j-leJ" id="Y4B-p8-lmq"/>
+                        <outlet property="livePhotoIndicator" destination="rOq-SZ-p8U" id="OoH-Oe-SPa"/>
                         <outlet property="resumeSessionButton" destination="Y5M-O4-xa0" id="byb-lP-MQk"/>
                         <outlet property="takeExposureButton" destination="3tB-4M-9JU" id="qjD-nh-fMM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTK-WS-5GT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2504.8000000000002" y="35.982008995502248"/>
+            <point key="canvasLocation" x="2503.125" y="35.91549295774648"/>
         </scene>
         <!--Full Screen Camera View Controller-->
         <scene sceneID="7gb-HJ-SH4">
@@ -237,10 +248,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VJ-DL-eK8" customClass="PreviewView" customModule="DarkSlide" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="304" height="568"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6v2-UO-HKd">
-                                        <rect key="frame" x="110" y="339" width="100" height="100"/>
+                                        <rect key="frame" x="102" y="339" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Kak-uj-FTb"/>
                                             <constraint firstAttribute="width" secondItem="6v2-UO-HKd" secondAttribute="height" multiplier="1:1" id="g7m-vv-fMG"/>
@@ -251,7 +262,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQE-rb-kt4">
-                                        <rect key="frame" x="240" y="354" width="70" height="70"/>
+                                        <rect key="frame" x="232" y="354" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="WQE-rb-kt4" secondAttribute="height" multiplier="1:1" id="Wrb-02-IaV"/>
                                         </constraints>
@@ -262,10 +273,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLF-sf-mQd">
-                                        <rect key="frame" x="0.0" y="455" width="320" height="113"/>
+                                        <rect key="frame" x="0.0" y="455" width="304" height="113"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ts3-X2-r3y">
-                                                <rect key="frame" x="10" y="0.0" width="300" height="113"/>
+                                                <rect key="frame" x="10" y="0.0" width="284" height="113"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52H-GJ-Yxv">
                                                         <rect key="frame" x="0.0" y="28" width="57" height="57"/>
@@ -282,7 +293,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sxc-BQ-01B">
-                                                        <rect key="frame" x="81" y="28" width="57" height="57"/>
+                                                        <rect key="frame" x="75.5" y="28" width="57" height="57"/>
                                                         <color key="backgroundColor" red="0.2468442683" green="0.24776512740000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Sxc-BQ-01B" secondAttribute="height" multiplier="1:1" id="rOF-md-hvs"/>
@@ -296,7 +307,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WxW-Of-aOt">
-                                                        <rect key="frame" x="162" y="28" width="57" height="57"/>
+                                                        <rect key="frame" x="151.5" y="28" width="57" height="57"/>
                                                         <color key="backgroundColor" red="0.2468442683" green="0.24776512740000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="WxW-Of-aOt" secondAttribute="height" multiplier="1:1" id="b9a-md-Sge"/>
@@ -310,7 +321,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOH-w1-bQe">
-                                                        <rect key="frame" x="243" y="28" width="57" height="57"/>
+                                                        <rect key="frame" x="227" y="28" width="57" height="57"/>
                                                         <color key="backgroundColor" red="0.2468442683" green="0.24776512740000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="GOH-w1-bQe" secondAttribute="height" multiplier="1:1" id="0RZ-q1-2d5"/>
@@ -352,13 +363,13 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVQ-0I-kZd">
-                                        <rect key="frame" x="84" y="274.5" width="152" height="20.5"/>
+                                        <rect key="frame" x="76" y="274.5" width="152" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cO6-zO-cPS">
-                                        <rect key="frame" x="103" y="269" width="113" height="30"/>
+                                        <rect key="frame" x="95" y="269" width="113" height="30"/>
                                         <state key="normal" title="Resume Session">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -390,13 +401,25 @@
                                     <outletCollection property="gestureRecognizers" destination="Mz5-NB-DwY" appends="YES" id="hXG-lF-otC"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eya-GN-QbO">
+                                <rect key="frame" x="263" y="8" width="40.5" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Eya-GN-QbO" secondAttribute="height" multiplier="1:1" id="l2a-Gc-i9m"/>
+                                    <constraint firstAttribute="height" constant="40" id="pye-l6-60u"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4VJ-DL-eK8" firstAttribute="top" secondItem="eRk-4g-qAb" secondAttribute="bottom" id="9oL-PO-Cfk"/>
+                            <constraint firstItem="Eya-GN-QbO" firstAttribute="top" secondItem="eRk-4g-qAb" secondAttribute="bottom" constant="8" id="IXs-Wz-sMz"/>
                             <constraint firstItem="dNw-Uz-ISn" firstAttribute="top" secondItem="4VJ-DL-eK8" secondAttribute="bottom" id="MBU-g7-ohs"/>
                             <constraint firstAttribute="trailing" secondItem="4VJ-DL-eK8" secondAttribute="trailing" id="Qdb-9N-yJn"/>
+                            <constraint firstItem="4VJ-DL-eK8" firstAttribute="top" secondItem="eRk-4g-qAb" secondAttribute="bottom" id="XgE-19-sZs"/>
                             <constraint firstItem="4VJ-DL-eK8" firstAttribute="leading" secondItem="gLf-sD-Anj" secondAttribute="leading" id="mTM-Ot-f9g"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Eya-GN-QbO" secondAttribute="trailing" id="mrh-44-PNu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4VJ-DL-eK8" secondAttribute="trailing" id="wzj-js-O5c"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -406,6 +429,7 @@
                         <outlet property="cameraView" destination="4VJ-DL-eK8" id="G3d-Yj-sz9"/>
                         <outlet property="exitFullScreenButton" destination="NHH-Z9-oWy" id="rTd-2w-Vy6"/>
                         <outlet property="flashOnOff" destination="Sxc-BQ-01B" id="hSn-Iw-2vI"/>
+                        <outlet property="livePhotoIndicator" destination="Eya-GN-QbO" id="bIM-xy-EZU"/>
                         <outlet property="livePhotoToggle" destination="GOH-w1-bQe" id="wxa-XB-dBt"/>
                         <outlet property="resumeSessionButton" destination="cO6-zO-cPS" id="YcH-C1-nO5"/>
                         <outlet property="switchCameraMode" destination="WxW-Of-aOt" id="HSZ-8T-6tI"/>

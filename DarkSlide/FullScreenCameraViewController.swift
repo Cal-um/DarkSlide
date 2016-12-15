@@ -28,12 +28,42 @@ class FullScreenCameraViewController: UIViewController {
 	@IBOutlet weak var livePhotoToggle: UIButton!
 	@IBOutlet weak var cameraUnavailableLabel: UILabel!
 	@IBOutlet weak var resumeSessionButton: UIButton!
-	
+	@IBOutlet weak var livePhotoIndicator: UIView!
+
 	deinit {
 		print("FullScreenCameraViewController DEINIT")
 	}
 
 	// MARK: Delegate properies. Used to observe state of photoVideo
+	
+	var observeLivePhotoPlaying: Bool = false {
+		didSet {
+			print("LIVEPHOTO")
+			livePhotoIndicator.backgroundColor = .orange
+			livePhotoIndicator.isHidden = !observeLivePhotoPlaying
+		}
+	}
+	
+	var observeMovieRecording: Bool = false {
+		didSet {
+			switch observeMovieRecording {
+				
+			case false:
+				self.takePhotoButton.setTitle("Record", for: .normal)
+				self.livePhotoIndicator.isHidden = true
+				self.switchCameraMode.isEnabled = true
+				self.switchFrontBackCamera.isEnabled = true
+				
+			case true:
+				
+				self.takePhotoButton.setTitle("Stop", for: .normal)
+				self.livePhotoIndicator.isHidden = false
+				self.livePhotoIndicator.backgroundColor = .red
+				self.switchCameraMode.isEnabled = false
+				self.switchFrontBackCamera.isEnabled = false
+			}
+		}
+	}
 
 	var observeLivePhotoModeSelected: LivePhotoMode = .off {
 		didSet {
@@ -43,6 +73,7 @@ class FullScreenCameraViewController: UIViewController {
 			}
 		}
 	}
+	
 	var observeFlashConfiguration: AVCaptureFlashMode = .auto {
 		didSet {
 			switch observeFlashConfiguration {
@@ -64,7 +95,7 @@ class FullScreenCameraViewController: UIViewController {
 				takePhotoButton.setTitle("Photo", for: .normal)
 			case .movie:
 				switchCameraMode.setTitle("Photo", for: .normal)
-				takePhotoButton.setTitle("Video", for: .normal)
+				takePhotoButton.setTitle("Record", for: .normal)
 			}
 		}
 	}
@@ -141,7 +172,6 @@ class FullScreenCameraViewController: UIViewController {
 
 	@IBAction func backButton(_ sender: AnyObject) {
 		photoVideo.stopAndNullifySession()
-		//self.dismiss(animated: true, completion: nil)
 		presentingViewController!.dismiss(animated: true, completion: nil)
 	}
 
@@ -181,6 +211,11 @@ class FullScreenCameraViewController: UIViewController {
 		takePhotoButton.backgroundColor =  UIColor(red:0.47, green:0.85, blue:0.98, alpha:0.5)
 		takePhotoButton.layer.borderColor = UIColor(red:0.47, green:0.85, blue:0.98, alpha:1.0).cgColor
 		takePhotoButton.layer.borderWidth = 1
+		livePhotoIndicator.layer.cornerRadius = livePhotoIndicator.bounds.width / 2
+		livePhotoIndicator.clipsToBounds = true
+		livePhotoIndicator.layer.masksToBounds = true
+		livePhotoIndicator.backgroundColor = .orange
+		livePhotoIndicator.isHidden = true
 	}
 
 	func openCloseCameraOptionTab() {
@@ -202,7 +237,6 @@ class FullScreenCameraViewController: UIViewController {
 				if !isBarOpen {
 					self.cameraOptionsBar.isHidden = true
 				}
-
 		})
 	}
 
@@ -227,6 +261,7 @@ class FullScreenCameraViewController: UIViewController {
 		cameraView.bringSubview(toFront: toggleCameraOptionsButton)
 		cameraView.bringSubview(toFront: exitFullScreenButton)
 		cameraView.bringSubview(toFront: cameraOptionsBar)
+		self.view.bringSubview(toFront: livePhotoIndicator)
 	}
 }
 
@@ -273,7 +308,7 @@ extension FullScreenCameraViewController: CameraViewDelegate {
 			takePhotoButton.isEnabled = true
 			flashOnOff.isEnabled = true
 			switchFrontBackCamera.isEnabled = false
-			switchFrontBackCamera.isHidden = true
+			switchFrontBackCamera.isHidden = false
 		}
 	}
 

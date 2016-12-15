@@ -16,7 +16,7 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextSettabl
 	// MARK: properties and life cycle
 	var locationManager: CLLocationManager!
 	var managedObjectContext: NSManagedObjectContext!
-	
+
 	var photoVideo: PhotoVideoCapture!
 	var chosenSubjectImage: Data!
 	var thumbnailImage: Data!
@@ -27,7 +27,7 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextSettabl
 			}
 		}
 	}
-	
+
 	deinit {
 		print("SubjectCameraViewController DEINIT")
 	}
@@ -88,6 +88,8 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextSettabl
 	var observeFlashConfiguration: AVCaptureFlashMode = .auto
 	var observeCaptureMode: CaptureMode = .photo
 	var observeCameraFacing: CameraFacing = .front
+	var observeLivePhotoPlaying: Bool = false
+	var observeMovieRecording: Bool = false
 
 	// MARK: Camera Actions
 

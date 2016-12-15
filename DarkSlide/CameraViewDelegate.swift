@@ -18,6 +18,8 @@ protocol CameraViewDelegate: class {
 	var observeFlashConfiguration: AVCaptureFlashMode { get set }
 	var observeCameraFacing: CameraFacing { get set }
 	var observeCaptureMode: CaptureMode { get set }
+	var observeLivePhotoPlaying: Bool { get set }
+	var observeMovieRecording: Bool { get set }
 
 	func disableButtons()
 	func alertActionNoCameraPermission()

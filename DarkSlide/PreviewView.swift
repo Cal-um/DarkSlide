@@ -12,9 +12,9 @@ import AVFoundation
 class PreviewView: UIView {
 
 	var videoPreviewLayer: AVCaptureVideoPreviewLayer!
-	
+
 	var shutterSimulation: UIView!
-	
+
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setup()
@@ -34,7 +34,8 @@ class PreviewView: UIView {
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		videoPreviewLayer.frame = bounds
-		
+		shutterSimulation.frame = bounds
+
 	}
 
 	private func setup() {

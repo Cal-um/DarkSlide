@@ -27,37 +27,44 @@ class ExposurePhotoVideoViewController: UIViewController {
 	var observeFlashConfiguration: AVCaptureFlashMode = .auto
 	var observeCaptureMode: CaptureMode = .photo
 	var observeCameraFacing: CameraFacing = .front
+	var observeLivePhotoPlaying: Bool = false {
+		didSet {
+			livePhotoIndicator.isHidden = !observeLivePhotoPlaying
+		}
+	}
+	var observeMovieRecording: Bool = false
 
 	@IBOutlet weak var cameraView: PreviewView!
 
 	var photoVideo: PhotoVideoCapture!
-	
+
 	override func viewDidLoad() {
 		// set up video preview and PhotoAudioVideo object
-
 		photoVideo = PhotoVideoCapture(cameraViewDelegate: self, cameraOutputDelegate: cameraOutputDelegate)
 		// The default is livePhoto off so this ensures live photo is on for capable devices
 		photoVideo.toggleLivePhotoMode()
+		configureButton()
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		photoVideo.viewAppeared()
 	}
-	
+
 	override func viewWillDisappear(_ animated: Bool) {
 		photoVideo.viewDissapeared()
 	}
 
 	@IBOutlet weak var takeExposureButton: UIButton!
-	
+
 	@IBAction func audioButtonTapped(_ sender: Any) {
-		photoVideo.viewDissapeared()
+		//photoVideo.viewDissapeared()
 	}
-	
+
 	@IBAction func fullScreenTapped(_ sender: Any) {
-		photoVideo.viewDissapeared()
+		//photoVideo.viewDissapeared()
 	}
-	
+
+	@IBOutlet weak var livePhotoIndicator: UIView!
 
 	@IBAction func resumeSession(_ sender: Any) {
 		photoVideo.resumeInterupptedSession()
@@ -88,6 +95,14 @@ extension ExposurePhotoVideoViewController: CameraViewDelegate {
 
 	func disableButtons() {
 		takeExposureButton.isEnabled = false
+	}
+
+	func configureButton() {
+		livePhotoIndicator.layer.cornerRadius = livePhotoIndicator.bounds.width / 2
+		livePhotoIndicator.clipsToBounds = true
+		livePhotoIndicator.layer.masksToBounds = true
+		livePhotoIndicator.backgroundColor = .orange
+		livePhotoIndicator.isHidden = true
 	}
 
 	func enableButtons(buttonconfiguration: ButtonConfiguration) {

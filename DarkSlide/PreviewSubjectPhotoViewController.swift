@@ -18,12 +18,11 @@ class PreviewSubjectPhotoViewController: UIViewController, ManagedObjectContextS
 	var longitude: Double?
 	var compassHeading: Double?
 	var subject: SubjectForExposure?
-	
-	
+
 	weak var delegate: PreviewSubjectPhotoViewControllerDelegate!
 
 	@IBOutlet weak var imageView: UIImageView!
-	
+
 	deinit {
 		print("PreviewSubjectPhotoViewController DEINIT")
 	}

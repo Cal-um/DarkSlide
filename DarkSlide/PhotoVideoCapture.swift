@@ -18,9 +18,9 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 		print("PhotoVideoCapture DEINIT")
 	}
 	// MARK: Init
-	
+
 	// when viewDissapear is called the 2 delegates will be set to nil. This allows time for the session to be shut down.
-	
+
 	var cameraViewDelegate: CameraViewDelegate?
 	var cameraOutputDelegate: CameraOutputDelegate?
 
@@ -93,7 +93,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 	func viewAppeared() {
 
 		sessionQueue.async { [unowned self] in
-			
+
 			switch self.setupResult {
 			case .success:
 				guard !self.session.isRunning else { print("Session already running"); return }
@@ -123,7 +123,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			}
 		}
 	}
-	
+
 	func stopAndNullifySession() {
 		sessionQueue.async { [unowned self] in
 			if self.setupResult == .success {
@@ -527,12 +527,20 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 				let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
 				movieFileOutput.startRecording(toOutputFileURL: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
 			} else {
+				DispatchQueue.main.async {
+					self.cameraViewDelegate?.observeMovieRecording = false
+				}
 				movieFileOutput.stopRecording()
 			}
 		}
 	}
+	
+	func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
+		self.cameraViewDelegate?.observeMovieRecording = true
+	}
 
 	func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+		
 		/*
 		Note that currentBackgroundRecordingID is used to end the background task
 		associated with this recording. This allows a new recording to be started,
@@ -589,9 +597,6 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 		} else {
 			cleanUp()
 		}
-
-		//TODO:
-		// Enable and disable the Camera and Record buttons to let the user switch camera and start another recording on main queue.
 	}
 
 	// MARK: KVO and Notifications
@@ -604,7 +609,7 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 		NotificationCenter.default.addObserver(self, selector: #selector(subjectAreaDidChange), name: Notification.Name(NotificationIdentifiers.PhotoVideo.SubjectAreaDidChange), object: videoDeviceInput.device)
 		NotificationCenter.default.addObserver(self, selector: #selector(sessionErrorRuntimeError), name: Notification.Name(NotificationIdentifiers.PhotoVideo.SRuntimeError), object: session)
 		NotificationCenter.default.addObserver(self, selector: #selector(stopAndNullifySession), name: Notification.Name(NotificationIdentifiers.PhotoVideo.WillClosePreviewView), object: nil)
-		
+
 		/*
 		A session can only run when the app is full screen. It will be interrupted
 		in a multi-app layout, introduced in iOS 9, see also the documentation of
@@ -797,15 +802,13 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 
 						let inProgressLivePhotoCapturesCount = self.inProgressLivePhotoCapturesCount
 						print(inProgressLivePhotoCapturesCount)
-//						DispatchQueue.main.async { [unowned self] in
-//							if inProgressLivePhotoCapturesCount > 0 {
-//							//	self.capturingLivePhotoLabel.isHidden = false
-//							} else if inProgressLivePhotoCapturesCount == 0 {
-//								//self.capturingLivePhotoLabel.isHidden = true
-//							} else {
-//								print("Error: In progress live photo capture count is less than 0")
-//							}
-//						}
+						if inProgressLivePhotoCapturesCount > 0 {
+							self.cameraViewDelegate?.observeLivePhotoPlaying = true
+						} else if inProgressLivePhotoCapturesCount == 0 {
+							self.cameraViewDelegate?.observeLivePhotoPlaying = false
+						} else {
+							print("Error: In progress live photo capture count is less than 0")
+						}
 					}
 				}, completed: { [unowned self] photoCaptureDelegate in
 					// When the capture is complete, remove a reference to the photo capture delegate so it can be deallocated.

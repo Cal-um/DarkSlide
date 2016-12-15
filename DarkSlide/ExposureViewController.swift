@@ -35,14 +35,14 @@ class ExposureViewController: UIViewController, ManagedObjectContextSettable {
 		let width = collectionView.bounds.height
 		layout.itemSize = CGSize(width: width, height: width)
 	}
-	
+
 	@IBAction func discardSubjetAndUnwind(_ sender: Any) {
 		NotificationCenter.default.post(name: Notification.Name(NotificationIdentifiers.PhotoVideo.WillClosePreviewView), object: nil)
 		managedObjectContext.delete(subject)
 		managedObjectContext.trySave()
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
 	}
-	
+
 	override func viewWillDisappear(_ animated: Bool) {
 		print("ViewDissapeared 2")
 	}

@@ -26,7 +26,7 @@ public final class SubjectForExposure: ManagedObject {
 	@NSManaged public var darkSlideUsed: DarkSlide?
 	@NSManaged public var audioNote: Set<AudioNote>?
 	@NSManaged public var movieNote: Set<MovieNote>?
-	
+
 	lazy var lowResImage: UIImage? = {
 		return UIImage(data: self.thumbnailImage, scale: 1)
 	}()

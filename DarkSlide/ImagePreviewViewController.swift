@@ -18,7 +18,7 @@ class ImagePreviewViewController: UIViewController {
 	deinit {
 		print("ImagePreviewViewController DEINIT")
 	}
-	
+
 	override func viewDidLoad() {
 		imageView.image = highResPhotoWithLivePhotoRef.0
 	}
