@@ -11,6 +11,7 @@ import AVFoundation
 
 protocol AudioRecorderDelegate: class, AVAudioRecorderDelegate {
 
+	var audioReferenceNumber: String? { get set }
 	func disableRecordButton()
 	func enableRecordButton()
 	func alertActionNoMicrophonePermission()

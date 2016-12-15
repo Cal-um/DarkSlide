@@ -132,8 +132,8 @@ extension ExposureViewController: UICollectionViewDelegate, UICollectionViewData
 				playerController.player!.play()
 			}
 
-		case .audio(let url):
-			let player = AVPlayer(url: url)
+		case .audio(let path):
+			let player = AVPlayer(url: path)
 			let playerController = AVPlayerViewController()
 			playerController.player = player
 			self.present(playerController, animated: true) {

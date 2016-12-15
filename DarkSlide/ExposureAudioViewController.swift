@@ -15,6 +15,7 @@ class ExposureAudioNoteViewController: UIViewController {
 
 	weak var audioNoteDelegate: AudioNoteDelegate!
 	var audioRecorder: AudioRecorder!
+	var audioReferenceNumber: String?
 
 	deinit {
 		print("ExposureAudioViewController DEINIT")
@@ -72,25 +73,9 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate, SpeechToTextDe
 	}
 
 	func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-		if flag {
-			audioNoteDelegate.didSaveAudioRecording(fileReferenceNumber: recorder.url.absoluteString)
-			// Play sound with AudioPlayer class
-			//player = AudioPlayer()
-			//player.playSoundFile(atPath: recorder.url)
-
-			// Play sounds with AVPlayer
-
-//			let sR = SpeechToText(delegate: self)
-//			sR.processAudioFile(url: recorder.url)
-
-			/*let player = AVPlayer(url: recorder.url)
-			let playerController = AVPlayerViewController()
-			playerController.player = player
-			self.present(playerController, animated: true) {
-				playerController.player!.play()*/
-
-			//}
-		}
+		guard let reference = audioReferenceNumber, flag else { return }
+			audioNoteDelegate.didSaveAudioRecording(fileReferenceNumber: reference)
+			print("\(recorder.url.path) RECORDER PATH")
 	}
 
 	func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {

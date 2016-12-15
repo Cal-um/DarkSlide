@@ -26,7 +26,7 @@ extension AudioNote: ManagedObjectType, ExposureNote {
 	}
 
 	var audioPath: URL {
-		return URL(string: audioRecordingURL)!
+		return AudioNote.generateAudioPath(audioReferenceNumber: self.audioRecordingURL)
 	}
 
 	static var randomReferenceNumber: String {
@@ -39,7 +39,7 @@ extension AudioNote: ManagedObjectType, ExposureNote {
 		return (FileManager.applicationSupportDirectory.appendingPathComponent(fileName))
 	}
 
-	func removeMovieFile() {
+	func removeAudioFile() {
 		let path = audioPath
 		let fileManager = FileManager.default
 		if fileManager.fileExists(atPath: path.path) {

@@ -534,13 +534,13 @@ class PhotoVideoCapture: NSObject, AVCaptureFileOutputRecordingDelegate, CameraU
 			}
 		}
 	}
-	
+
 	func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
 		self.cameraViewDelegate?.observeMovieRecording = true
 	}
 
 	func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
-		
+
 		/*
 		Note that currentBackgroundRecordingID is used to end the background task
 		associated with this recording. This allows a new recording to be started,

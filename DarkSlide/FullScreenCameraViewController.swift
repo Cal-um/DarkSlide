@@ -35,7 +35,7 @@ class FullScreenCameraViewController: UIViewController {
 	}
 
 	// MARK: Delegate properies. Used to observe state of photoVideo
-	
+
 	var observeLivePhotoPlaying: Bool = false {
 		didSet {
 			print("LIVEPHOTO")
@@ -43,19 +43,19 @@ class FullScreenCameraViewController: UIViewController {
 			livePhotoIndicator.isHidden = !observeLivePhotoPlaying
 		}
 	}
-	
+
 	var observeMovieRecording: Bool = false {
 		didSet {
 			switch observeMovieRecording {
-				
+
 			case false:
 				self.takePhotoButton.setTitle("Record", for: .normal)
 				self.livePhotoIndicator.isHidden = true
 				self.switchCameraMode.isEnabled = true
 				self.switchFrontBackCamera.isEnabled = true
-				
+
 			case true:
-				
+
 				self.takePhotoButton.setTitle("Stop", for: .normal)
 				self.livePhotoIndicator.isHidden = false
 				self.livePhotoIndicator.backgroundColor = .red
@@ -73,7 +73,7 @@ class FullScreenCameraViewController: UIViewController {
 			}
 		}
 	}
-	
+
 	var observeFlashConfiguration: AVCaptureFlashMode = .auto {
 		didSet {
 			switch observeFlashConfiguration {

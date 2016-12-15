@@ -87,6 +87,7 @@ class AudioRecorder: NSObject {
 			self.audioRecorder.isMeteringEnabled = true
 			self.audioRecorder.prepareToRecord()
 			self.audioRecorder.record()
+			self.delegate.audioReferenceNumber = randomReferenceNumber
 		}
 	}
 
@@ -95,6 +96,7 @@ class AudioRecorder: NSObject {
 		audioQueue.async { [unowned self] in
 			if self.audioRecorder != nil, self.audioRecorder.isRecording {
 				self.audioRecorder.stop()
+				
 			} else {
 				guard self.setupResult else { fatalError("incorrect button config") }
 				self.beginRecording()
