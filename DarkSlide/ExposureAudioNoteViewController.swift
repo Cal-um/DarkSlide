@@ -46,6 +46,7 @@ class ExposureAudioNoteViewController: UIViewController {
 	}
 
 	func exitViewController() {
+		
 		dismiss(animated: true, completion: nil)
 	}
 
@@ -65,8 +66,6 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate, SpeechToTextDe
 	func didBeginRecording() {
 		print("didBeginRecording")
 		DispatchQueue.main.async {
-			self.audioRecordButton.isEnabled = false
-			self.audioRecordButton.isHidden = true
 			self.audioRecordButton.setTitle("Stop Recording", for: .normal)
 		}
 	}
