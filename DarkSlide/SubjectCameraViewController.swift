@@ -132,18 +132,7 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextSettabl
 
 		didSet {
 			guard let currentScreenOrientation = cameraView?.videoPreviewLayer.connection?.videoOrientation, let heading = heading else { return }
-
-			switch currentScreenOrientation {
-			case .portrait: correctedScreenOrientationHeading = heading
-			case .landscapeRight: correctedScreenOrientationHeading = heading + 90
-			case .landscapeLeft: correctedScreenOrientationHeading = heading - 90
-			case .portraitUpsideDown:
-				if heading > 180 {
-					correctedScreenOrientationHeading = heading + 180 - 360
-				} else {
-					correctedScreenOrientationHeading = 360 - (180 - heading)
-				}
-			}
+			correctedScreenOrientationHeading = SubjectCameraModel.correctHeading(screenOrientation: currentScreenOrientation, heading: heading)
 		}
 	}
 
