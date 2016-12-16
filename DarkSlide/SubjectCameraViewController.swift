@@ -210,12 +210,10 @@ extension SubjectCameraViewController: CameraViewDelegate, CameraOutputDelegate 
 
 	func enableButtons(buttonconfiguration: ButtonConfiguration) {
 		takePhotoButton.isEnabled = true
-		goBackButton.isEnabled = true
 	}
 
 	func disableButtons() {
 		takePhotoButton.isEnabled = false
-		goBackButton.isEnabled = false
 	}
 }
 

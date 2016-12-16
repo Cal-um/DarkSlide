@@ -40,7 +40,7 @@
 		3A215D3E1D8EB0DF00876F00 /* CameraViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */; };
 		3A215D411D9024F500876F00 /* ExposureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D401D9024F500876F00 /* ExposureViewController.swift */; };
 		3A215D431D90256400876F00 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D421D90256400876F00 /* Protocols.swift */; };
-		3A215D451D90289D00876F00 /* ExposureAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D441D90289D00876F00 /* ExposureAudioViewController.swift */; };
+		3A215D451D90289D00876F00 /* ExposureAudioNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D441D90289D00876F00 /* ExposureAudioNoteViewController.swift */; };
 		3A215D471D90306500876F00 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D461D90306500876F00 /* Utilities.swift */; };
 		3A215D491D9149A300876F00 /* PortraitNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A215D481D9149A300876F00 /* PortraitNavigationController.swift */; };
 		3A3B2A4A1DC3A38800357D00 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3B2A481DC3A38800357D00 /* Fabric.framework */; };
@@ -113,7 +113,7 @@
 		3A215D3D1D8EB0DF00876F00 /* CameraViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewDelegate.swift; sourceTree = "<group>"; };
 		3A215D401D9024F500876F00 /* ExposureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposureViewController.swift; sourceTree = "<group>"; };
 		3A215D421D90256400876F00 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		3A215D441D90289D00876F00 /* ExposureAudioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposureAudioViewController.swift; sourceTree = "<group>"; };
+		3A215D441D90289D00876F00 /* ExposureAudioNoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExposureAudioNoteViewController.swift; sourceTree = "<group>"; };
 		3A215D461D90306500876F00 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = ../Utilities.swift; sourceTree = "<group>"; };
 		3A215D481D9149A300876F00 /* PortraitNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortraitNavigationController.swift; sourceTree = "<group>"; };
 		3A3B2A481DC3A38800357D00 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 				3A215D391D8EA98200876F00 /* ExposurePhotoVideoViewController.swift */,
 				3AC8214B1D9929CE003C484D /* FullScreenCameraViewController.swift */,
 				3A215D401D9024F500876F00 /* ExposureViewController.swift */,
-				3A215D441D90289D00876F00 /* ExposureAudioViewController.swift */,
+				3A215D441D90289D00876F00 /* ExposureAudioNoteViewController.swift */,
 				3A215D481D9149A300876F00 /* PortraitNavigationController.swift */,
 				3A3CADF61DDE300000804424 /* SubjectCameraViewController.swift */,
 				3A3CADF81DDE537A00804424 /* PreviewSubjectPhotoViewController.swift */,
@@ -508,7 +508,7 @@
 				3A7319631DE7117000C9B16A /* SubjectDetailViewController.swift in Sources */,
 				3A3CADF51DDDD57D00804424 /* AudioPlayer.swift in Sources */,
 				3A215D361D8D4C7200876F00 /* ManagedObjectContextStack.swift in Sources */,
-				3A215D451D90289D00876F00 /* ExposureAudioViewController.swift in Sources */,
+				3A215D451D90289D00876F00 /* ExposureAudioNoteViewController.swift in Sources */,
 				3A215D2A1D8C4D4D00876F00 /* ManagedObject.swift in Sources */,
 				3A215D471D90306500876F00 /* Utilities.swift in Sources */,
 				3A0FFFDF1DDF086F00AFA88B /* SpeechToTextDelegate.swift in Sources */,

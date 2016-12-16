@@ -37,9 +37,9 @@ class ExposureViewController: UIViewController, ManagedObjectContextSettable {
 	}
 
 	@IBAction func discardSubjetAndUnwind(_ sender: Any) {
+		deleteSavedFiles(input: exposureNotes)
 		NotificationCenter.default.post(name: Notification.Name(NotificationIdentifiers.PhotoVideo.WillClosePreviewView), object: nil)
 		managedObjectContext.delete(subject)
-		managedObjectContext.trySave()
 		performSegue(withIdentifier: "unwindToRoot", sender: nil)
 	}
 
@@ -150,5 +150,33 @@ extension ExposureViewController: AudioNoteDelegate {
 			self.exposureNotes.insert(audio, at: 0)
 			let paths = [IndexPath(row: 0, section: 0)]
 			self.collectionView.insertItems(at: paths)
+	}
+}
+
+extension ExposureViewController {
+
+	func deleteSavedFiles(input: [ExposureNote]) {
+
+		func deleteFile(url: URL) {
+			let fileManager = FileManager.default
+				if fileManager.fileExists(atPath: url.path) {
+					do {
+						try fileManager.removeItem(atPath: url.path)
+						print("Deleted")
+					} catch {
+						print("Error removing file: \(error)")
+				}
+			}
+		}
+
+		for i in input {
+			switch i.exposureNoteTypeIdentifier {
+			case .audio(let url):
+				deleteFile(url: url)
+			case .movie(let url):
+				deleteFile(url: url)
+			case .photo: break
+			}
+		}
 	}
 }

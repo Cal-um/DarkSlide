@@ -1,5 +1,5 @@
 //
-//  ExposureAudioViewController.swift
+//  ExposureAudioNoteViewController.swift
 //  DarkSlide
 //
 //  Created by Calum Harris on 19/09/2016.
@@ -13,6 +13,7 @@ import AVKit
 
 class ExposureAudioNoteViewController: UIViewController {
 
+	weak var delegate: ExposureAudioNoteViewControllerDelegate!
 	weak var audioNoteDelegate: AudioNoteDelegate!
 	var audioRecorder: AudioRecorder!
 	var audioReferenceNumber: String?
@@ -46,7 +47,7 @@ class ExposureAudioNoteViewController: UIViewController {
 	}
 
 	func exitViewController() {
-		
+		delegate.disableSessionStart = true
 		dismiss(animated: true, completion: nil)
 	}
 
@@ -62,14 +63,14 @@ extension ExposureAudioNoteViewController: AudioRecorderDelegate, SpeechToTextDe
 	func enableRecordButton() {
 		audioRecordButton.isEnabled = true
 	}
-	
+
 	func didBeginRecording() {
 		print("didBeginRecording")
 		DispatchQueue.main.async {
 			self.audioRecordButton.setTitle("Stop Recording", for: .normal)
 		}
 	}
-	
+
 	func didEndRecording() {
 		print("didEndRecording")
 		DispatchQueue.main.async {

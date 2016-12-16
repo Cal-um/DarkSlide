@@ -11,12 +11,13 @@ import AVFoundation
 import CoreData
 import AVKit
 
-class ExposurePhotoVideoViewController: UIViewController {
+class ExposurePhotoVideoViewController: UIViewController, ExposureAudioNoteViewControllerDelegate {
 
 	// MARK: View Controller properties and life cycle
 
 	weak var cameraOutputDelegate: CameraOutputDelegate!
 	weak var audioOutputDelegate: AudioNoteDelegate!
+	var disableSessionStart: Bool = false
 
 	@IBOutlet weak var cameraUnavailableLabel: UILabel!
 	@IBOutlet weak var resumeSessionButton: UIButton!
@@ -49,7 +50,9 @@ class ExposurePhotoVideoViewController: UIViewController {
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
-		photoVideo.viewAppeared()
+		if !disableSessionStart {
+			photoVideo.viewAppeared()
+		}
 	}
 
 	override func viewWillDisappear(_ animated: Bool) {
@@ -57,14 +60,6 @@ class ExposurePhotoVideoViewController: UIViewController {
 	}
 
 	@IBOutlet weak var takeExposureButton: UIButton!
-
-	@IBAction func audioButtonTapped(_ sender: Any) {
-		//photoVideo.viewDissapeared()
-	}
-
-	@IBAction func fullScreenTapped(_ sender: Any) {
-		//photoVideo.viewDissapeared()
-	}
 
 	@IBOutlet weak var livePhotoIndicator: UIView!
 
@@ -81,6 +76,7 @@ class ExposurePhotoVideoViewController: UIViewController {
 		case .some("AudioSegue"):
 			guard let vc = segue.destination as? ExposureAudioNoteViewController else { fatalError("wrong view controller type") }
 			vc.audioNoteDelegate = audioOutputDelegate
+			vc.delegate = self
 		case .some("FullViewSegue"):
 			guard let vc = segue.destination as? FullScreenCameraViewController else { fatalError("wrong view controller type") }
 			vc.cameraOutputDelegate = cameraOutputDelegate

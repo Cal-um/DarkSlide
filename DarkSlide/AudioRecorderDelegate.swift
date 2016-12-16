@@ -23,3 +23,7 @@ protocol AudioNoteDelegate: class {
 
 	func didSaveAudioRecording(fileReferenceNumber: String)
 }
+
+protocol ExposureAudioNoteViewControllerDelegate: class {
+	var disableSessionStart: Bool { get set }
+}

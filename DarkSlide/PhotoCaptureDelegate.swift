@@ -106,7 +106,7 @@ class PhotoCaptureDelegate: NSObject, AVCapturePhotoCaptureDelegate {
 			return
 		}
 
-		let thumbnailData = UIImageJPEGRepresentation(previewImage, 0.3)!
+		let thumbnailData = UIImageJPEGRepresentation(previewImage, 0.2)!
 		let byte = ByteCountFormatter()
 		print("FULL IMAGE \(byte.string(fromByteCount: Int64(photoData.count)))")
 		print("PREVIEW IMAGE \(byte.string(fromByteCount: Int64(thumbnailData.count)))")

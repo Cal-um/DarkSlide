@@ -28,6 +28,10 @@ class WeatherViewController: UITableViewController {
 		}
 	}
 
+	deinit {
+		print("DEINIT WeatherTableViewController")
+	}
+
 	@IBAction func exit(_ sender: Any) {
 		dismiss(animated: true, completion: nil)
 	}

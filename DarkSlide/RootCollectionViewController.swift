@@ -19,6 +19,10 @@ class RootCollectionViewController: UICollectionViewController, ManagedObjectCon
 		setUpCollectionView()
 	}
 
+	override func viewDidAppear(_ animated: Bool) {
+		managedObjectContext.trySave()
+	}
+
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 

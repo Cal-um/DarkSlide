@@ -44,7 +44,7 @@ class CollectionViewDataSource<Delegate: DataSourceDelegate, Data: DataProvider,
 				case .insert(let indexPath):
 					print("inserted")
 					self.collectionView.insertItems(at: [indexPath])
-				case .update(let indexPath, let object):
+				case .update(_, _):
 					//let checkForNil		= self.collectionView.objectAtIndex(at: indexPath)
 					//guard let cell = self.collectionView.cellForItem(at: indexPath) as? Cell else { fatalError("wrong cell type") }
 					//cell.configureCell(object)

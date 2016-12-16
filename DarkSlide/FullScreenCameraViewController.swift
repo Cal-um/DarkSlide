@@ -55,7 +55,7 @@ class FullScreenCameraViewController: UIViewController {
 					self.livePhotoIndicator.isHidden = true
 				}
 				self.takePhotoButton.setTitle("Record", for: .normal)
-				
+
 				self.switchCameraMode.isEnabled = true
 				self.switchFrontBackCamera.isEnabled = true
 
@@ -227,7 +227,7 @@ class FullScreenCameraViewController: UIViewController {
 		switchFrontBackCamera.titleLabel?.adjustsFontSizeToFitWidth = true
 		switchCameraMode.titleLabel?.adjustsFontSizeToFitWidth = true
 	}
-	
+
 	func openCloseCameraOptionTab() {
 
 		let constraint = cameraOptionsBar.superview!.constraints.filter { $0.identifier == "height" }.first

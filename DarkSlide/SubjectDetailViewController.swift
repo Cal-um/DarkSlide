@@ -32,19 +32,19 @@ class SubjectDetailViewController: UIViewController {
 	override func viewDidLoad() {
 		if subject == nil {
 			hideAllAndShowLabel()
-		}
-		else {
-		collectionView?.delegate = self
-		collectionView?.dataSource = self
-		collectionView?.register(UINib(nibName: "PhotoNoteCell", bundle: nil), forCellWithReuseIdentifier: "PhotoNote")
-		collectionView?.register(UINib(nibName: "AudioNoteCell", bundle: nil), forCellWithReuseIdentifier: "AudioNote")
-		collectionView?.register(UINib(nibName: "MovieNoteCell", bundle: nil), forCellWithReuseIdentifier: "MovieNote")
-				configureLabels()
-		fetchNotes() { results in
-			exposureNotes = results
-			collectionView.reloadData()
-		}
-		setMapView()
+		} else {
+
+			collectionView?.delegate = self
+			collectionView?.dataSource = self
+			collectionView?.register(UINib(nibName: "PhotoNoteCell", bundle: nil), forCellWithReuseIdentifier: "PhotoNote")
+			collectionView?.register(UINib(nibName: "AudioNoteCell", bundle: nil), forCellWithReuseIdentifier: "AudioNote")
+			collectionView?.register(UINib(nibName: "MovieNoteCell", bundle: nil), forCellWithReuseIdentifier: "MovieNote")
+					configureLabels()
+			fetchNotes() { results in
+				exposureNotes = results
+				collectionView.reloadData()
+			}
+			setMapView()
 		}
 		navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
 		navigationItem.leftItemsSupplementBackButton = true
@@ -53,11 +53,9 @@ class SubjectDetailViewController: UIViewController {
 
 	// swiftlint:disable force_cast
 
-	override func viewDidLayoutSubviews() {
-		guard let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout else { fatalError("Wrong layout type") }
-		let width = collectionView.bounds.height
-		layout.itemSize = CGSize(width: width, height: width)
-		layout.invalidateLayout()
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
+		collectionView.collectionViewLayout.invalidateLayout()
 	}
 
 	func setMapView() {
@@ -72,7 +70,7 @@ class SubjectDetailViewController: UIViewController {
 		annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
 		mapView.addAnnotation(annotation)
 	}
-	
+
 	func hideAllAndShowLabel() {
 		mapView.isHidden = true
 		subjectImageView.isHidden = true
@@ -82,9 +80,9 @@ class SubjectDetailViewController: UIViewController {
 	}
 
 	func fetchNotes(completion: ([ExposureNote]) -> ()) {
-		
+
 		guard let subject = subject else { fatalError("subject is nil") }
-		
+
 		var exposureNotes: [ExposureNote] = []
 
 		let photoNotes: [PhotoNote] = PhotoNote.fetchInContext(subject.managedObjectContext!) { (request) -> () in
@@ -116,7 +114,7 @@ class SubjectDetailViewController: UIViewController {
 	}
 
 	func configureLabels() {
-		
+
 		guard let subject = subject else { fatalError("subject is nil") }
 
 		let date: String = {
@@ -178,9 +176,9 @@ class SubjectDetailViewController: UIViewController {
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		
+
 		guard let subject = subject else { fatalError("subject is nil") }
-		
+
 		switch segue.identifier {
 		case .some("SubjectDetailImagePreviewSegue"):
 			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? ImagePreviewViewController else { fatalError("wrong view controller type") }
@@ -199,7 +197,7 @@ class SubjectDetailViewController: UIViewController {
 	}
 }
 
-extension SubjectDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SubjectDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return exposureNotes.count
 	}
@@ -242,5 +240,10 @@ extension SubjectDetailViewController: UICollectionViewDelegate, UICollectionVie
 				playerController.player!.play()
 			}
 		}
+	}
+
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		let height = collectionView.bounds.height
+		return CGSize(width: height, height: height)
 	}
 }
