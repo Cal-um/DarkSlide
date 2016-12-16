@@ -3,7 +3,7 @@
 Dark Slide is an app for the large format film photographer. 
 It allows the user to take exposure notes without having to time consumingly write them down or type into a text field. Instead, take notes with the camera by taking a photo/movie or an audio note. It is fast and simple.
 
-You will first take a photo of your subject for reference. You then enter the Exposure notes menu where you can tap on the camera preview to take a photo note or press the full screen button to enter a full screen camera view where you can record video or change the camera settings.
+You will first take a photo of your subject for reference. You then enter the Exposure notes menu where you can tap on the camera preview to take a photo note or press the full screen button to enter a full screen camera view where you can record video or change the camera settings. To record an audio note press the audio button.
 
 Once you have made your exposure note you can view your notes along with coordinate and bearing information. You can also check the week's weather in the exposure notes location in case you would like to go back under different conditions.
 
