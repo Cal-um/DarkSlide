@@ -30,22 +30,25 @@ class SubjectDetailViewController: UIViewController {
 
 	// View life cycle
 	override func viewDidLoad() {
-		if SubjectForExposure == nil {
+		if subject == nil {
 			hideAllAndShowLabel()
 		}
+		else {
 		collectionView?.delegate = self
 		collectionView?.dataSource = self
 		collectionView?.register(UINib(nibName: "PhotoNoteCell", bundle: nil), forCellWithReuseIdentifier: "PhotoNote")
 		collectionView?.register(UINib(nibName: "AudioNoteCell", bundle: nil), forCellWithReuseIdentifier: "AudioNote")
 		collectionView?.register(UINib(nibName: "MovieNoteCell", bundle: nil), forCellWithReuseIdentifier: "MovieNote")
-		navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-		navigationItem.leftItemsSupplementBackButton = true
-		configureLabels()
+				configureLabels()
 		fetchNotes() { results in
 			exposureNotes = results
 			collectionView.reloadData()
 		}
 		setMapView()
+		}
+		navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+		navigationItem.leftItemsSupplementBackButton = true
+
 	}
 
 	// swiftlint:disable force_cast
@@ -59,7 +62,7 @@ class SubjectDetailViewController: UIViewController {
 
 	func setMapView() {
 
-		guard let lat = subject.locationLat as? Double, let long = subject.locationLong as? Double else { return }
+		guard let lat = subject?.locationLat as? Double, let long = subject?.locationLong as? Double else { return }
 		mapView.isScrollEnabled = false
 		mapView.isZoomEnabled = false
 		let span = MKCoordinateSpanMake(0.030, 0.030)
@@ -79,7 +82,9 @@ class SubjectDetailViewController: UIViewController {
 	}
 
 	func fetchNotes(completion: ([ExposureNote]) -> ()) {
-
+		
+		guard let subject = subject else { fatalError("subject is nil") }
+		
 		var exposureNotes: [ExposureNote] = []
 
 		let photoNotes: [PhotoNote] = PhotoNote.fetchInContext(subject.managedObjectContext!) { (request) -> () in
@@ -111,6 +116,8 @@ class SubjectDetailViewController: UIViewController {
 	}
 
 	func configureLabels() {
+		
+		guard let subject = subject else { fatalError("subject is nil") }
 
 		let date: String = {
 			let dateFormatter = DateFormatter()
@@ -171,7 +178,9 @@ class SubjectDetailViewController: UIViewController {
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+		
+		guard let subject = subject else { fatalError("subject is nil") }
+		
 		switch segue.identifier {
 		case .some("SubjectDetailImagePreviewSegue"):
 			guard let nc = segue.destination as? UINavigationController, let vc = nc.viewControllers.first as? ImagePreviewViewController else { fatalError("wrong view controller type") }

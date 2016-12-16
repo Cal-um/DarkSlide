@@ -222,6 +222,10 @@ class FullScreenCameraViewController: UIViewController {
 		livePhotoIndicator.layer.cornerRadius = livePhotoIndicator.bounds.width / 2
 		livePhotoIndicator.clipsToBounds = true
 		livePhotoIndicator.layer.masksToBounds = true
+		flashOnOff.titleLabel?.adjustsFontSizeToFitWidth = true
+		livePhotoToggle.titleLabel?.adjustsFontSizeToFitWidth = true
+		switchFrontBackCamera.titleLabel?.adjustsFontSizeToFitWidth = true
+		switchCameraMode.titleLabel?.adjustsFontSizeToFitWidth = true
 	}
 	
 	func openCloseCameraOptionTab() {
