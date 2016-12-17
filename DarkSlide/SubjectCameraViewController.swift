@@ -162,8 +162,8 @@ class SubjectCameraViewController: UIViewController, ManagedObjectContextSettabl
 				vc.longitude = coordinates.longitude
 			}
 
-			if let heading = heading {
-				vc.compassHeading = heading
+			if let correctedScreenOrientationHeading = correctedScreenOrientationHeading {
+				vc.compassHeading = correctedScreenOrientationHeading
 			}
 		}
 	}
